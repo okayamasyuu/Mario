@@ -9,11 +9,12 @@ title::title()
 
 title::~title()
 {
+	DeleteGO(m_spriteRender);
 }
 bool title::Start()
 {
-	//m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	//m_spriteRender->Init(L"sprite/.dds", 1280, 720);
+	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
+	m_spriteRender->Init(L"sprite/title.dds", 700, 350);
 	return true;
 }
 void title::Update()
