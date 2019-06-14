@@ -31,7 +31,8 @@ void Player::Update()
 	m_moveSpeed.x = pad.GetLStickXF() * 750.0f;
 	m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
 
-	
+	//重力
+	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
 
 	m_position = m_charaCon.Execute(m_moveSpeed);//キャラコンに移動速度を与える
 
