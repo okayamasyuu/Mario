@@ -1,0 +1,39 @@
+#include "stdafx.h"
+#include "Player.h"
+
+
+Player::Player()
+{
+}
+
+
+Player::~Player()
+{
+	DeleteGO(m_skinModelRender);
+}
+
+bool Player::Start()
+{
+	//キャラクターコントローラーを初期化。
+	m_charaCon.Init(
+		20.0,        //半径 大きさ
+		100.0,       //高さ
+		m_position
+	);
+
+	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
+	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	return true;
+}
+void Player::Update()
+{
+	CPad& pad = Pad(0);
+	m_moveSpeed.x = pad.GetLStickXF() * 750.0f;
+	m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
+
+	
+
+	m_position = m_charaCon.Execute(m_moveSpeed);//キャラコンに移動速度を与える
+
+	m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
+}
