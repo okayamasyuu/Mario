@@ -6,9 +6,8 @@
 #include "Camera.h"
 #include "Stege.h"
 #include "GameOver.h"
+#include "GameClear.h"
 
-CVector3 cameraPos = { 0.0f, 70.0f, 200.0f };
-CVector3 cameraTarget;
 Game::Game()
 {
 }

@@ -31,6 +31,9 @@ void Player::Update()
 	m_moveSpeed.x = pad.GetLStickXF() * 750.0f;
 	m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
 
+	camera = FindGO<Camera>("ƒJƒƒ‰");
+
+
 	//d—Í
 	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
 

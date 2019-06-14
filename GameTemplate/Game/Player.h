@@ -1,5 +1,6 @@
 #pragma once
 #include <Camera.h>
+class Camera;
 class Player : public IGameObject
 {
 public:
@@ -20,6 +21,6 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CCharacterController m_charaCon; //キャラクターコントローラー
-	
+	Camera* camera = nullptr;
 };
 

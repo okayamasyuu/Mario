@@ -13,9 +13,23 @@ public:
 	~Game();
 	bool Start();
 	void Update();
-	int m_timer = 0;
+	
 	Player* m_pl = nullptr;
 	//クラスの継承
 	//ポイント型にする
+	void SetTimer(int time)
+	{
+		m_timer = time;
+	}
+	int GetTimer()
+	{
+		return m_timer;
+	}
+	int TasuTimer(int time)
+	{
+		m_timer += time;
+	}
+private:
+	int m_timer = 0;
 };
 

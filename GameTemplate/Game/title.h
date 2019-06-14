@@ -6,7 +6,7 @@ public:
 	~title();
 	bool Start();
 	void Update();
-
+private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
 };
 

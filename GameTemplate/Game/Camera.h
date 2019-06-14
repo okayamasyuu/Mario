@@ -1,5 +1,5 @@
 #pragma once
-#include <Player.h>
+//#include <Player.h>
 class Player;
 class Camera : public IGameObject
 {
@@ -14,5 +14,7 @@ private:
 	CVector3 target;
 	CVector3 camePos;
 	Player* m_player = nullptr;
+	//クラスの継承
+	//ポイント型
 };
 

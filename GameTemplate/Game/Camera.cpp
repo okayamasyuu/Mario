@@ -18,9 +18,11 @@ bool Camera::Start()
 }
 void Camera::Update()
 {
-	//m_player = FindGO<Player>("プレイヤー");
-	//target = m_player->GetPosi(); //注視点
-//	target.y += 50.0f;
+	//クラス継承をしてポイント型にしてインスタンスを探す（名前）
+	m_player = FindGO<Player>("プレイヤー");
+	target = m_player->GetPosi(); //注視点
+
+	target.y += 50.0f;
 
 	//視点計算
 	CVector3 Pos = { 0.0f, 50.0f, 100.0f };

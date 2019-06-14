@@ -24,6 +24,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Stege.cpp" />
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameClear.cpp" />
+    <ClCompile Include="GoalFlaag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -36,6 +38,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Stege.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameClear.h" />
+    <ClInclude Include="GoalFlaag.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -50,6 +54,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\yuka.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\hatahata.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

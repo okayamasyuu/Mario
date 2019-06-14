@@ -17,7 +17,7 @@ bool Stege::Start()
 	m_StegeModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_StegeModelRender->Init(L"modelData/yuka.cmo");
 
-	scela = { 7,3,7 };
+	scela = { 12,3,7 };
 	m_position = { 0,-10,0 };
 
 	m_StegeModelRender->SetPosition(m_position);
