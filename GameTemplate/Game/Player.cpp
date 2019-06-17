@@ -33,9 +33,19 @@ void Player::Update()
 
 	camera = FindGO<Camera>("ÉJÉÅÉâ");
 
+	/*CVector3 cameraDir = 
+		camera->GetCameraTargetPos() - camera->GetcamePos();
+	cameraDir.y = 0.0f;
+	cameraDir.Normalize();
 
-
-
+	CVector3 cameraDirX;
+	cameraDirX.Cross(
+		cameraDir,
+		{ 0,1,0 }
+	);
+	if (GetAsyncKeyState('F')) {
+		m_position += cameraDirX * 3;
+	}*/
 
 	//èdóÕ
 	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
