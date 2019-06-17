@@ -27,6 +27,7 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GoalFlaag.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="Enemy1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -42,6 +43,7 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GoalFlaag.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="Enemy1.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -78,10 +80,8 @@
     <ImageContentTask Include="Assets\sprite\banana.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\Mario.Title.png">
+    <ImageContentTask Include="Assets\sprite\Mario.Title.png">
       <Filter>Assets\sprite</Filter>
-    </Image>
+    </ImageContentTask>
   </ItemGroup>
 </Project>
