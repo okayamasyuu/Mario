@@ -27,6 +27,7 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GoalFlaag.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="Enemy1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -42,6 +43,7 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GoalFlaag.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="Enemy1.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

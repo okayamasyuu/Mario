@@ -36,18 +36,20 @@ void Camera::Update()
 	//注視点から視点に向かって伸びるベクトル
 	CVector3 toCameraPos = camePos - target;
 
-	////回転するクォータニオン
-	//CQuaternion mRot;
-	//mRot = CQuaternion::Identity;
-	//if (GetAsyncKeyState(VK_LEFT)) {
-	//	mRot.SetRotationDeg({ 0,1,0 }, 1);
-	//}
-	//
+	CMatrix mRot;
+	mRot = CMatrix::Identity;
+	if (GetAsyncKeyState(VK_LEFT)) {
+		mRot.MakeRotationY(CMath::DegToRad(1.0f));
+	}
+	else if (GetAsyncKeyState(VK_RIGHT)) {
+		mRot.MakeRotationY(CMath::DegToRad(-1.0f));
+	}
+	mRot.Mul(toCameraPos);
 
-	//mRot.Multiply(toCameraPos);
+	
 
 	////新しい視点を計算する
-	//m_position = target + toCameraPos;
+	camePos = target + toCameraPos;
 
 	MainCamera().SetTarget(target);  //注視点
 	MainCamera().SetPosition(camePos); //視点

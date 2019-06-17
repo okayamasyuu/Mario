@@ -8,6 +8,7 @@
 #include "GameOver.h"
 #include "GameClear.h"
 #include "GoalFlaag.h"
+#include "Enemy1.h"
 
 Game::Game()
 {
