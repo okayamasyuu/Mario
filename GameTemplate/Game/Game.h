@@ -6,6 +6,7 @@
 #include "Player.h"
 
 class Player;
+class GoalFlaag;
 class Game : public IGameObject
 {
 public:
@@ -15,8 +16,10 @@ public:
 	void Update();
 	
 	Player* m_pl = nullptr;
+	GoalFlaag* m_goaflaag = nullptr;
 	//クラスの継承
 	//ポイント型にする
+
 	void SetTimer(int time)
 	{
 		m_timer = time;
@@ -25,9 +28,9 @@ public:
 	{
 		return m_timer;
 	}
-	int TasuTimer(int time)
+	void TasuTimer(int timer)
 	{
-		m_timer += time;
+		m_timer += timer;
 	}
 private:
 	int m_timer = 0;

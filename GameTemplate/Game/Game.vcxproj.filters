@@ -26,6 +26,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GoalFlaag.cpp" />
+    <ClCompile Include="Result.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -40,6 +41,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GoalFlaag.h" />
+    <ClInclude Include="Result.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -71,6 +73,9 @@
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\GAMECLEAR.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\banana.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>

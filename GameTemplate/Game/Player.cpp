@@ -34,6 +34,9 @@ void Player::Update()
 	camera = FindGO<Camera>("ƒJƒƒ‰");
 
 
+
+
+
 	//d—Í
 	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
 

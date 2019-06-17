@@ -4,6 +4,7 @@
 #include "GameClear.h"
 #include "title.h"
 #include "Game.h"
+#include "Result.h"
 
 GoalFlaag::GoalFlaag()
 {
@@ -19,31 +20,48 @@ bool GoalFlaag::Start()
 	m_goalflaagModel = NewGO<prefab::CSkinModelRender>(0);
 	m_goalflaagModel->Init(L"modelData/hatahata.cmo");	//ゴールオブジェクト
 
-	m_position.x = 100;
+	m_position.x = 150;
+	scela = { 5,5,5 };
 
 	m_goalflaagModel->SetPosition(m_position);
 	m_goalflaagModel->SetScale(scela);
+	m_PSOject.CreateMesh(m_position, CQuaternion::Identity, scela, m_goalflaagModel);
 
 	return true;
 }
 void GoalFlaag::Update()
 {
 	//クリア判定してリザルト画面のシーンに映る
-	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
-		CVector3 diff = pl->GetPosi() - m_position;
-		if (diff.Length() < 100.0f) {
-			/*Game* ga = FindGO<Game>("game");
-			ga->Clear_flag = true;*/
-			NewGO<GameClear>(0, "クリア");
-			//ga->m_timer += 5;
-			if (ga->GetTimer() == 300) {
+	if (Clear_flag == true) {
+		QueryGOs<Game>("game", [&](Game * ga)->bool {
+			ga->TasuTimer(5);
+			if (ga->GetTimer() == 300) { //リザルト画面に移るまでのタイム
 				ga->SetTimer(0);
-				//NewGO<title>(0);
+				Clear_flag = false;
+
 				DeleteGO(ga);
+				NewGO<Result>(0, "リザルト");
 			}
-		}
+			return true;
+		});
+		
+	}
+	else {
+		
+		QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
+			CVector3 diff = pl->GetPosi() - m_position;
+			if (diff.Length() < 100.0f && Clear_flag == false) {
+				/*ga->Clear_flag = true;*/
+			
+					NewGO<GameClear>(0, "クリア");
+					Clear_flag = true;
 
 
-		return true;
-	});
+
+			}
+
+
+			return true;
+		});
+	}
 }
