@@ -1828,6 +1828,12 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Mario.Title.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\sound\nanndeyanen.wav" />
+    <Media Include="Assets\sound\taitle1.wav">
+      <FileType>Document</FileType>
+    </Media>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

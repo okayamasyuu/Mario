@@ -14,6 +14,9 @@
     <Filter Include="Assets\sprite">
       <UniqueIdentifier>{a6ce300a-b532-440d-b914-b4661d3015ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sound">
+      <UniqueIdentifier>{6f9d9d70-aefe-4c45-aa80-c2cffa5541cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -75,13 +78,14 @@
     <ImageContentTask Include="Assets\sprite\GAMECLEAR.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\banana.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Mario.Title.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\sprite\Mario.Title.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
+    <Media Include="Assets\sound\taitle1.wav">
+      <Filter>Assets\sound</Filter>
+    </Media>
+    <Media Include="Assets\sound\nanndeyanen.wav">
+      <Filter>Assets\sound</Filter>
+    </Media>
   </ItemGroup>
 </Project>
