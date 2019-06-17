@@ -14,7 +14,7 @@ title::~title()
 bool title::Start()
 {
 	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	m_spriteRender->Init(L"sprite/title.dds", 700, 350);
+	m_spriteRender->Init(L"sprite/Mario.Title.dds", 700, 350);
 	return true;
 }
 void title::Update()
