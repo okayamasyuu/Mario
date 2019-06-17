@@ -8,5 +8,7 @@ public:
 	void Update();
 private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
+	prefab::CSoundSource* soundRender = nullptr;
+	prefab::CSoundSource* APress = nullptr;
 };
 

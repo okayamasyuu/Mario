@@ -23,6 +23,7 @@ Game::~Game()
 	DeleteGOs("ゲームオーバー");
 	DeleteGOs("ゴールオブジェクト");
 	DeleteGOs("クリア");
+	DeleteGOs("敵１");
 
 }
 bool Game::Start()
@@ -35,6 +36,7 @@ bool Game::Start()
 	NewGO<Camera>(0, "カメラ");
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
+	//NewGO<Enemy1>(0, "敵１");
 
 	return true;
 }

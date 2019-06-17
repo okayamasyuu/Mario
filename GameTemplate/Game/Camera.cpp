@@ -26,12 +26,13 @@ void Camera::Update()
 
 	//視点計算
 	CVector3 Pos = { 0.0f, 50.0f, 100.0f };
-	CVector3 camePos = target + Pos; //キャラクタを斜め上から見ているような視点にする
+    camePos = target + Pos; //キャラクタを斜め上から見ているような視点にする
 	camePos = target;
 
 	//視点の場所
 	camePos.y += 400.0f;
 	camePos.z -= 800.0f;
+
 
 	//注視点から視点に向かって伸びるベクトル
 	CVector3 toCameraPos = camePos - target;
