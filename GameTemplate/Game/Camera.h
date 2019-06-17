@@ -11,6 +11,7 @@ public:
 	
 private:
 	CVector3 m_position = CVector3::Zero; //ç¿ïW
+	CQuaternion m_rot = CQuaternion::Identity;
 	CVector3 target;
 	CVector3 camePos;
 	Player* m_player = nullptr;
