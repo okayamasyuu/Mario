@@ -79,4 +79,9 @@
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Mario.Title.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
