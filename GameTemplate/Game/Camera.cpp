@@ -34,30 +34,24 @@ void Camera::Update()
 	camePos.z -= 800.0f;
 
 
-	/*CPad& pad = Pad(0);
-	camePos.x = pad.GetRStickXF() * 750.0f;
-	camePos.z = pad.GetRStickYF() * 750.0f;*/
-
 	//注視点から視点に向かって伸びるベクトル
 	CVector3 toCameraPos = camePos - target;
 
 
 	//回転行列
-	//CMatrix mRotY;
-	//mRotY = CMatrix::Identity;
-	//if (GetAsyncKeyState(VK_LEFT)) { 
-	//	mRotY.MakeRotationY(CMath::DegToRad(100.0));//回転する値
-	//}
-	//if (GetAsyncKeyState(VK_RIGHT)) {
-	//	mRotY.MakeRotationY(CMath::DegToRad(-10.0));
-	//}
-	////ベクトルと行列を乗算して回転させる
-	//mRotY.Mul(toCameraPos);
+	CMatrix mRotY;
+	mRotY = CMatrix::Identity;
+	if (GetAsyncKeyState(VK_LEFT)) { 
+		mRotY.MakeRotationY(CMath::DegToRad(100.0));//回転する値
+	}
+	if (GetAsyncKeyState(VK_RIGHT)) {
+		mRotY.MakeRotationY(CMath::DegToRad(-10.0));
+	}
+	//ベクトルと行列を乗算して回転させる
+	mRotY.Mul(toCameraPos);
 
-	//
-
-	////新しい視点を計算する
-	//camePos = target + toCameraPos;
+	//新しい視点を計算する
+	camePos = target + toCameraPos;
 
 	MainCamera().SetTarget(target);  //注視点
 	MainCamera().SetPosition(camePos); //視点
