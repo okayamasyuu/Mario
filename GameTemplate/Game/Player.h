@@ -16,6 +16,7 @@ public:
 	{
 		return m_position;
 	}
+	CPad& pad = Pad(0);
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CVector3 m_position = CVector3::Zero;
