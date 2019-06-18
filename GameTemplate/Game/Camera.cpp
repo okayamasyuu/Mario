@@ -62,6 +62,6 @@ void Camera::Update()
 	MainCamera().SetTarget(target);  //’‹“_
 	MainCamera().SetPosition(camePos); //‹“_
 	//MainCamera().SetViewAngle();//‰æŠp
-	MainCamera().Update();0
+	MainCamera().Update();
 
 }
