@@ -33,7 +33,7 @@ void Camera::Update()
 	camePos.y += 400.0f;
 	camePos.z -= 800.0f;
 
-
+	//‰ñ“]
 	
 
 
