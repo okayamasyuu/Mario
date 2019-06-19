@@ -24,7 +24,7 @@ Game::~Game()
 	DeleteGOs("ゴールオブジェクト");
 	DeleteGOs("クリア");
 	DeleteGOs("敵１");
-
+	DeleteGO(soundRender);
 }
 bool Game::Start()
 {
@@ -38,6 +38,9 @@ bool Game::Start()
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 	NewGO<Enemy1>(0, "敵１");
 
+	//NewGO<Enemy1>(0, "敵１");
+	soundRender = NewGO<prefab::CSoundSource>(0);
+	soundRender->Init(L"sound/field1.wav");
 	return true;
 }
 
@@ -45,10 +48,11 @@ void Game::Update()
 {
 	m_pl = FindGO<Player>("プレイヤー");
 	m_goaflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
-
+	soundRender->Play(true);
 
 	if (m_goaflaag->GetClearFlag() == false) {
 		if (Pad(0).IsPress(enButtonSelect) == true) {
+			soundRender->Stop();
 			NewGO<title>(0);
 			DeleteGO(this);
 		}
@@ -58,6 +62,7 @@ void Game::Update()
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
 		if (m_timer == 500) {
+			soundRender->Stop();
 			DeleteGO(this);
 			NewGO<title>(0);
 			m_timer = 0;

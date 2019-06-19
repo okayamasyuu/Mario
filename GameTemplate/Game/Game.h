@@ -34,5 +34,6 @@ public:
 	}
 private:
 	int m_timer = 0;
+	prefab::CSoundSource* soundRender = nullptr;
 };
 
