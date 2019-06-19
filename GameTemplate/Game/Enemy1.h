@@ -7,5 +7,6 @@ public:
 	bool Start();
 	void Update();
 	prefab::CSkinModelRender* m_enemy = nullptr;
+	CVector3 m_position = CVector3::Zero;
 };
 

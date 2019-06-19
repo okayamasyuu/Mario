@@ -21,6 +21,8 @@ bool Enemy1::Start()
 		4,
 
 	};
+	m_position.y = 300;
+	m_enemy->SetPosition(m_position);
 	m_enemy->SetScale(scena);
 	return true;
 }
