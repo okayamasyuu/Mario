@@ -8,6 +8,6 @@ public:
 	void Update();
 private:
 	prefab::CSpriteRender* m_gameClearSprite = nullptr;
-
+	prefab::CSoundSource* sound = nullptr;
 };
 
