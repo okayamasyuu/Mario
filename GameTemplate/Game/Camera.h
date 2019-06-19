@@ -21,6 +21,7 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity;
 	CVector3 target;
 	CVector3 camePos;//座標
+	CVector3 toCameraPos;
 	Player* m_player = nullptr;
 	//クラスの継承
 	//ポイント型
