@@ -7,6 +7,6 @@ public:
 	bool Start();
 private:
 	prefab::CSpriteRender* m_spriteRender = nullptr;
-
+	prefab::CSoundSource* himei = nullptr;
 };
 
