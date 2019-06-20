@@ -52,13 +52,13 @@ void Game::Update()
 	if (m_goaflaag->GetClearFlag() == false) {
 		if (Pad(0).IsPress(enButtonSelect) == true) {
 			soundRender->Stop();
-			NewGO<GameClear>(0, "クリア");
-			m_timer += 5;
-			if (m_timer == 500) {
+			//NewGO<GameClear>(0, "クリア");
+			//m_timer += 5;
+			//if (m_timer == 500) {
 				DeleteGO(this);
 				NewGO<title>(0);
 				m_timer = 0;
-			}
+			//}
 		}
 	}
 
