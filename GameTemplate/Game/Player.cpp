@@ -58,8 +58,8 @@ void Player::Update()
 		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
     }
 	else {
-		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
-		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
+		m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
 	}
 
 	
