@@ -21,7 +21,8 @@ public:
 	enum EnAnimationClip {
 		enAnimationClip_idle,	//待機アニメーション。
 		enAnimationClip_run,	//走りアニメーション。
-	
+		enAnimationClip_walk,   //歩きアニメーション
+		enAnimationClip_jump,   //ジャンプアニメーション
 		enAnimationClip_Num,	//アニメーションクリップの数。
 	};
 private:
