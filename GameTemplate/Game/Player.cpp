@@ -23,6 +23,9 @@ bool Player::Start()
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	jump = NewGO<prefab::CSoundSource>(0);
+	jump->Init(L"sound/jump.wav");
+	jump->SetVolume(10.0f);
 	return true;
 }
 void Player::Update()
@@ -33,8 +36,11 @@ void Player::Update()
 	m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
 
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		jump->Play(false);
 		m_moveSpeed.y = 300.0f;
+		DeleteGO(jump);
 	}
+	
 	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
 		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
