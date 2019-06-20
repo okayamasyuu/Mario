@@ -85,4 +85,12 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\banana.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Mario.Titlemozi.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Mario.Titlehaikei.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
