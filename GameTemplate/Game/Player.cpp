@@ -21,27 +21,44 @@ bool Player::Start()
 		m_position
 	);
 
+	//アニメーションクリップのロード。
+	m_animClips[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
+	m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
+	
+	//ループフラグを設定する。<-走りアニメーションはループフラグを設定していないので
+	//ワンショット再生で停止する。
+	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
+	m_animClips[enAnimationClip_run].SetLoopFlag(true);
+	
+
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
+	m_skinModelRender->PlayAnimation(enAnimationClip_idle); 
 	return true;
 }
 void Player::Update()
 {
-	camera = FindGO<Camera>("カメラ");
+	//camera = FindGO<Camera>("カメラ");
 
-	//m_moveSpeed.x = pad.GetLStickXF() * 750.0f;
-	//m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
-
-	/*if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-		m_moveSpeed.y = 300.0f;
-	}
-	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
-		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
-		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
-    }*/
-
+	
+	
 	float LStickx = pad.GetLStickXF();
 	float LSticky = pad.GetLStickYF();
+
+	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		m_moveSpeed.y = 300.0f;
+	}
+	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB)){
+		m_moveSpeed.x = LStickx * 850.0;
+		m_moveSpeed.z = LSticky * 850.0;
+		//m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+    }
+	else {
+		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
+	}
+
+	
 
 	CVector3 cameraForward = MainCamera().GetForward();
 	CVector3 cameraRight = MainCamera().GetRight();
@@ -59,10 +76,31 @@ void Player::Update()
 
 
 	//重力
-	//m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
+	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
 
 	m_position = m_charaCon.Execute(m_moveSpeed);//キャラコンに移動速度を与える
 
-	m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
-	m_skinModelRender->SetRotation(m_rotation);
+	//m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
+
+	Turn();
+
+	//3dMax上で成分の設定されているので回転する
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3::AxisX, 90.0f);
+	qRot.Multiply(m_rotation, qRot);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(qRot);
+}
+void Player::Turn()
+{
+	//Playerの回転
+	if (fabsf(m_moveSpeed.x) < 0.001f && 
+		fabsf(m_moveSpeed.z) < 0.001f ){
+		return;
+	}
+	//角度を求めている
+	float angle = atan2(m_moveSpeed.x, m_moveSpeed.z);
+
+	//Z軸回転
+	m_rotation.SetRotation(CVector3::AxisZ, -angle);
 }

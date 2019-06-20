@@ -21,8 +21,15 @@ bool Camera::Start()
 	//camePos = target;
 
 	//注視点から視点までのベクトルを設定。
-	toCameraPos.Set(0.0, 100, 500);
+	toCameraPos.Set(0.0, 100, -500);
 
+	//ばねカメラの初期化
+	m_springCamera.Init(
+		MainCamera(),
+		1000.0,  //カメラの移動速度の最大値
+		true,    //カメラと地形との当たり判定
+		5.0      //カメラの球体コリジョンの半径
+	);
 	//視点の場所
 	//camePos.y += 400.0f;
 	//camePos.z -= 500.0f;
@@ -58,21 +65,21 @@ void Camera::Update()
 	//大きさが１になるということは、ベクトルから強さがなくなり、方向のみの情報となるということ。
 	CVector3 toPosDir = toCameraPos;
 	toPosDir.Normalize();
-	if (toPosDir.y < -0.7f) {
+	if (toPosDir.y < -0.5f) {
 		//カメラが上向きすぎ。
-		toCameraPos = toCameraPosOld;
+		toCameraPos = toCameraPosOld;//カメラが下に行きすぎないように0.0
 	}
-	else if (toPosDir.y > 0.8f) {
+	else if (toPosDir.y > 0.7f) {
 		//カメラが下向きすぎ。
 		toCameraPos = toCameraPosOld;
 	}
 
 	//新しい視点を計算する
 	camePos = target + toCameraPos;
-
-	MainCamera().SetTarget(target);  //注視点
-	MainCamera().SetPosition(camePos); //視点
+	
+	m_springCamera.SetTarget(target);  //注視点
+	m_springCamera.SetPosition(camePos); //視点
 	//MainCamera().SetViewAngle();//画角
-	MainCamera().Update();
+	m_springCamera.Update();
 
 }
