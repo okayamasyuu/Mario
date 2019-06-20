@@ -24,15 +24,20 @@ bool Player::Start()
 	//アニメーションクリップのロード。
 	m_animClips[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
+	m_animClips[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
+	m_animClips[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
 	
 	//ループフラグを設定する。<-走りアニメーションはループフラグを設定していないので
 	//ワンショット再生で停止する。
 	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
 	m_animClips[enAnimationClip_run].SetLoopFlag(true);
+	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
+	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo",m_animClips, enAnimationClip_Num);
+	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
+	m_skinModelRender->PlayAnimation(enAnimationClip_idle); 
 	return true;
 }
 void Player::Update()
@@ -46,14 +51,15 @@ void Player::Update()
 
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
 		m_moveSpeed.y = 300.0f;
+		m_skinModelRender->PlayAnimation(enAnimationClip_jump, 0.2);
 	}
 	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
 		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
     }
 	else {
-		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
-		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
+		m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
 	}
 
 	
