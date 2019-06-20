@@ -26,9 +26,6 @@ public:
 	};
 private:
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
-	prefab::CSoundSource* jump = nullptr;
-	CAnimationClip m_animClips[enAnimationClip_Num];	//アニメーションクリップ。
-
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rotation = CQuaternion::Identity;
