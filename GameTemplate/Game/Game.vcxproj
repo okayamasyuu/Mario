@@ -1812,6 +1812,7 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Angel.fbx" />
     <MeshContentTask Include="Assets\modelData\hatahata.fbx" />
+    <MeshContentTask Include="Assets\modelData\stage.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\yuka.fbx" />
   </ItemGroup>
