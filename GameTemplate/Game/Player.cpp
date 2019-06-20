@@ -55,11 +55,11 @@ void Player::Update()
 	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB)){
 		m_moveSpeed.x = LStickx * 850.0;
 		m_moveSpeed.z = LSticky * 850.0;
-		//m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
+		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.2);
     }
 	else {
-		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
-		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
+		m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
 	}
 
 	
