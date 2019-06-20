@@ -36,8 +36,7 @@ bool Player::Start()
 	
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
-	m_skinModelRender->PlayAnimation(enAnimationClip_idle); 
+	m_skinModelRender->Init(L"modelData/unityChan.cmo");
 	return true;
 }
 void Player::Update()
@@ -50,16 +49,16 @@ void Player::Update()
 	float LSticky = pad.GetLStickYF();
 
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		jump->Play(false);
 		m_moveSpeed.y = 300.0f;
-		m_skinModelRender->PlayAnimation(enAnimationClip_jump, 0.2);
 	}
 	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
 		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
     }
 	else {
-		m_animClips[enAnimationClip_run].SetLoopFlag(false);
-		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
+		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
 	}
 
 	
