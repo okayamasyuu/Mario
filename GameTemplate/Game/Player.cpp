@@ -21,58 +21,93 @@ bool Player::Start()
 		m_position
 	);
 
+	//アニメーションクリップのロード。
+	m_animClips[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
+	m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
+	m_animClips[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
+	m_animClips[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
+	
+	//ループフラグを設定する。<-走りアニメーションはループフラグを設定していないので
+	//ワンショット再生で停止する。
+	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
+	m_animClips[enAnimationClip_run].SetLoopFlag(true);
+	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
+	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
+	
+
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
+	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
+
 	return true;
 }
 void Player::Update()
 {
-	camera = FindGO<Camera>("カメラ");
+	//camera = FindGO<Camera>("カメラ");
 
-	m_moveSpeed.x = pad.GetLStickXF() * 750.0f;
-	m_moveSpeed.z = pad.GetLStickYF() * 750.0f;
+	
+	
+	float LStickx = pad.GetLStickXF();
+	float LSticky = pad.GetLStickYF();
 
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		//jump->Play(false);
 		m_moveSpeed.y = 300.0f;
 	}
-	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
+	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB)){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
-		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
+		m_moveSpeed.z = pad.GetLStickYF() * 850.0;
+		
+		m_skinModelRender->PlayAnimation( enAnimationClip_run);
     }
+	else {
+		m_animClips[enAnimationClip_run].SetLoopFlag(false);
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
+	}
 
-	//float LStickx = pad.GetLStickXF();
-	//float LSticky = pad.GetLStickXF();
+	
 
-	//CVector3 cameraForward = MainCamera().GetForward();
-	//CVector3 cameraRight = MainCamera().GetRight();
+	CVector3 cameraForward = MainCamera().GetForward();
+	CVector3 cameraRight = MainCamera().GetRight();
 
-	//cameraForward.y = 0.0;
-	//cameraForward.Normalize();
-	//cameraRight.y = 0.0;
-	//cameraRight.Normalize();
-	////XZ成分の移動速度をクリア
-	//m_moveSpeed.x = 0.0;
-	//m_moveSpeed.z = 0.0;
-	//m_moveSpeed.y -= 700.0f * GameTime().GetFrameDeltaTime();
-	//m_moveSpeed += cameraForward * LStickx * 500.0f;
-	//m_moveSpeed += cameraRight * LSticky * 500.0f;
-
-	//前ベクトル
-	CVector3 cameraForward = camera->GetCameraTargetPos() - camera->GetcamePos();
-	cameraForward.y = 0.0f;
+	cameraForward.y = 0.0;
 	cameraForward.Normalize();
-	m_position += cameraForward * 5.0 * pad.GetLStickYF();
-
-	CVector3 cameraRight;
-	cameraRight.Cross(cameraForward,{ 0.0f, 1.0f, 0.0f });
+	cameraRight.y = 0.0;
 	cameraRight.Normalize();
-	m_position += cameraRight * 5.0f * pad.GetLStickXF();
+	//XZ成分の移動速度をクリア
+	m_moveSpeed.x = 0.0;
+	m_moveSpeed.z = 0.0;
+
+	m_moveSpeed += cameraForward * LSticky * 500.0f;
+	m_moveSpeed += cameraRight * LStickx * 500.0f;
+
 
 	//重力
 	m_moveSpeed.y -= 500.0 * GameTime().GetFrameDeltaTime();
 
 	m_position = m_charaCon.Execute(m_moveSpeed);//キャラコンに移動速度を与える
 
-	m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
-	m_skinModelRender->SetRotation(m_rotation);
+	//m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
+
+	Turn();
+
+	//3dMax上で成分の設定されているので回転する
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3::AxisX, 90.0f);
+	qRot.Multiply(m_rotation, qRot);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(qRot);
+}
+void Player::Turn()
+{
+	//Playerの回転
+	if (fabsf(m_moveSpeed.x) < 0.001f && 
+		fabsf(m_moveSpeed.z) < 0.001f ){
+		return;
+	}
+	//角度を求めている
+	float angle = atan2(m_moveSpeed.x, m_moveSpeed.z);
+
+	//Z軸回転
+	m_rotation.SetRotation(CVector3::AxisZ, -angle);
 }

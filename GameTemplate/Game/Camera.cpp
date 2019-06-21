@@ -13,74 +13,73 @@ Camera::~Camera()
 }
 bool Camera::Start()
 {
-	//カメラの回転
-	//視点の設定はUpdateではなくStart()で呼び出す
-	//出なければ入力しただけで回転した後元の位置に戻ってしまう
+	
 
 	//視点計算
-	CVector3 Pos = { 0.0f, 50.0f, 100.0f };
-	camePos = target + Pos; //キャラクタを斜め上から見ているような視点にする
-	camePos = target;
+	//CVector3 Pos = { 0.0f, 50.0f, 100.0f };
+	//camePos = target + Pos; //キャラクタを斜め上から見ているような視点にする
+	//camePos = target;
 
+	//注視点から視点までのベクトルを設定。
+	toCameraPos.Set(0.0, 100, -500);
+
+	//ばねカメラの初期化
+	m_springCamera.Init(
+		MainCamera(),
+		1000.0,  //カメラの移動速度の最大値
+		true,    //カメラと地形との当たり判定
+		5.0      //カメラの球体コリジョンの半径
+	);
 	//視点の場所
-	camePos.y += 400.0f;
-	camePos.z -= 800.0f;
+	//camePos.y += 400.0f;
+	//camePos.z -= 500.0f;
 	return true;
 }
 void Camera::Update()
 {
 	//クラス継承をしてポイント型にしてインスタンスを探す（名前）
 	m_player = FindGO<Player>("プレイヤー");
-
-	
-
-	target = m_player->GetPosi(); //注視点
-
+	//カメラを更新。
+	//注視点を計算する。
+	CVector3 target = m_player->GetPosi();
+	//プレイヤの足元からちょっと上を注視点とする。
 	target.y += 50.0f;
-	//注視点から視点に向かって伸びるベクトル
-	CVector3 toCameraPos = camePos - target;
+
 	CVector3 toCameraPosOld = toCameraPos;
+	//パッドの入力を使ってカメラを回す。
+	float x = Pad(0).GetRStickXF();
+	float y = Pad(0).GetRStickYF();
+	//Y軸周りの回転
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3::AxisY, 2.0f * x);
+	qRot.Multiply(toCameraPos);
+	//X軸周りの回転。
+	CVector3 axisX;
+	axisX.Cross(CVector3::AxisY, toCameraPos);
+	axisX.Normalize();
+	qRot.SetRotationDeg(axisX, 2.0f * y);
+	qRot.Multiply(toCameraPos);
+	//カメラの回転の上限をチェックする。
+	//注視点から視点までのベクトルを正規化する。
+	//正規化すると、ベクトルの大きさが１になる。
+	//大きさが１になるということは、ベクトルから強さがなくなり、方向のみの情報となるということ。
+	CVector3 toPosDir = toCameraPos;
+	toPosDir.Normalize();
+	if (toPosDir.y < -0.5f) {
+		//カメラが上向きすぎ。
+		toCameraPos = toCameraPosOld;//カメラが下に行きすぎないように0.0
+	}
+	else if (toPosDir.y > 0.7f) {
+		//カメラが下向きすぎ。
+		toCameraPos = toCameraPosOld;
+	}
 
-	//float x = m_player->pad.GetRStickXF();
-	//float y = m_player->pad.GetRStickYF();
-	//横回転
-	//CQuaternion qRot;
-	//qRot.SetRotationDeg(CVector3::AxisY, 2.0f * x);
-	//qRot.Apply(toCameraPos);
-	//
-	////縦回転
-	//CVector3 axisX;
-	//axisX.Cross(CVector3::AxisX, toCameraPos);
-	//axisX.Normalize();
-	//qRot.SetRotationDeg(axisX, 2.0 * y);
-	//qRot.Apply(toCameraPos);
-	//CVector3 toPosDir = toCameraPos;
-	//toPosDir.Normalize();
-	
-	//回転行列
-	CMatrix mRotY;
-	mRotY = CMatrix::Identity;
-
-	//右スティック
-		mRotY.MakeRotationY(CMath::DegToRad(2.0f) * m_player->pad.GetRStickXF());
-		mRotY.Mul(toCameraPos);
-	
-	//まず、回す軸を計算する。
-	CVector3 rotAxis;
-	CVector3 upAxis(0.0f, 1.0f, 0.0f);
-	rotAxis.Cross(upAxis, toCameraPos);
-	rotAxis.Normalize();
-	mRotY = CMatrix::Identity;
-	mRotY.MakeRotationAxis(rotAxis, CMath::DegToRad(2.0f) * m_player->pad.GetRStickYF());
-	//ベクトルと行列を乗算して回転させる
-	mRotY.Mul(toCameraPos);
-	
 	//新しい視点を計算する
 	camePos = target + toCameraPos;
-
-	MainCamera().SetTarget(target);  //注視点
-	MainCamera().SetPosition(camePos); //視点
+	
+	m_springCamera.SetTarget(target);  //注視点
+	m_springCamera.SetPosition(camePos); //視点
 	//MainCamera().SetViewAngle();//画角
-	MainCamera().Update();
+	m_springCamera.Update();
 
 }

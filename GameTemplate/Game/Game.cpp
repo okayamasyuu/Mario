@@ -41,6 +41,7 @@ bool Game::Start()
 	//NewGO<Enemy1>(0, "敵１");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
+	soundRender->SetVolume(10.0f);
 	return true;
 }
 
@@ -53,16 +54,22 @@ void Game::Update()
 	if (m_goaflaag->GetClearFlag() == false) {
 		if (Pad(0).IsPress(enButtonSelect) == true) {
 			soundRender->Stop();
-			NewGO<title>(0);
-			DeleteGO(this);
+			//NewGO<GameClear>(0, "クリア");
+			//m_timer += 5;
+			//if (m_timer == 500) {
+				DeleteGO(this);
+				NewGO<title>(0);
+				m_timer = 0;
+			//}
 		}
 	}
 
 	if (m_pl->GetPosi().y < -200) {
+		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
 		if (m_timer == 500) {
-			soundRender->Stop();
+			
 			DeleteGO(this);
 			NewGO<title>(0);
 			m_timer = 0;
