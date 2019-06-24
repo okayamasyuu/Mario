@@ -71,7 +71,7 @@ void Player::Update()
 		m_skinModelRender->PlayAnimation(enAnimationClip_walk,0.3);
 	}
 	//ƒ_ƒbƒVƒ…
-	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB) && m_moveSpeed.LengthSq() > 600){
+	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB) && m_moveSpeed.LengthSq() > 600 * 600){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
 		m_moveSpeed.z = pad.GetLStickYF() * 850.0;
 	
