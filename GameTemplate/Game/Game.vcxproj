@@ -1792,6 +1792,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview_Low|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Stege.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1806,6 +1807,7 @@
     <ClInclude Include="Result.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Stege.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="title.h" />
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>

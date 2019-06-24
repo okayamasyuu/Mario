@@ -9,6 +9,7 @@
 #include "GameClear.h"
 #include "GoalFlaag.h"
 #include "Enemy1.h"
+#include "Timer.h"
 
 Game::Game()
 {
@@ -37,6 +38,7 @@ bool Game::Start()
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 	//NewGO<Enemy1>(0, "敵１");
+	NewGO<Timer>(0);
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);

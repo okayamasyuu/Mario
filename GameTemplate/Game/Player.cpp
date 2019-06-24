@@ -49,7 +49,6 @@ void Player::Update()
 	float LSticky = pad.GetLStickYF();
 
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-		jump->Play(false);
 		m_moveSpeed.y = 300.0f;
 	}
 	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
