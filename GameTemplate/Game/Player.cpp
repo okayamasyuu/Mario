@@ -14,6 +14,9 @@ Player::~Player()
 
 bool Player::Start()
 {
+	//ワイヤーフレーム表示を有効にする
+	PhysicsWorld().SetDebugDrawMode(btIDebugDraw::DBG_DrawWireframe);
+
 	//キャラクターコントローラーを初期化。
 	m_charaCon.Init(
 		20.0,        //半径 大きさ
@@ -36,28 +39,47 @@ bool Player::Start()
 	
 
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
+	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
+
 	return true;
 }
 void Player::Update()
 {
 	//camera = FindGO<Camera>("カメラ");
 
-	
-	
+
+
 	float LStickx = pad.GetLStickXF();
 	float LSticky = pad.GetLStickYF();
 
-	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-		m_moveSpeed.y = 300.0f;
+	
+	//ジャンプ
+	if (m_state = 1 && m_charaCon.IsJump()) {
+		m_skinModelRender->PlayAnimation(enAnimationClip_jump,0.3);
+		if (m_charaCon.IsOnGround()) {
+			m_state = 0;
+			m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3);
+		}
 	}
-	if(m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonB)){
+	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+			m_state = 1;
+			m_moveSpeed.y = 300.0f;
+	}
+	//歩き
+	if (m_moveSpeed.LengthSq() > 50 * 50) {
+		m_skinModelRender->PlayAnimation(enAnimationClip_walk,0.3);
+	}
+	//ダッシュ
+	else if(m_charaCon.IsOnGround() && Pad(0).IsPress(enButtonB) && m_moveSpeed.LengthSq() > 600){
 		m_moveSpeed.x = pad.GetLStickXF() * 850.0;
-		m_moveSpeed.y = pad.GetLStickYF() * 850.0;
+		m_moveSpeed.z = pad.GetLStickYF() * 850.0;
+	
+		m_skinModelRender->PlayAnimation( enAnimationClip_run,0.3);
     }
+	//待機
 	else {
-		//m_animClips[enAnimationClip_run].SetLoopFlag(false);
-		//m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
 	}
 
 	

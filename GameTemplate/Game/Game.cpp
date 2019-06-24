@@ -37,6 +37,8 @@ bool Game::Start()
 	NewGO<Camera>(0, "カメラ");
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
+	NewGO<Enemy1>(0, "敵１");
+
 	//NewGO<Enemy1>(0, "敵１");
 	NewGO<Timer>(0);
 	soundRender = NewGO<prefab::CSoundSource>(0);
