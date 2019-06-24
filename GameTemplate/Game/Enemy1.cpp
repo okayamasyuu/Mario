@@ -67,12 +67,12 @@ void Enemy1::Update()
 	//toPlayerの距離を計算
 	float len = toPlayer.Length();
 
-	if (len < 550) {
+	if (len < 50) {
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 15;
-		toPlayer.z *= 15;
-		toPlayer.y *= 15;
+		toPlayer.x *= 10;
+		toPlayer.z *= 10;
+		toPlayer.y *= 10;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;
@@ -83,11 +83,22 @@ void Enemy1::Update()
 	//HPダメージ
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
+		//無敵時間
+		if (pl->GetMutekiFlag() == true) {
+			pl->TasuMutekiTime(1);
+			if (pl->GetMutekiTime() == 100) {
+				pl->SetMutekiFlag(false);
+				pl->SetMutekiTime(0);
+			}
+		}
+
 		//距離小さくなったら
-		if (diff.Length() < 20 && m_goalflaag->GetClearFlag() == false) {
+		if (diff.Length() < 20 && m_goalflaag->GetClearFlag() == false
+			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
-
-
+			pl->HikuHP(1);
+			//無敵
+			pl->SetMutekiFlag(true);
 		}
 		return true;
 	});

@@ -24,6 +24,11 @@ bool Player::Start()
 		m_position
 	);
 
+	//HPUI
+	font = NewGO<prefab::CFontRender>(0);
+	font->SetShadowParam(true, 2.0f, CVector4::Black);
+
+
 	//アニメーションクリップのロード。
 	m_animClips[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
 	m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
@@ -48,7 +53,7 @@ void Player::Update()
 {
 	//camera = FindGO<Camera>("カメラ");
 
-
+	blink();
 
 	float LStickx = pad.GetLStickXF();
 	float LSticky = pad.GetLStickYF();
@@ -108,6 +113,8 @@ void Player::Update()
 
 	Turn();
 
+	HPUI();
+
 	//3dMax上で成分の設定されているので回転する
 	CQuaternion qRot;
 	qRot.SetRotationDeg(CVector3::AxisX, 90.0f);
@@ -127,4 +134,33 @@ void Player::Turn()
 
 	//Z軸回転
 	m_rotation.SetRotation(CVector3::AxisZ, -angle);
+}
+void Player::HPUI()
+{
+	//HP
+	wchar_t text[256];
+	swprintf(text, L"HP%02d", HP);
+
+	font->SetText(text);
+	font->SetPosition({ -320, 300 });
+}
+void Player::blink()
+{
+	//点滅処理
+	if (muteki == true) {
+		int Inbizible = 3;
+
+		if ((mutekitime / Inbizible) % 2 == 0) {
+			m_skinModelRender->SetActiveFlag(false);
+		}
+		else {
+			m_skinModelRender->SetActiveFlag(true);
+		}
+
+		if (mutekitime >= 100) {
+			m_skinModelRender->SetActiveFlag(true);
+			muteki = false;
+			mutekitime = 0;
+		}
+	}
 }

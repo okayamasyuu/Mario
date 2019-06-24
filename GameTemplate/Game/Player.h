@@ -9,6 +9,8 @@ public:
 	bool Start();
 	void Update();
 	void Turn();
+	void HPUI();
+	void blink();
 	void SetPosi(CVector3 Plposi)
 	{
 		m_position = Plposi;
@@ -16,6 +18,35 @@ public:
 	CVector3 GetPosi()
 	{
 		return m_position;
+	}
+	int GetHP()
+	{
+		return HP;
+	}
+	void HikuHP(int hp)
+	{
+		HP -= hp;
+	}
+	void SetMutekiFlag(bool mutekiflag)
+	{
+		muteki = mutekiflag;
+	}
+	bool GetMutekiFlag()
+	{
+		return muteki;
+	}
+	//–³“GŠÔ
+	void TasuMutekiTime(int timer)
+	{
+		mutekitime += timer;
+	}
+	int GetMutekiTime()
+	{
+		return mutekitime;
+	}
+	void SetMutekiTime(int timer)
+	{
+		mutekitime = timer;
 	}
 	CPad& pad = Pad(0);
 	enum EnAnimationClip {
@@ -27,6 +58,10 @@ public:
 	};
 private:
 	int m_state = 0; //ó‘Ô‚Ì•Ï”
+	int HP = 3;
+	bool  muteki = false;
+	int mutekitime = 0;
+	prefab::CFontRender* font = nullptr; //ƒtƒHƒ“ƒg
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CAnimationClip m_animClips[enAnimationClip_Num];
 	CVector3 m_position = CVector3::Zero;
