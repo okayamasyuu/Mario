@@ -32,10 +32,13 @@ bool Enemy1::Start()
 	//	);
 	//}
 
+	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelmotion.tka");
+
+	m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
 
 	m_enemy = NewGO<prefab::CSkinModelRender>(0);
-	//m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
-	m_enemy->Init(L"modelData/Angel.cmo");
+	m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
+	//m_enemy->Init(L"modelData/Angel.cmo");
 	CVector3 scena = {
 		4,
 		4,
@@ -43,14 +46,10 @@ bool Enemy1::Start()
 
 	};
 
-	//m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelmotion.tka");
-
-	//m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
-
 	m_position.y = 150;
 	m_enemy->SetPosition(m_position);
 	m_enemy->SetScale(scena);
-	//m_enemy->PlayAnimation(enEnemyAnimClip_sky);
+	m_enemy->PlayAnimation(enEnemyAnimClip_sky);
 	return true;
 }
 void Enemy1::Update()
@@ -125,4 +124,15 @@ void Enemy1::Turn()
 
 	//Y軸回転
 	m_rot.SetRotation(CVector3::AxisY, angle);
+}
+void Enemy1::GhostObj()
+{
+	//ゴーストオブジェクトの当たり判定(プレイヤー)
+	//PhysicsWorld().ContactTest(m_pl->m_charaCon[&](const btCollisionObject){
+	  //if( m_ghostobj.IsSelf(contactObject)){
+	
+	  //DeleteGO(this); //当たったら破棄
+      //}
+	//}
+	
 }

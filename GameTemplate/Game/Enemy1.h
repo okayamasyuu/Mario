@@ -12,6 +12,7 @@ public:
 	bool Start();
 	void Update();
 	void Turn();
+	void GhostObj();
 	enum EnAnimationClip {
 		enEnemyAnimClip_sky,//飛行アニメーション
 		enEnemyAnimClip_Num
