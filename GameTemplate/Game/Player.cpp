@@ -69,9 +69,9 @@ void Player::Update()
 	}
 	if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
 			m_state = 1;
-			m_moveSpeed.y = 300.0f;
+			m_moveSpeed.y = 450.0f;
 	}
-	//•à‚«
+	//•à‚«•à‚«
 	if (m_moveSpeed.LengthSq() > 50 * 50) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_walk,0.3);
 	}
