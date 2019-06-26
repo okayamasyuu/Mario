@@ -28,6 +28,9 @@
     <ClCompile Include="GoalFlaag.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="Enemy1.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Coin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -44,6 +47,9 @@
     <ClInclude Include="GoalFlaag.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="Enemy1.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Coin.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

@@ -36,6 +36,8 @@ bool Game::Start()
 	NewGO<Camera>(0, "カメラ");
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
+	NewGO<Enemy1>(0, "敵１");
+
 	//NewGO<Enemy1>(0, "敵１");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
@@ -68,6 +70,16 @@ void Game::Update()
 		m_timer += 5;
 		if (m_timer == 500) {
 			
+			DeleteGO(this);
+			NewGO<title>(0);
+			m_timer = 0;
+		}
+	}
+	//HP0
+	if (m_pl->GetHP() <= 0) {
+		NewGO<GameOver>(0, "ゲームオーバー");
+		m_timer += 5;
+		if (m_timer == 500) {
 			DeleteGO(this);
 			NewGO<title>(0);
 			m_timer = 0;
