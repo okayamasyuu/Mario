@@ -62,7 +62,7 @@ void Game::Update()
 		}
 	}
 
-	if (m_pl->GetPosi().y < -200) {
+	if (m_pl->GetPosi().y < -1500) {
 		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;

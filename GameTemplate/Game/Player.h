@@ -26,7 +26,7 @@ public:
 		enAnimationClip_Num,	//アニメーションクリップの数。
 	};
 private:
-	CAnimationClip m_animClips[enAnimationClip_Num];
+	
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CAnimationClip m_animClips[enAnimationClip_Num];
 	CVector3 m_position = CVector3::Zero;

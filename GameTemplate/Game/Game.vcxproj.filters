@@ -84,13 +84,7 @@
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\banana.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\Mario.Titlemozi.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Mario.Titlehaikei.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\sprite\Mario.Titlehaikei.png" />
+    <ImageContentTask Include="Assets\sprite\Mario.Titlemozi.png" />
   </ItemGroup>
 </Project>
