@@ -29,6 +29,9 @@
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="Enemy1.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Coin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -46,6 +49,9 @@
     <ClInclude Include="Result.h" />
     <ClInclude Include="Enemy1.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Coin.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -63,6 +69,12 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\hatahata.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stge_1.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

@@ -68,12 +68,22 @@ void Game::Update()
 		}
 	}
 
-	if (m_pl->GetPosi().y < -200) {
+	if (m_pl->GetPosi().y < -1500) {
 		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
 		if (m_timer == 500) {
 			
+			DeleteGO(this);
+			NewGO<title>(0);
+			m_timer = 0;
+		}
+	}
+	//HP0
+	if (m_pl->GetHP() <= 0) {
+		NewGO<GameOver>(0, "ゲームオーバー");
+		m_timer += 5;
+		if (m_timer == 500) {
 			DeleteGO(this);
 			NewGO<title>(0);
 			m_timer = 0;
