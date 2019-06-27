@@ -1,13 +1,16 @@
 #pragma once
+
+class Game;
 class Timer : public IGameObject
 {
 public:
 	Timer();
 	~Timer();
-	bool Start();
-	void Update();
-	Game* ga;
+	bool Start() override;
+	void Update() override;
+	
 private:
 	prefab::CFontRender* m_fontRender = nullptr;
+	//Game* ga = nullptr;
 };
 

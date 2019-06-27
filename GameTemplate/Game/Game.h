@@ -32,14 +32,13 @@ public:
 	{
 		m_timer += timer;
 	}
-	float zikan = 10.0f;
 	float timer()const
 	{
-		return zikan;
+		return m_zikan;
 	}
 private:
 	int m_timer = 0;
 	prefab::CSoundSource* soundRender = nullptr;
-
+	float m_zikan = 0.0f;
 };
 

@@ -26,6 +26,7 @@ Game::~Game()
 	DeleteGOs("クリア");
 	DeleteGOs("敵１");
 	DeleteGO(soundRender);
+	DeleteGO("時間");
 }
 bool Game::Start()
 {
@@ -40,7 +41,7 @@ bool Game::Start()
 	NewGO<Enemy1>(0, "敵１");
 
 	//NewGO<Enemy1>(0, "敵１");
-	NewGO<Timer>(0);
+	NewGO<Timer>(0, "時間");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);
@@ -49,6 +50,7 @@ bool Game::Start()
 
 void Game::Update()
 {
+	m_zikan = min(999.0f, m_zikan + GameTime().GetFrameDeltaTime());
 	m_pl = FindGO<Player>("プレイヤー");
 	m_goaflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
 	soundRender->Play(true);
