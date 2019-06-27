@@ -10,6 +10,7 @@ Player::Player()
 Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
+	DeleteGO(font);
 }
 
 bool Player::Start()
@@ -21,7 +22,7 @@ bool Player::Start()
 	//キャラクターコントローラーを初期化。
 	m_charaCon.Init(
 		20.0,        //半径 大きさ
-		100.0,       //高さ
+		90.0,       //高さ
 		m_position
 	);
 

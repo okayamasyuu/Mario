@@ -15,18 +15,6 @@ Enemy1::~Enemy1()
 bool Enemy1::Start()
 {
 	
-
-	//敵（ノコノコ）の数（i）　
-	//for (int i = 0; i < 1; i++) {
-
-	//	//ボックス形状のゴースト作成する
-	//	m_ghostobj.CreateBox(
-	//		ghostPosi = m_position,    //第一引数は座標。
-	//		CQuaternion::Identity,     //第二引数は回転クォータニオン。
-	//		{ 50.0, 10.0, 50.0 }     //第三引数はボックスのサイズ。
-	//	);
-	//}
-
 	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelmotion.tka");
 
 	m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
@@ -51,6 +39,17 @@ bool Enemy1::Start()
 		m_position
 	);
 
+	//敵（ノコノコ）の数（i）　
+	for (int i = 0; i < 1; i++) {
+
+		//ボックス形状のゴースト作成する
+		m_ghostobj.CreateBox(
+			ghostPosi = m_position,    //第一引数は座標。
+			CQuaternion::Identity,     //第二引数は回転クォータニオン。
+			{ 50.0, 10.0, 50.0 }     //第三引数はボックスのサイズ。
+		);
+	}
+
 	m_enemy->SetPosition(m_position);
 	m_enemy->SetScale(scena);
 	m_enemy->PlayAnimation(enEnemyAnimClip_sky);
@@ -62,6 +61,8 @@ void Enemy1::Update()
 	m_goalflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
 
 	m_position += m_moveSpeed;
+
+	GhostObj();
 
 	//プレイヤーを追いかける
 	CVector3 toPlayer = { 0,0,0 };
@@ -80,9 +81,11 @@ void Enemy1::Update()
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;
+		
 	}
 	else {
-		m_moveSpeed = { 0,0,0 };
+		toPlayer = { 0,0,0 };
+		m_moveSpeed = toPlayer;
 	}
 
 	//HPダメージ
@@ -109,10 +112,15 @@ void Enemy1::Update()
 		return true;
 	});
 
-	//GhostObj();
-
+	
+	
 	//キャラコンに移動速度を与える
 	m_position = m_EnemyCharaCon.Execute(m_moveSpeed);
+
+	//ゴーストをエネミーと一緒に移動させる
+	CVector3 pos = m_position;
+	pos.y = -180;
+	m_ghostobj.SetPosition(pos);
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
 	m_enemy->SetPosition(m_EnemyCharaCon.GetPosition());
@@ -120,6 +128,7 @@ void Enemy1::Update()
 	Turn();
 
 	m_enemy->SetRotation(m_rot);
+	
 }
 void Enemy1::Turn()
 {
@@ -136,12 +145,7 @@ void Enemy1::Turn()
 }
 void Enemy1::GhostObj()
 {
-	//ゴーストをエネミーと一緒に移動させる
-	CVector3 pos = m_position;
-	pos.y = -180;
-	m_ghostobj.SetPosition(pos);
-	m_ghostobj.SetPosition(m_position);
-
+	
 	//ゴーストオブジェクトの当たり判定(プレイヤー)
 	PhysicsWorld().ContactTest(m_pl->m_charaCon,[&](const btCollisionObject & contactObject) {
 		if (m_ghostobj.IsSelf(contactObject)) {
