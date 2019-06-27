@@ -9,6 +9,8 @@
 #include "GameClear.h"
 #include "GoalFlaag.h"
 #include "Enemy1.h"
+#include "Timer.h"
+
 #include"Enemy2.h"
 Game::Game()
 {
@@ -26,6 +28,7 @@ Game::~Game()
 	DeleteGOs("“G‚P");
 	DeleteGOs("“G2");
 	DeleteGO(soundRender);
+	DeleteGO("ŠÔ");
 }
 bool Game::Start()
 {
@@ -40,6 +43,7 @@ bool Game::Start()
 	NewGO<Enemy1>(0, "“G‚P");
 	NewGO<Enemy2>(0, "“G2");
 	//NewGO<Enemy1>(0, "“G‚P");
+	NewGO<Timer>(0, "ŠÔ");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);
@@ -48,6 +52,7 @@ bool Game::Start()
 
 void Game::Update()
 {
+	m_zikan = min(999.0f, m_zikan + GameTime().GetFrameDeltaTime());
 	m_pl = FindGO<Player>("ƒvƒŒƒCƒ„[");
 	m_goaflaag = FindGO<GoalFlaag>("ƒS[ƒ‹ƒIƒuƒWƒFƒNƒg");
 	soundRender->Play(true);
