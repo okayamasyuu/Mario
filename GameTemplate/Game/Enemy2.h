@@ -11,6 +11,10 @@ public:
 	bool Start();
 	void Update();
 	void Turn();
+	enum EnAnimationClip {
+		enEnemy2AnimClip_walk,//飛行アニメーション
+		enEnemy2AnimClip_Num
+	};
 private:
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goalflaag = nullptr;
@@ -19,6 +23,6 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
 	CCharacterController m_Enemy2CharaCon;
-
+	CAnimationClip m_enemy2animClip[enEnemy2AnimClip_Num];
 };
 

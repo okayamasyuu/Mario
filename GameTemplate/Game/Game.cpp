@@ -9,7 +9,7 @@
 #include "GameClear.h"
 #include "GoalFlaag.h"
 #include "Enemy1.h"
-
+#include"Enemy2.h"
 Game::Game()
 {
 }
@@ -24,6 +24,7 @@ Game::~Game()
 	DeleteGOs("ゴールオブジェクト");
 	DeleteGOs("クリア");
 	DeleteGOs("敵１");
+	DeleteGOs("敵2");
 	DeleteGO(soundRender);
 }
 bool Game::Start()
@@ -37,7 +38,7 @@ bool Game::Start()
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 	NewGO<Enemy1>(0, "敵１");
-
+	NewGO<Enemy2>(0, "敵2");
 	//NewGO<Enemy1>(0, "敵１");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
