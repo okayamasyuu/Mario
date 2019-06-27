@@ -20,7 +20,8 @@ bool GoalFlaag::Start()
 	m_goalflaagModel = NewGO<prefab::CSkinModelRender>(0);
 	m_goalflaagModel->Init(L"modelData/hatahata.cmo");	//ゴールオブジェクト
 
-	m_position.x = 150;
+	m_position.x = 200;
+	m_position.y = -250;
 	scela = { 5,5,5 };
 
 	m_goalflaagModel->SetPosition(m_position);

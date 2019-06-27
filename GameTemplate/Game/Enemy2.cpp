@@ -18,6 +18,9 @@ bool Enemy2::Start()
 	//m_enemy2->Init(L"");
 	CVector3 scale = { 2,2,2 };
 
+	m_position.x = -300;
+	m_position.y = 100;
+
 	m_enemy2->SetPosition(m_position);
 	m_enemy2->SetScale(scale);
 	return true;

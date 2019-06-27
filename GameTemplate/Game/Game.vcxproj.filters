@@ -72,6 +72,9 @@
     <MeshContentTask Include="Assets\modelData\stage.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stge_1.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\WorkEnemy.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
