@@ -17,6 +17,7 @@ bool Player::Start()
 	//ワイヤーフレーム表示を有効にする
 	PhysicsWorld().SetDebugDrawMode(btIDebugDraw::DBG_DrawWireframe);
 
+	m_position.y = -250;
 	//キャラクターコントローラーを初期化。
 	m_charaCon.Init(
 		20.0,        //半径 大きさ

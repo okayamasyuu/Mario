@@ -48,6 +48,7 @@ public:
 	{
 		mutekitime = timer;
 	}
+	CCharacterController m_charaCon; //キャラクターコントローラー
 	CPad& pad = Pad(0);
 	enum EnAnimationClip {
 		enAnimationClip_idle,	//待機アニメーション。
@@ -67,7 +68,7 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rotation = CQuaternion::Identity;
-	CCharacterController m_charaCon; //キャラクターコントローラー
+	
 	Camera* camera = nullptr;
 };
 
