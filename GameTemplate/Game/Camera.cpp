@@ -21,7 +21,7 @@ bool Camera::Start()
 	//camePos = target;
 
 	//注視点から視点までのベクトルを設定。
-	toCameraPos.Set(0.0, 100, -500);
+	toCameraPos.Set(0.0, 100, -700);
 
 	//ばねカメラの初期化
 	m_springCamera.Init(

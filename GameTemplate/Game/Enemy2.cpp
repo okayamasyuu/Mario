@@ -22,14 +22,31 @@ bool Enemy2::Start()
 	m_enemy2 = NewGO<prefab::CSkinModelRender>(0);
 	m_enemy2->Init(L"modelData/WorkEnemy.cmo", m_enemy2animClip, enEnemy2AnimClip_Num);
 	
-	CVector3 scale = { 3,3,3 };
+	CVector3 scale = { 4,4,4 };
 
-	m_position.x = -100;
-	m_position.y = -50;
+	m_position.x = -400;
+	m_position.y = -200;
 
+	//キャラコンの初期化
+	m_Enemy2CharaCon.Init(
+		25.0,        //半径
+		47.0,       //高さ
+		m_position
+	);
+	
+	for (int i = 0; i < 1; i++) {
+
+		//ボックス形状のゴースト作成する
+		m_ghostobj.CreateBox(
+			ghostPosi = m_position,    //第一引数は座標。
+			CQuaternion::Identity,     //第二引数は回転クォータニオン。
+			{ 40.0, 5.0, 40.0 }     //第三引数はボックスのサイズ。
+		);
+	}
+	
 	m_enemy2->SetPosition(m_position);
 	m_enemy2->SetScale(scale);
-	m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
+	//m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
 	return true;
 }
 void Enemy2::Update()
@@ -41,13 +58,97 @@ void Enemy2::Update()
 
 	m_position += m_moveSpeed;
 
+	//プレイヤーを追いかける
+	CVector3 toPlayer = { 0,0,0 };
+	toPlayer = m_pl->GetPosi() - m_position;
+
+	//toPlayerの距離を計算
+	float len = toPlayer.Length();
+
+	//範囲
+	if (len < 300) {
+		toPlayer.Normalize();
+		//スピード
+		toPlayer.x *= 10;
+		toPlayer.z *= 10;
+		m_moveSpeed.x += toPlayer.x;
+		m_moveSpeed.z += toPlayer.z;
+		if (m_moveSpeed.LengthSq() > 10 * 10) {
+			m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
+		}
+	}
+	else {
+		toPlayer.x *= 0;
+		toPlayer.z *= 0;
+		m_moveSpeed.x = toPlayer.x;
+		m_moveSpeed.z = toPlayer.z;
+	}
 
 	//HPダメージ
+	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
+		CVector3 diff = pl->GetPosi() - m_position;
+		//無敵時間
+		if (pl->GetMutekiFlag() == true) {
+			pl->TasuMutekiTime(1);
+			if (pl->GetMutekiTime() == 100) {
+				pl->SetMutekiFlag(false);
+				pl->SetMutekiTime(0);
+			}
+		}
 
+		//距離小さくなったら
+		//距離0.5前後ぐらい
+		if (diff.Length() < 0.27 && m_goalflaag->GetClearFlag() == false
+			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
+			//HPダメージ
+			pl->HikuHP(1);
+			//無敵
+			pl->SetMutekiFlag(true);
+		}
+		return true;
+	});
 
+	GhostObj();
 
+	//重力
+	m_moveSpeed.y -= 700.0 * GameTime().GetFrameDeltaTime();
+
+	//キャラコンに移動速度を与える
+	m_position = m_Enemy2CharaCon.Execute(m_moveSpeed);
+	
+	//ゴーストをエネミーと一緒に移動させる
+	CVector3 pos = m_position;	
+	pos.y += 120;
+	m_ghostobj.SetPosition(pos);
+
+	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
+	m_enemy2->SetPosition(m_Enemy2CharaCon.GetPosition());
+
+	Turn();
+
+	m_enemy2->SetRotation(m_rot);
 }
 void Enemy2::Turn()
 {
+	//Enemyの回転
+	if (fabsf(m_moveSpeed.x) < 0.001f &&
+		fabsf(m_moveSpeed.z) < 0.001f) {
+		return;
+	}
+	//角度を求めている
+	float angle = atan2(m_moveSpeed.x, m_moveSpeed.z);
 
+	//Y軸回転
+	m_rot.SetRotation(CVector3::AxisY, angle);
+}
+void Enemy2::GhostObj()
+{
+	//ゴーストオブジェクトの当たり判定(プレイヤー)
+	PhysicsWorld().ContactTest(m_pl->m_charaCon, [&](const btCollisionObject & contactObject) {
+		if (m_ghostobj.IsSelf(contactObject)) {
+			//踏んだら飛ぶ
+			m_pl->SetMoveSpeed({ 0,300,0 });
+			DeleteGO(this); //当たったら破棄
+		}
+	});
 }

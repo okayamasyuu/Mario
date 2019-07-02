@@ -1821,6 +1821,7 @@
     <MeshContentTask Include="Assets\modelData\Angel.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\block.fbx" />
     <MeshContentTask Include="Assets\modelData\hatahata.fbx" />
     <MeshContentTask Include="Assets\modelData\stage.fbx" />
     <MeshContentTask Include="Assets\modelData\stge_1.fbx" />

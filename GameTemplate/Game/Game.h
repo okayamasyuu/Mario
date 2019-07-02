@@ -7,6 +7,8 @@
 
 class Player;
 class GoalFlaag;
+class Enemy1;
+class Enemy2;
 class Game : public IGameObject
 {
 public:
@@ -14,9 +16,11 @@ public:
 	~Game();
 	bool Start();
 	void Update();
-	
+	CLevel m_level;
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goaflaag = nullptr;
+	Enemy1* en1[3] = { nullptr };
+	Enemy2* en2[3] = { nullptr };
 	//クラスの継承
 	//ポイント型にする
 

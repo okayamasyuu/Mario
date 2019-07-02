@@ -48,6 +48,10 @@ public:
 	{
 		mutekitime = timer;
 	}
+	void SetMoveSpeed(CVector3 movespeed)
+	{
+		m_moveSpeed.y = movespeed.y;
+	}
 	CCharacterController m_charaCon; //キャラクターコントローラー
 	CPad& pad = Pad(0);
 	enum EnAnimationClip {
@@ -57,9 +61,10 @@ public:
 		enAnimationClip_jump,   //ジャンプアニメーション
 		enAnimationClip_Num,	//アニメーションクリップの数。
 	};
+	
 private:
 	int m_state = 0; //状態の変数
-	int HP = 3;
+	int HP = 5;
 	bool  muteki = false;
 	int mutekitime = 0;
 	prefab::CFontRender* font = nullptr; //フォント

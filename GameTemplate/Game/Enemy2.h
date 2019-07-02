@@ -11,8 +11,13 @@ public:
 	bool Start();
 	void Update();
 	void Turn();
+	void GhostObj();
+	void SetPosi(CVector3 Plposi)
+	{
+		m_position = Plposi;
+	}
 	enum EnAnimationClip {
-		enEnemy2AnimClip_walk,//飛行アニメーション
+		enEnemy2AnimClip_walk,//歩きアニメーション
 		enEnemy2AnimClip_Num
 	};
 private:
@@ -24,5 +29,10 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity;
 	CCharacterController m_Enemy2CharaCon;
 	CAnimationClip m_enemy2animClip[enEnemy2AnimClip_Num];
+
+	//ゴーストオブジェクト
+	CPhysicsGhostObject m_ghostobj;
+	CVector3  ghostPosi = CVector3::Zero;
+	CVector3 m_ghostmove = CVector3::Zero;
 };
 

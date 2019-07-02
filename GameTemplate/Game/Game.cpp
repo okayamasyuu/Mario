@@ -10,10 +10,28 @@
 #include "GoalFlaag.h"
 #include "Enemy1.h"
 #include "Timer.h"
-
 #include"Enemy2.h"
+#include "Block.h"
+
 Game::Game()
 {
+	/*
+	STAGE
+	unityChan
+	stge_1
+	hatahata
+	Angel
+	WorkEnemy
+	
+	*/
+	/*m_level.Init(L".tkl", [&](LevelObjectData & objData) {
+		if (objData.EqualObjectName(L"unityChan")) {
+			Player* pl = NewGO<Player>(0, "プレイヤー");
+			pl->GetPosi() = objData.position;
+			return true;
+		}
+
+	});*/
 }
 
 
@@ -29,6 +47,7 @@ Game::~Game()
 	DeleteGOs("敵2");
 	DeleteGO(soundRender);
 	DeleteGO("時間");
+	DeleteGOs("ブロック");
 }
 bool Game::Start()
 {
@@ -40,10 +59,18 @@ bool Game::Start()
 	NewGO<Camera>(0, "カメラ");
 	NewGO<Stege>(0, "ステージ");
 	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
-	NewGO<Enemy1>(0, "敵１");
+
+	en1[0]=NewGO<Enemy1>(0, "敵１");
+	en1[0]->SetPosi({ -150,-250,300 });
+	en1[0] = NewGO<Enemy1>(0, "敵１");
+	en1[0]->SetPosi({ -250,-250,300 });
+	en1[0] = NewGO<Enemy1>(0, "敵１");
+	en1[0]->SetPosi({ -350,-250,300 });
+
 	NewGO<Enemy2>(0, "敵2");
 	//NewGO<Enemy1>(0, "敵１");
 	NewGO<Timer>(0, "時間");
+	NewGO<Block>(0, "ブロック");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);

@@ -29,9 +29,9 @@ bool Enemy1::Start()
 
 	};
 	//敵1のポジション位置、配列
-	m_position.y = -250;
+	/*m_position.y = -250;
 	m_position.x = -150;
-	m_position.z = 350;
+	m_position.z = 350;*/
 	//キャラコンの初期化
 	m_EnemyCharaCon.Init(
 		25.0,        //半径
@@ -46,7 +46,7 @@ bool Enemy1::Start()
 		m_ghostobj.CreateBox(
 			ghostPosi = m_position,    //第一引数は座標。
 			CQuaternion::Identity,     //第二引数は回転クォータニオン。
-			{ 50.0, 10.0, 50.0 }     //第三引数はボックスのサイズ。
+			{ 40.0, 5.0, 40.0 }     //第三引数はボックスのサイズ。
 		);
 	}
 
@@ -64,6 +64,11 @@ void Enemy1::Update()
 
 	GhostObj();
 
+	CQuaternion Rot;
+	Rot.SetRotationDeg(
+		{ 0.0f, 1.0, 0.0 },
+		3.0f);
+	m_rot *= Rot;
 	//プレイヤーを追いかける
 	CVector3 toPlayer = { 0,0,0 };
 	toPlayer = m_pl->GetPosi() - m_position;
@@ -71,8 +76,27 @@ void Enemy1::Update()
 	//toPlayerの距離を計算
 	float len = toPlayer.Length();
 
-	//範囲
-	if (len < 300) {
+
+	///////視野角
+	CVector3 enemyForward = CVector3::AxisZ;
+	m_rot.Multiply(enemyForward);
+
+	//エネミーからプレイヤーに伸びるベクトルを求める。
+	CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
+	//正規化を行う前に、プレイヤーまでの距離を求めておく。
+	float toPlayerLen = toPlayerDir.Length();
+	//正規化！
+	toPlayerDir.Normalize();
+	//enemyForwardとtoPlayerDirとの内積を計算する。
+	float d = enemyForward.Dot(toPlayerDir);
+	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+	float angle = acos(d);
+	//視野角判定
+	//fabsfは絶対値を求める関数！
+	//角度はマイナスが存在するから、絶対値にする。
+	if (fabsf(angle) < CMath::DegToRad(45.0f)//90
+		&& toPlayerLen < 500.0f)
+	{
 		toPlayer.Normalize();
 		//スピード
 		toPlayer.x *= 10;
@@ -81,8 +105,21 @@ void Enemy1::Update()
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;
-		
 	}
+
+
+	//範囲
+	//if (len < 300) {
+	//	toPlayer.Normalize();
+	//	//スピード
+	//	toPlayer.x *= 10;
+	//	toPlayer.z *= 10;
+	//	toPlayer.y *= 10;
+	//	m_moveSpeed.x += toPlayer.x;
+	//	m_moveSpeed.z += toPlayer.z;
+	//	m_moveSpeed.y += toPlayer.y;
+	//	
+	//}
 	else {
 		toPlayer = { 0,0,0 };
 		m_moveSpeed = toPlayer;
@@ -119,7 +156,7 @@ void Enemy1::Update()
 
 	//ゴーストをエネミーと一緒に移動させる
 	CVector3 pos = m_position;
-	pos.y = -180;
+	pos.y += 90;
 	m_ghostobj.SetPosition(pos);
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
@@ -149,7 +186,8 @@ void Enemy1::GhostObj()
 	//ゴーストオブジェクトの当たり判定(プレイヤー)
 	PhysicsWorld().ContactTest(m_pl->m_charaCon,[&](const btCollisionObject & contactObject) {
 		if (m_ghostobj.IsSelf(contactObject)) {
-
+			//踏んだら飛ぶ
+			m_pl->SetMoveSpeed({ 0,300,0 });
 			DeleteGO(this); //当たったら破棄
 		}
 	});

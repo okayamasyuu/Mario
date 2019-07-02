@@ -13,10 +13,16 @@ public:
 	void Update();
 	void Turn();
 	void GhostObj();
+
+	void SetPosi(CVector3 Plposi)
+	{
+		m_position = Plposi;
+	}
 	enum EnAnimationClip {
 		enEnemyAnimClip_sky,//飛行アニメーション
 		enEnemyAnimClip_Num
 	};
+	
 private:
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goalflaag = nullptr;
