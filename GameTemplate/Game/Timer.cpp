@@ -30,12 +30,11 @@ void Timer::Update()
 		byou = fmod(zikan, 60.0f);
 
 		wchar_t text[256];
-		swprintf(text, L"Œo‰ßŽžŠÔŽžŠÔ %.f:%02.f", hun, byou);
+		swprintf(text, L"%.f:%02.fŒo‰ß", hun, byou);
 		m_fontRender->SetText(text);
 
 		return true;
 	});
 
-	m_fontRender->SetPosition({ 200.0f, 300.0f });
-	//‚ 
+	m_fontRender->SetPosition({ 400.0f, 300.0f });
 }

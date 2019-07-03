@@ -144,7 +144,11 @@ void Player::HPUI()
 	swprintf(text, L"HP%02d", HP);
 
 	font->SetText(text);
-	font->SetPosition({ -320, 300 });
+	font->SetPosition({ 400, 250 });
+
+	if (HP <= 5) {
+		font->SetColor(color);
+	}
 }
 void Player::blink()
 {
@@ -165,4 +169,15 @@ void Player::blink()
 			mutekitime = 0;
 		}
 	}
+}
+void Player::Coinget()
+{
+	//コインができたらここに書く
+	//例文
+	/*
+	if(コインとプレイヤーの距離 <= 50){
+	count++;
+	DeleteGO(当たったコイン);
+	}
+	*/
 }

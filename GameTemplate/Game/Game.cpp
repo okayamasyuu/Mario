@@ -83,6 +83,7 @@ void Game::Update()
 	}
 	//HP0
 	if (m_pl->GetHP() <= 0) {
+		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
 		if (m_timer == 500) {
