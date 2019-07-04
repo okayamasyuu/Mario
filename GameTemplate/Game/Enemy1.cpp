@@ -15,7 +15,7 @@ Enemy1::~Enemy1()
 bool Enemy1::Start()
 {
 	
-	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelmotion.tka");
+	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelhanedakemotion.tka");
 
 	m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
 
