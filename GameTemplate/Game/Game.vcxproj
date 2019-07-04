@@ -1824,6 +1824,7 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\block.fbx" />
     <MeshContentTask Include="Assets\modelData\hatahata.fbx" />
+    <MeshContentTask Include="Assets\modelData\koin.fbx" />
     <MeshContentTask Include="Assets\modelData\stage.fbx" />
     <MeshContentTask Include="Assets\modelData\stge_1.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />

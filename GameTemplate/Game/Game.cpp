@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include"Enemy2.h"
 #include "Block.h"
+#include "coin.h"
 
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
 //静的メンバ変数を定義する
@@ -82,6 +83,7 @@ Game::~Game()
 	DeleteGO(soundRender);
 	DeleteGO("時間");
 	DeleteGOs("ブロック");
+	DeleteGOs("コイン");
 }
 bool Game::Start()
 {
@@ -105,6 +107,7 @@ bool Game::Start()
 	//NewGO<Enemy1>(0, "敵１");
 	NewGO<Timer>(0, "時間");
 	NewGO<Block>(0, "ブロック");
+	NewGO<Coin>(0, "コイン");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);
