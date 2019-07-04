@@ -5,6 +5,11 @@ public:
 	Stege();
 	~Stege();
 	bool Start();
+	void SetPosi(CVector3 posi)
+	{
+		m_position = posi;
+	}
+	
 private:
 	prefab::CSkinModelRender* m_StegeModelRender = nullptr;
 	CPhysicsStaticObject m_PSOject;

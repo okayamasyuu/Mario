@@ -15,23 +15,23 @@ Enemy1::~Enemy1()
 bool Enemy1::Start()
 {
 	
-	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelmotion.tka");
+	m_enemyanimClip[enEnemyAnimClip_sky].Load(L"animData/angelhanedakemotion.tka");
 
 	m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
 
 	m_enemy = NewGO<prefab::CSkinModelRender>(0);
 	m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
 	//m_enemy->Init(L"modelData/Angel.cmo");
-	CVector3 scena = {
+	 scena = {
 		4,
 		4,
 		4,
 
 	};
 	//敵1のポジション位置、配列
-	m_position.y = -250;
+	/*m_position.y = -250;
 	m_position.x = -150;
-	m_position.z = 350;
+	m_position.z = 350;*/
 	//キャラコンの初期化
 	m_EnemyCharaCon.Init(
 		25.0,        //半径
@@ -46,7 +46,7 @@ bool Enemy1::Start()
 		m_ghostobj.CreateBox(
 			ghostPosi = m_position,    //第一引数は座標。
 			CQuaternion::Identity,     //第二引数は回転クォータニオン。
-			{ 50.0, 10.0, 50.0 }     //第三引数はボックスのサイズ。
+			{ 30.0, 5.0, 30.0 }     //第三引数はボックスのサイズ。
 		);
 	}
 
@@ -60,29 +60,71 @@ void Enemy1::Update()
 	m_pl = FindGO<Player>("プレイヤー");
 	m_goalflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
 
+	//ゲームのクラスのポインタを返す
+	//m_pl = Game::GetInstance()->m_pl;
+	//m_goalflaag = Game::GetInstance()->m_goaflaag;
+
 	m_position += m_moveSpeed;
 
 	GhostObj();
 
-	//プレイヤーを追いかける
+	CQuaternion Rot;
+	Rot.SetRotationDeg(
+		{ 0.0f, 1.0, 0.0 },
+		3.0f);
+	m_rot *= Rot;
+	
 	CVector3 toPlayer = { 0,0,0 };
-	toPlayer = m_pl->GetPosi() - m_position;
 
-	//toPlayerの距離を計算
-	float len = toPlayer.Length();
+	/////////視野角
+	CVector3 enemyForward = CVector3::AxisZ;
+	m_rot.Multiply(enemyForward);
 
-	//範囲
-	if (len < 300) {
+	//エネミーからプレイヤーに伸びるベクトルを求める。
+	CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
+	//正規化を行う前に、プレイヤーまでの距離を求めておく。
+	float toPlayerLen = toPlayerDir.Length();
+	//正規化！
+	toPlayerDir.Normalize();
+	//enemyForwardとtoPlayerDirとの内積を計算する。
+	float d = enemyForward.Dot(toPlayerDir);
+	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+	float angle = acos(d);
+	//視野角判定
+	//fabsfは絶対値を求める関数！
+	//角度はマイナスが存在するから、絶対値にする。
+	if (fabsf(angle) < CMath::DegToRad(45.0f)
+		&& toPlayerLen < 400.0f)
+	{
+		//プレイヤーを追いかける
+		
+		toPlayer = m_pl->GetPosi() - m_position;
+
+		//toPlayerの距離を計算
+		float len = toPlayer.Length();
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 10;
-		toPlayer.z *= 10;
-		toPlayer.y *= 10;
+		toPlayer.x *= 12;
+		toPlayer.z *= 12;
+		toPlayer.y *= 12;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;
-		
 	}
+
+
+	//範囲
+	//if (len < 500) {
+	//	toPlayer.Normalize();
+	//	//スピード
+	//	toPlayer.x *= 10;
+	//	toPlayer.z *= 10;
+	//	toPlayer.y *= 10;
+	//	m_moveSpeed.x += toPlayer.x;
+	//	m_moveSpeed.z += toPlayer.z;
+	//	m_moveSpeed.y += toPlayer.y;
+	//	
+	//}
 	else {
 		toPlayer = { 0,0,0 };
 		m_moveSpeed = toPlayer;
@@ -92,17 +134,17 @@ void Enemy1::Update()
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
 		//無敵時間
-		if (pl->GetMutekiFlag() == true) {
+		/*if (pl->GetMutekiFlag() == true) {
 			pl->TasuMutekiTime(1);
 			if (pl->GetMutekiTime() == 100) {
 				pl->SetMutekiFlag(false);
 				pl->SetMutekiTime(0);
 			}
-		}
-
+		}*/
+	
 		//距離小さくなったら
 		//距離0.5前後ぐらい
-		if (diff.Length() < 0.7 && m_goalflaag->GetClearFlag() == false
+		if (diff.Length() < 1.2 && m_goalflaag->GetClearFlag() == false
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
 			pl->HikuHP(1);
@@ -120,7 +162,7 @@ void Enemy1::Update()
 
 	//ゴーストをエネミーと一緒に移動させる
 	CVector3 pos = m_position;
-	pos.y = -180;
+	pos.y += 90;
 	m_ghostobj.SetPosition(pos);
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
@@ -150,7 +192,8 @@ void Enemy1::GhostObj()
 	//ゴーストオブジェクトの当たり判定(プレイヤー)
 	PhysicsWorld().ContactTest(m_pl->m_charaCon,[&](const btCollisionObject & contactObject) {
 		if (m_ghostobj.IsSelf(contactObject)) {
-
+			//踏んだら飛ぶ
+			m_pl->SetMoveSpeed({ 0,300,0 });
 			DeleteGO(this); //当たったら破棄
 		}
 	});

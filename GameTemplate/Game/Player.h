@@ -12,6 +12,10 @@ public:
 	void HPUI();
 	void blink();
 	void Coinget();
+	void SetScale(CVector3 Scale)
+	{
+		scale = Scale;
+	}
 	void SetPosi(CVector3 Plposi)
 	{
 		m_position = Plposi;
@@ -49,6 +53,10 @@ public:
 	{
 		mutekitime = timer;
 	}
+	void SetMoveSpeed(CVector3 movespeed)
+	{
+		m_moveSpeed.y = movespeed.y;
+	}
 	CCharacterController m_charaCon; //キャラクターコントローラー
 	CPad& pad = Pad(0);
 	enum EnAnimationClip {
@@ -60,6 +68,7 @@ public:
 	};
 	prefab::CSpriteRender* HPmae = nullptr;
 private:
+	CVector3 scale;
 	int m_state = 0; //状態の変数
 	int HP = 10;
 	int count = 0;

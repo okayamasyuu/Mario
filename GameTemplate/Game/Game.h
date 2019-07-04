@@ -7,6 +7,8 @@
 
 class Player;
 class GoalFlaag;
+class Enemy1;
+class Enemy2;
 class Game : public IGameObject
 {
 public:
@@ -14,11 +16,21 @@ public:
 	~Game();
 	bool Start();
 	void Update();
-	
+	CLevel m_level;
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goaflaag = nullptr;
+	Enemy1* en1[3] = { nullptr };
+	Enemy2* en2[3] = { nullptr };
 	//クラスの継承
 	//ポイント型にする
+
+	//静的メンバ変数
+	static Game* m_instance;
+	//インスタンスの取得
+	static Game* GetInstance()
+	{
+		return m_instance;
+	}
 
 	void SetTimer(int time)
 	{
@@ -37,6 +49,7 @@ public:
 		return m_zikan;
 	}
 private:
+	
 	int m_timer = 0;
 	prefab::CSoundSource* soundRender = nullptr;
 	float m_zikan = 0.0f;

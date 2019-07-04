@@ -1099,6 +1099,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;BT_NO_SIMD_OPERATOR_OVERLOADS;USE_LOW_SPEC_SETTINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
@@ -1821,7 +1822,9 @@
     <MeshContentTask Include="Assets\modelData\Angel.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\block.fbx" />
     <MeshContentTask Include="Assets\modelData\hatahata.fbx" />
+    <MeshContentTask Include="Assets\modelData\koin.fbx" />
     <MeshContentTask Include="Assets\modelData\stage.fbx" />
     <MeshContentTask Include="Assets\modelData\stge_1.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
