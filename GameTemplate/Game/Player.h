@@ -11,6 +11,7 @@ public:
 	void Turn();
 	void HPUI();
 	void blink();
+	void Coinget();
 	void SetPosi(CVector3 Plposi)
 	{
 		m_position = Plposi;
@@ -64,7 +65,8 @@ public:
 	
 private:
 	int m_state = 0; //èÛë‘ÇÃïœêî
-	int HP = 5;
+	int HP = 10;
+	int count = 0;
 	bool  muteki = false;
 	int mutekitime = 0;
 	prefab::CFontRender* font = nullptr; //ÉtÉHÉìÉg
@@ -73,7 +75,7 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rotation = CQuaternion::Identity;
-	
+	CVector4 color = CVector4::Yellow;
 	Camera* camera = nullptr;
 };
 
