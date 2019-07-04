@@ -9,10 +9,10 @@ FBXHeaderExtension:  {
 		Year: 2019
 		Month: 7
 		Day: 4
-		Hour: 10
-		Minute: 18
-		Second: 32
-		Millisecond: 407
+		Hour: 13
+		Minute: 37
+		Second: 43
+		Millisecond: 413
 	}
 	Creator: "FBX SDK/FBX Plugins version 2018.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -34,13 +34,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2018"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "04/07/2019 01:18:32.375"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "04/07/2019 04:37:43.411"
 			P: "Original|FileName", "KString", "", "", "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koin.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2018"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "04/07/2019 01:18:32.375"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "04/07/2019 04:37:43.411"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\GC1818\Documents\3dsMax"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\GC1818\Desktop\koin.max"
 		}
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2109148156576, "", "Scene" {
+	Document: 2647797454576, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -315,10 +315,10 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	NodeAttribute: 2109084385616, "NodeAttribute::", "Null" {
+	NodeAttribute: 2645723864944, "NodeAttribute::", "Null" {
 		TypeFlags: "Null"
 	}
-	Geometry: 2109188886896, "Geometry::", "Mesh" {
+	Geometry: 2647804156848, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.603921568627451,0.603921568627451,0.898039215686275
 		}
@@ -684,7 +684,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 2109188887984, "Geometry::", "Mesh" {
+	Geometry: 2647804152496, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.6,0.894117647058823,0.6
 		}
@@ -1047,7 +1047,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2108944443712, "Model::グループ001", "Null" {
+	Model: 2647439238080, "Model::グループ001", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1059,7 +1059,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2108944445904, "Model::Sphere002", "Mesh" {
+	Model: 2647439242464, "Model::Sphere002", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1073,7 +1073,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 2108944417408, "Model::Sphere001", "Mesh" {
+	Model: 2647439244656, "Model::Sphere001", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
@@ -1087,7 +1087,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2109156447920, "Material::20 - Default", "" {
+	Material: 2645720723456, "Material::20 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1110,7 +1110,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Material: 2109156470000, "Material::19 - Default", "" {
+	Material: 2645720743136, "Material::21 - Default", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1133,7 +1133,7 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Video: 2109156442160, "Video::マップ #11", "Clip" {
+	Video: 2645720722016, "Video::マップ #11", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koimme.jpg"
@@ -1143,17 +1143,17 @@ Objects:  {
 		Filename: "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koimme.jpg"
 		RelativeFilename: "koimme.jpg"
 	}
-	Video: 2109156450320, "Video::マップ #10", "Clip" {
+	Video: 2645720734976, "Video::マップ #12", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koin1.jpg"
-			P: "RelPath", "KString", "XRefUrl", "", "koin1.jpg"
+			P: "Path", "KString", "XRefUrl", "", "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\mememe.jpg"
+			P: "RelPath", "KString", "XRefUrl", "", "mememe.jpg"
 		}
 		UseMipMap: 0
-		Filename: "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koin1.jpg"
-		RelativeFilename: "koin1.jpg"
+		Filename: "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\mememe.jpg"
+		RelativeFilename: "mememe.jpg"
 	}
-	Texture: 2109156447440, "Texture::マップ #11", "" {
+	Texture: 2645720718176, "Texture::マップ #11", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #11"
@@ -1169,29 +1169,29 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: 2109156465200, "Texture::マップ #10", "" {
+	Texture: 2645720740256, "Texture::マップ #12", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::マップ #10"
+		TextureName: "Texture::マップ #12"
 		Properties70:  {
 			P: "UVSet", "KString", "", "", "UVChannel_1"
 			P: "UseMaterial", "bool", "", "",1
 		}
-		Media: "Video::マップ #10"
-		FileName: "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\koin1.jpg"
-		RelativeFilename: "koin1.jpg"
+		Media: "Video::マップ #12"
+		FileName: "C:\Users\GC1818\Desktop\mario\Mario\GameTemplate\Game\Assets\modelData\mememe.jpg"
+		RelativeFilename: "mememe.jpg"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	AnimationStack: 2109093525472, "AnimStack::Take 001", "" {
+	AnimationStack: 2647546663024, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStop", "KTime", "Time", "",153953860000
 			P: "ReferenceStop", "KTime", "Time", "",153953860000
 		}
 	}
-	AnimationLayer: 2108855943360, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 2647690133792, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -1201,43 +1201,43 @@ Objects:  {
 Connections:  {
 	
 	;Model::グループ001, Model::RootNode
-	C: "OO",2108944443712,0
+	C: "OO",2647439238080,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2108855943360,2109093525472
+	C: "OO",2647690133792,2647546663024
 	
 	;Model::Sphere002, Model::グループ001
-	C: "OO",2108944445904,2108944443712
+	C: "OO",2647439242464,2647439238080
 	
 	;Model::Sphere001, Model::グループ001
-	C: "OO",2108944417408,2108944443712
+	C: "OO",2647439244656,2647439238080
 	
 	;NodeAttribute::, Model::グループ001
-	C: "OO",2109084385616,2108944443712
+	C: "OO",2645723864944,2647439238080
 	
 	;Material::20 - Default, Model::Sphere002
-	C: "OO",2109156447920,2108944445904
+	C: "OO",2645720723456,2647439242464
 	
 	;Geometry::, Model::Sphere002
-	C: "OO",2109188886896,2108944445904
+	C: "OO",2647804156848,2647439242464
 	
-	;Material::19 - Default, Model::Sphere001
-	C: "OO",2109156470000,2108944417408
+	;Material::21 - Default, Model::Sphere001
+	C: "OO",2645720743136,2647439244656
 	
 	;Geometry::, Model::Sphere001
-	C: "OO",2109188887984,2108944417408
+	C: "OO",2647804152496,2647439244656
 	
 	;Texture::マップ #11, Material::20 - Default
-	C: "OP",2109156447440,2109156447920, "DiffuseColor"
+	C: "OP",2645720718176,2645720723456, "DiffuseColor"
 	
 	;Video::マップ #11, Texture::マップ #11
-	C: "OO",2109156442160,2109156447440
+	C: "OO",2645720722016,2645720718176
 	
-	;Texture::マップ #10, Material::19 - Default
-	C: "OP",2109156465200,2109156470000, "DiffuseColor"
+	;Texture::マップ #12, Material::21 - Default
+	C: "OP",2645720740256,2645720743136, "DiffuseColor"
 	
-	;Video::マップ #10, Texture::マップ #10
-	C: "OO",2109156450320,2109156465200
+	;Video::マップ #12, Texture::マップ #12
+	C: "OO",2645720734976,2645720740256
 }
 ;Takes section
 ;----------------------------------------------------

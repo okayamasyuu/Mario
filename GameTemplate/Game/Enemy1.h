@@ -25,7 +25,7 @@ public:
 		enEnemyAnimClip_sky,//飛行アニメーション
 		enEnemyAnimClip_Num
 	};
-	
+	CVector3 m_pos = CVector3::Zero;
 private:
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goalflaag = nullptr;
