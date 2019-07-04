@@ -7,6 +7,10 @@ public:
 	~Block();
 	bool Start();
 	void Update();
+	CVector3 SetPosi(CVector3 posi)
+	{
+		m_position = posi;
+	}
 private:
 	prefab::CSkinModelRender* m_block = nullptr;
 	CPhysicsStaticObject  m_PSObject;

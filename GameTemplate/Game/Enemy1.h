@@ -13,7 +13,10 @@ public:
 	void Update();
 	void Turn();
 	void GhostObj();
-
+	CVector3 SetScale(CVector3 scale)
+	{
+		scena = scale;
+	}
 	void SetPosi(CVector3 Plposi)
 	{
 		m_position = Plposi;
@@ -32,7 +35,7 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
 	CCharacterController m_EnemyCharaCon;
-
+	CVector3 scena = CVector3::Zero;
 	//ゴーストオブジェクト
 	CPhysicsGhostObject m_ghostobj; 
 	CVector3  ghostPosi = CVector3::Zero;

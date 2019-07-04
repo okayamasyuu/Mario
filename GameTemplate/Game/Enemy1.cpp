@@ -22,7 +22,7 @@ bool Enemy1::Start()
 	m_enemy = NewGO<prefab::CSkinModelRender>(0);
 	m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
 	//m_enemy->Init(L"modelData/Angel.cmo");
-	CVector3 scena = {
+	 scena = {
 		4,
 		4,
 		4,
@@ -46,7 +46,7 @@ bool Enemy1::Start()
 		m_ghostobj.CreateBox(
 			ghostPosi = m_position,    //第一引数は座標。
 			CQuaternion::Identity,     //第二引数は回転クォータニオン。
-			{ 40.0, 5.0, 40.0 }     //第三引数はボックスのサイズ。
+			{ 30.0, 5.0, 30.0 }     //第三引数はボックスのサイズ。
 		);
 	}
 
@@ -60,6 +60,10 @@ void Enemy1::Update()
 	m_pl = FindGO<Player>("プレイヤー");
 	m_goalflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
 
+	//ゲームのクラスのポインタを返す
+	//m_pl = Game::GetInstance()->m_pl;
+	//m_goalflaag = Game::GetInstance()->m_goaflaag;
+
 	m_position += m_moveSpeed;
 
 	GhostObj();
@@ -69,15 +73,10 @@ void Enemy1::Update()
 		{ 0.0f, 1.0, 0.0 },
 		3.0f);
 	m_rot *= Rot;
-	//プレイヤーを追いかける
+	
 	CVector3 toPlayer = { 0,0,0 };
-	toPlayer = m_pl->GetPosi() - m_position;
 
-	//toPlayerの距離を計算
-	float len = toPlayer.Length();
-
-
-	///////視野角
+	/////////視野角
 	CVector3 enemyForward = CVector3::AxisZ;
 	m_rot.Multiply(enemyForward);
 
@@ -94,14 +93,20 @@ void Enemy1::Update()
 	//視野角判定
 	//fabsfは絶対値を求める関数！
 	//角度はマイナスが存在するから、絶対値にする。
-	if (fabsf(angle) < CMath::DegToRad(45.0f)//90
-		&& toPlayerLen < 500.0f)
+	if (fabsf(angle) < CMath::DegToRad(45.0f)
+		&& toPlayerLen < 400.0f)
 	{
+		//プレイヤーを追いかける
+		
+		toPlayer = m_pl->GetPosi() - m_position;
+
+		//toPlayerの距離を計算
+		float len = toPlayer.Length();
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 10;
-		toPlayer.z *= 10;
-		toPlayer.y *= 10;
+		toPlayer.x *= 12;
+		toPlayer.z *= 12;
+		toPlayer.y *= 12;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;
@@ -109,7 +114,7 @@ void Enemy1::Update()
 
 
 	//範囲
-	//if (len < 300) {
+	//if (len < 500) {
 	//	toPlayer.Normalize();
 	//	//スピード
 	//	toPlayer.x *= 10;
@@ -136,10 +141,10 @@ void Enemy1::Update()
 				pl->SetMutekiTime(0);
 			}
 		}
-
+	
 		//距離小さくなったら
 		//距離0.5前後ぐらい
-		if (diff.Length() < 0.7 && m_goalflaag->GetClearFlag() == false
+		if (diff.Length() < 1.2 && m_goalflaag->GetClearFlag() == false
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
 			pl->HikuHP(1);

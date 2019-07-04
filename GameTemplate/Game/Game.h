@@ -24,6 +24,14 @@ public:
 	//クラスの継承
 	//ポイント型にする
 
+	//静的メンバ変数
+	static Game* m_instance;
+	//インスタンスの取得
+	static Game* GetInstance()
+	{
+		return m_instance;
+	}
+
 	void SetTimer(int time)
 	{
 		m_timer = time;
@@ -41,6 +49,7 @@ public:
 		return m_zikan;
 	}
 private:
+	
 	int m_timer = 0;
 	prefab::CSoundSource* soundRender = nullptr;
 	float m_zikan = 0.0f;

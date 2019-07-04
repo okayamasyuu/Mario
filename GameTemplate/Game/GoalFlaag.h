@@ -8,6 +8,10 @@ public:
 	~GoalFlaag();
 	bool Start();
 	void Update();
+	CVector3 SetPosi(CVector3 posi)
+	{
+		m_position = posi;
+	}
 	void SetClear_flag(bool flag)
 	{
 		Clear_flag = flag;

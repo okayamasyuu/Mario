@@ -155,7 +155,7 @@ void Player::blink()
 {
 	//“_–Åˆ—
 	if (muteki == true) {
-		int Inbizible = 2;
+		int Inbizible = 3;
 
 		if ((mutekitime / Inbizible) % 2 == 0) {
 			m_skinModelRender->SetActiveFlag(false);

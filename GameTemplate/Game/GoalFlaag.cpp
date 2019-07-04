@@ -22,7 +22,7 @@ bool GoalFlaag::Start()
 
 	m_position.x = 300;
 	m_position.y = -250;
-	m_position.z = 1500;
+	m_position.z = 1800;
 	scela = { 5,5,5 };
 
 	m_goalflaagModel->SetPosition(m_position);
