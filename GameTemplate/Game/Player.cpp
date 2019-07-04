@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
 
-
 Player::Player()
 {
 }
@@ -159,7 +158,8 @@ void Player::blink()
 {
 	//“_–Åˆ—
 	if (muteki == true) {
-		int Inbizible = 3;
+		mutekitime++;
+		const int Inbizible = 3;
 
 		if ((mutekitime / Inbizible) % 2 == 0) {
 			m_skinModelRender->SetActiveFlag(false);
@@ -168,7 +168,7 @@ void Player::blink()
 			m_skinModelRender->SetActiveFlag(true);
 		}
 
-		if (mutekitime >= 100) {
+		if (mutekitime >= 100 ) {
 			m_skinModelRender->SetActiveFlag(true);
 			muteki = false;
 			mutekitime = 0;

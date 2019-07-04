@@ -121,13 +121,13 @@ void Enemy2::Update()
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
 		//無敵時間
-		if (pl->GetMutekiFlag() == true) {
+		/*if (pl->GetMutekiFlag() == true) {
 			pl->TasuMutekiTime(1);
 			if (pl->GetMutekiTime() == 100) {
 				pl->SetMutekiFlag(false);
 				pl->SetMutekiTime(0);
 			}
-		}
+		}*/
 
 		//距離小さくなったら
 		//距離0.5前後ぐらい
