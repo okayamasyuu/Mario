@@ -64,9 +64,12 @@ void Player::Update()
 
 	
 	//ƒWƒƒƒ“ƒv
-	if (m_state == 1 && m_charaCon.IsJump()) {
+	if (m_charaCon.IsJump()) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_jump,0.3);
+		//if (m_charaCon.IsOnGround()) {
 			m_state = 0;
+			//m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3);
+		//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
 			m_state = 1;

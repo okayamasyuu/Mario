@@ -131,7 +131,7 @@ void Enemy2::Update()
 
 		//距離小さくなったら
 		//距離0.5前後ぐらい
-		if (diff.Length() < 0.3 && m_goalflaag->GetClearFlag() == false
+		if (diff.Length() < 0.8 && m_goalflaag->GetClearFlag() == false
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
 			pl->HikuHP(1);
