@@ -12,6 +12,10 @@ public:
 	void HPUI();
 	void blink();
 	void Coinget();
+	void SetScale(CVector3 Scale)
+	{
+		scale = Scale;
+	}
 	void SetPosi(CVector3 Plposi)
 	{
 		m_position = Plposi;
@@ -64,6 +68,7 @@ public:
 	};
 	
 private:
+	CVector3 scale;
 	int m_state = 0; //èÛë‘ÇÃïœêî
 	int HP = 10;
 	int count = 0;

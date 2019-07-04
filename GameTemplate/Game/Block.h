@@ -7,7 +7,7 @@ public:
 	~Block();
 	bool Start();
 	void Update();
-	CVector3 SetPosi(CVector3 posi)
+	void SetPosi(CVector3 posi)
 	{
 		m_position = posi;
 	}

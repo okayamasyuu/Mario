@@ -32,19 +32,20 @@ Game::Game()
 	クラス　プレイヤー、ステージ、ゴール、敵１、敵２、ブロックを
 　　NewGOしているところをコメントアウトする
 	クラスの中で座標や大きさをSetしていたらコメントアウトする
-	ファイルパス STAGE
+	ファイルパス Mariotkl
 	Angel
 	WorkEnemy
 	unityChan　座標
 	stge_1   座標
 	hatahata　座標
 	block　　　座標
-	まだですcoin 　　　大きさ　座標、(回転あってもなくても)
+	coin 　　　座標、(回転あってもなくても)
 	*/
-	/*m_level.Init(L"STAGE.tkl", [&](LevelObjectData & objData) {
+	/*m_level.Init(L"Mariotkl.tkl", [&](LevelObjectData & objData) {
 		if (objData.EqualObjectName(L"unityChan")) {
 			Player* pl = NewGO<Player>(0, "プレイヤー");
 			pl->SetPosi(objData.position);
+			pl->SetScale(objData.scale);
 			return true;
 		}
 		else if(objData.EqualObjectName(L"hatahata")){
@@ -60,6 +61,11 @@ Game::Game()
 		else if(objData.EqualObjectName(L"block")){
 			Block* bl  = NewGO<Block>(0, "ブロック");
 			bl->SetPosi(objData.position);
+			return true;
+		}
+		else if(objData.EqualObjectName(L"koin")){
+			Coin* co  = NewGO<Coin>(0, "コイン");
+			co->SetPosi(objData.position);
 			return true;
 		}
 	});*/
