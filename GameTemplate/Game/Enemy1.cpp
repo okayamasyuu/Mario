@@ -106,6 +106,7 @@ void Enemy1::Update()
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPƒ_ƒ[ƒW
 			pl->HikuHP(1);
+			//pl->HPmae.x - Tidimaru.x;
 			//–³“G
 			pl->SetMutekiFlag(true);
 		}

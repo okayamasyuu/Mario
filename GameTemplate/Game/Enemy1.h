@@ -31,5 +31,7 @@ private:
 	CPhysicsGhostObject m_ghostobj; 
 	CVector3  ghostPosi = CVector3::Zero;
 	CVector3 m_ghostmove = CVector3::Zero;
+
+	CVector2 Tidimaru = { 15.0f, 0.0f };
 };
 

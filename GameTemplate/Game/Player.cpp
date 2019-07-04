@@ -11,6 +11,8 @@ Player::~Player()
 {
 	DeleteGO(m_skinModelRender);
 	DeleteGO(font);
+	DeleteGO(HPmae);
+	DeleteGO(HPusiro);
 }
 
 bool Player::Start()
@@ -49,6 +51,12 @@ bool Player::Start()
 	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
 	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
 
+	HPmae = NewGO<prefab::CSpriteRender>(0);
+	HPmae->Init(L"sprite/HPmae.dds", 150.0f, 100.0f);
+	HPmae->SetPosition(HPmaePos);
+	HPusiro = NewGO<prefab::CSpriteRender>(0);
+	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
+	HPusiro->SetPosition(HPusiroPos);
 	return true;
 }
 void Player::Update()
@@ -141,7 +149,7 @@ void Player::HPUI()
 {
 	//HP
 	wchar_t text[256];
-	swprintf(text, L"HP%02d", HP);
+	swprintf(text, L"%02d / 10", HP);
 
 	font->SetText(text);
 	font->SetPosition({ 400, 250 });

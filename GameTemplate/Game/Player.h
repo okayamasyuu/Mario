@@ -58,6 +58,7 @@ public:
 		enAnimationClip_jump,   //ジャンプアニメーション
 		enAnimationClip_Num,	//アニメーションクリップの数。
 	};
+	prefab::CSpriteRender* HPmae = nullptr;
 private:
 	int m_state = 0; //状態の変数
 	int HP = 10;
@@ -65,11 +66,15 @@ private:
 	bool  muteki = false;
 	int mutekitime = 0;
 	prefab::CFontRender* font = nullptr; //フォント
+	prefab::CSpriteRender* HPusiro = nullptr;
+	
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CAnimationClip m_animClips[enAnimationClip_Num];
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rotation = CQuaternion::Identity;
+	CVector3 HPmaePos = { 200.0f, 250.0f , 0.0f };
+	CVector3 HPusiroPos = { 200.0f, 100.0f , 0.0f };
 	CVector4 color = CVector4::Yellow;
 	Camera* camera = nullptr;
 };
