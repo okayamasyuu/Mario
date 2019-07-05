@@ -17,8 +17,8 @@ bool Stege::Start()
 	m_StegeModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_StegeModelRender->Init(L"modelData/stage.cmo");
 
-	scela = { 2,2,2 };
-	m_position = { 0,-300,0 };
+	//scela = { 2,2,2 };
+	/*m_position = { 0,-300,0 };*/
 
 	m_StegeModelRender->SetPosition(m_position);
 	m_StegeModelRender->SetScale(scela);

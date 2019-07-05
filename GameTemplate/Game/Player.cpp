@@ -22,8 +22,8 @@ bool Player::Start()
 	//m_position.y = -250;
 	//キャラクターコントローラーを初期化。
 	m_charaCon.Init(
-		20.0,        //半径 大きさ
-		80.0,       //高さ
+		10.0,        //半径 大きさ
+		20.0,       //高さ
 		m_position
 	);
 
@@ -81,7 +81,7 @@ void Player::Update()
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
 			m_state = 1;
-			m_moveSpeed.y = 500.0f;
+			m_moveSpeed.y = 300.0f;
 	}
 	//歩き歩き
 	else if (m_moveSpeed.LengthSq() > 50 * 50) {
@@ -115,8 +115,8 @@ void Player::Update()
 	m_moveSpeed.x = 0.0;
 	m_moveSpeed.z = 0.0;
 
-	m_moveSpeed += cameraForward * LSticky * 500.0f;
-	m_moveSpeed += cameraRight * LStickx * 500.0f;
+	m_moveSpeed += cameraForward * LSticky * 300.0f;
+	m_moveSpeed += cameraRight * LStickx * 300.0f;
 
 
 	//重力

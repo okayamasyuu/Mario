@@ -8,6 +8,10 @@ public:
 	~GoalFlaag();
 	bool Start();
 	void Update();
+	void SetScale(CVector3 sca)
+	{
+		scela = sca;
+	}
 	void SetPosi(CVector3 posi)
 	{
 		m_position = posi;

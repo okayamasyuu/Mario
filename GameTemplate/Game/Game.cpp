@@ -41,7 +41,7 @@ Game::Game()
 	block　　　座標
 	coin 　　　座標、(回転あってもなくても)
 	*/
-	/*m_level.Init(L"Mariotkl.tkl", [&](LevelObjectData & objData) {
+	m_level.Init(L"Mariotkl.tkl", [&](LevelObjectData & objData) {
 		if (objData.EqualObjectName(L"unityChan")) {
 			Player* pl = NewGO<Player>(0, "プレイヤー");
 			pl->SetPosi(objData.position);
@@ -51,24 +51,42 @@ Game::Game()
 		else if(objData.EqualObjectName(L"hatahata")){
 			GoalFlaag* goal = NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 			goal->SetPosi(objData.position);
+			goal->SetScale(objData.scale);
 			return true;
 		}
 		else if(objData.EqualObjectName(L"stge_1")){
 			Stege* st  = NewGO<Stege>(0, "ステージ");
 			st->SetPosi(objData.position);
+			st->SetScale(objData.scale);
 			return true;
 		}
 		else if(objData.EqualObjectName(L"block")){
 			Block* bl  = NewGO<Block>(0, "ブロック");
 			bl->SetPosi(objData.position);
+			bl->SetScale(objData.scale);
 			return true;
 		}
 		else if(objData.EqualObjectName(L"koin")){
 			Coin* co  = NewGO<Coin>(0, "コイン");
 			co->SetPosi(objData.position);
+			co->SetScale(objData.scale);
 			return true;
 		}
-	});*/
+		else if (objData.EqualObjectName(L"Angel")) {
+			Enemy1* en1 = NewGO<Enemy1>(0, "敵1");
+			en1->SetPosi(objData.position);
+			en1->SetScale(objData.scale);
+			en1->SetRotation(objData.rotation);
+			return true;
+		}
+		else if (objData.EqualObjectName(L"WorkEnemy")) {
+			Enemy2* en2 = NewGO<Enemy2>(0, "敵2");
+			en2->SetPosi(objData.position);
+			en2->SetScale(objData.scale);
+			en2->SetRotation(objData.rotation);
+			return true;
+		}
+	});
 
 }
 
@@ -84,7 +102,7 @@ Game::~Game()
 	DeleteGOs("ゲームオーバー");
 	DeleteGOs("ゴールオブジェクト");
 	DeleteGOs("クリア");
-	DeleteGOs("敵１");
+	DeleteGOs("敵1");
 	DeleteGOs("敵2");
 	DeleteGO(soundRender);
 	DeleteGO("時間");
@@ -97,23 +115,23 @@ bool Game::Start()
 	MainCamera().SetNear(10.0f);
 	MainCamera().SetFar(10000.0f);
 	
-	NewGO<Player>(0, "プレイヤー");
+	//NewGO<Player>(0, "プレイヤー");
 	NewGO<Camera>(0, "カメラ");
-	NewGO<Stege>(0, "ステージ");
-	NewGO<GoalFlaag>(0, "ゴールオブジェクト");
+	//NewGO<Stege>(0, "ステージ");
+	//NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 
-	en1[0]=NewGO<Enemy1>(0, "敵１");
+	/*en1[0]=NewGO<Enemy1>(0, "敵１");
 	en1[0]->SetPosi({ -150,-250,300 });
 	en1[0] = NewGO<Enemy1>(0, "敵１");
 	en1[0]->SetPosi({ -250,-250,400 });
 	en1[0] = NewGO<Enemy1>(0, "敵１");
-	en1[0]->SetPosi({ -350,-250,700 });
+	en1[0]->SetPosi({ -350,-250,700 });*/
 
 	NewGO<Enemy2>(0, "敵2");
 	//NewGO<Enemy1>(0, "敵１");
 	NewGO<Timer>(0, "時間");
-	NewGO<Block>(0, "ブロック");
-	NewGO<Coin>(0, "コイン");
+	//NewGO<Block>(0, "ブロック");
+	//NewGO<Coin>(0, "コイン");
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);

@@ -20,10 +20,10 @@ bool GoalFlaag::Start()
 	m_goalflaagModel = NewGO<prefab::CSkinModelRender>(0);
 	m_goalflaagModel->Init(L"modelData/hatahata.cmo");	//ゴールオブジェクト
 
-	m_position.x = 300;
+	/*m_position.x = 300;
 	m_position.y = -250;
 	m_position.z = 1800;
-	scela = { 5,5,5 };
+	scela = { 5,5,5 };*/
 
 	m_goalflaagModel->SetPosition(m_position);
 	m_goalflaagModel->SetScale(scela);
@@ -52,7 +52,7 @@ void GoalFlaag::Update()
 		
 		QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 			CVector3 diff = pl->GetPosi() - m_position;
-			if (diff.Length() < 100.0f && Clear_flag == false) {
+			if (diff.Length() < 30.0f && Clear_flag == false) {
 				/*ga->Clear_flag = true;*/
 			
 					NewGO<GameClear>(0, "クリア");

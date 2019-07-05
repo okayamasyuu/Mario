@@ -22,20 +22,20 @@ bool Enemy1::Start()
 	m_enemy = NewGO<prefab::CSkinModelRender>(0);
 	m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
 	//m_enemy->Init(L"modelData/Angel.cmo");
-	 scena = {
+	/* scena = {
 		4,
 		4,
 		4,
 
-	};
+	};*/
 	//敵1のポジション位置、配列
 	/*m_position.y = -250;
 	m_position.x = -150;
 	m_position.z = 350;*/
 	//キャラコンの初期化
 	m_EnemyCharaCon.Init(
-		25.0,        //半径
-		43.0,       //高さ
+		10.0,        //半径
+		10.0,       //高さ
 		m_position
 	);
 
@@ -46,12 +46,13 @@ bool Enemy1::Start()
 		m_ghostobj.CreateBox(
 			ghostPosi = m_position,    //第一引数は座標。
 			CQuaternion::Identity,     //第二引数は回転クォータニオン。
-			{ 30.0, 5.0, 30.0 }     //第三引数はボックスのサイズ。
+			{ 12.0, 5.0, 12.0 }     //第三引数はボックスのサイズ。
 		);
 	}
 
 	m_enemy->SetPosition(m_position);
 	m_enemy->SetScale(scena);
+	m_enemy->SetRotation(m_rot);
 	m_enemy->PlayAnimation(enEnemyAnimClip_sky);
 	return true;
 }
@@ -68,40 +69,59 @@ void Enemy1::Update()
 
 	GhostObj();
 
-	CQuaternion Rot;
+	/*CQuaternion Rot;
 	Rot.SetRotationDeg(
 		{ 0.0f, 1.0, 0.0 },
 		3.0f);
-	m_rot *= Rot;
+	m_rot *= Rot;*/
 	
 	CVector3 toPlayer = { 0,0,0 };
 
-	/////////視野角
-	CVector3 enemyForward = CVector3::AxisZ;
-	m_rot.Multiply(enemyForward);
+	///////////視野角
+	//CVector3 enemyForward = CVector3::AxisZ;
+	//m_rot.Multiply(enemyForward);
 
-	//エネミーからプレイヤーに伸びるベクトルを求める。
-	CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
-	//正規化を行う前に、プレイヤーまでの距離を求めておく。
-	float toPlayerLen = toPlayerDir.Length();
-	//正規化！
-	toPlayerDir.Normalize();
-	//enemyForwardとtoPlayerDirとの内積を計算する。
-	float d = enemyForward.Dot(toPlayerDir);
-	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
-	float angle = acos(d);
-	//視野角判定
-	//fabsfは絶対値を求める関数！
-	//角度はマイナスが存在するから、絶対値にする。
-	if (fabsf(angle) < CMath::DegToRad(45.0f)
-		&& toPlayerLen < 400.0f)
-	{
-		//プレイヤーを追いかける
-		
-		toPlayer = m_pl->GetPosi() - m_position;
+	////エネミーからプレイヤーに伸びるベクトルを求める。
+	//CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
+	////正規化を行う前に、プレイヤーまでの距離を求めておく。
+	//float toPlayerLen = toPlayerDir.Length();
+	////正規化！
+	//toPlayerDir.Normalize();
+	////enemyForwardとtoPlayerDirとの内積を計算する。
+	//float d = enemyForward.Dot(toPlayerDir);
+	////内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+	//float angle = acos(d);
 
-		//toPlayerの距離を計算
-		float len = toPlayer.Length();
+	////視野角判定
+	////fabsfは絶対値を求める関数！
+	////角度はマイナスが存在するから、絶対値にする。
+	//if (fabsf(angle) < CMath::DegToRad(45.0f)
+	//	&& toPlayerLen < 400.0f)
+	//{
+	//	hakkenFlag = true;
+	//	//プレイヤーを追いかける
+	//	
+	//	
+
+	//	//toPlayerの距離を計算
+	//	float len = toPlayerDir.Length();
+	//	toPlayerDir.Normalize();
+	//	//スピード
+	//	toPlayerDir.x *= 20;
+	//	toPlayerDir.z *= 20;
+	//	toPlayerDir.y *= 20;
+	//	m_moveSpeed.x += toPlayerDir.x;
+	//	m_moveSpeed.z += toPlayerDir.z;
+	//	m_moveSpeed.y += toPlayerDir.y;
+	//}
+	
+    //プレイヤーを追いかける
+	toPlayer = m_pl->GetPosi() - m_position;
+
+	//toPlayerの距離を計算
+	float len = toPlayer.Length();
+	//範囲
+	if (len < 300) {
 		toPlayer.Normalize();
 		//スピード
 		toPlayer.x *= 12;
@@ -109,27 +129,12 @@ void Enemy1::Update()
 		toPlayer.y *= 12;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
-		m_moveSpeed.y += toPlayer.y;
+		m_moveSpeed.y += toPlayer.y;	
 	}
-
-
-	//範囲
-	//if (len < 500) {
-	//	toPlayer.Normalize();
-	//	//スピード
-	//	toPlayer.x *= 10;
-	//	toPlayer.z *= 10;
-	//	toPlayer.y *= 10;
-	//	m_moveSpeed.x += toPlayer.x;
-	//	m_moveSpeed.z += toPlayer.z;
-	//	m_moveSpeed.y += toPlayer.y;
-	//	
-	//}
 	else {
 		toPlayer = { 0,0,0 };
 		m_moveSpeed = toPlayer;
 	}
-
 	//HPダメージ
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
@@ -144,7 +149,7 @@ void Enemy1::Update()
 	
 		//距離小さくなったら
 		//距離0.5前後ぐらい
-		if (diff.Length() < 1.2 && m_goalflaag->GetClearFlag() == false
+		if (diff.Length() < 0.48 && m_goalflaag->GetClearFlag() == false
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
 			pl->HikuHP(1);
@@ -162,7 +167,7 @@ void Enemy1::Update()
 
 	//ゴーストをエネミーと一緒に移動させる
 	CVector3 pos = m_position;
-	pos.y += 90;
+	pos.y += 30;
 	m_ghostobj.SetPosition(pos);
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。

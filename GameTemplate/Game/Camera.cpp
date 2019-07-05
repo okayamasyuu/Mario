@@ -21,7 +21,7 @@ bool Camera::Start()
 	//camePos = target;
 
 	//注視点から視点までのベクトルを設定。
-	toCameraPos.Set(0.0, 100, -700);
+	toCameraPos.Set(0.0, 100, -300);
 
 	//ばねカメラの初期化
 	m_springCamera.Init(
@@ -51,13 +51,13 @@ void Camera::Update()
 	float y = Pad(0).GetRStickYF();
 	//Y軸周りの回転
 	CQuaternion qRot;
-	qRot.SetRotationDeg(CVector3::AxisY, 2.0f * x);
+	qRot.SetRotationDeg(CVector3::AxisY, 4.0f * x);
 	qRot.Multiply(toCameraPos);
 	//X軸周りの回転。
 	CVector3 axisX;
 	axisX.Cross(CVector3::AxisY, toCameraPos);
 	axisX.Normalize();
-	qRot.SetRotationDeg(axisX, 2.0f * y);
+	qRot.SetRotationDeg(axisX, 4.0f * y);
 	qRot.Multiply(toCameraPos);
 	//カメラの回転の上限をチェックする。
 	//注視点から視点までのベクトルを正規化する。

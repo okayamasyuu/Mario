@@ -7,6 +7,11 @@ public:
 	~Block();
 	bool Start();
 	void Update();
+	void SetScale(CVector3 sca)
+	{
+		scale = sca;
+	}
+
 	void SetPosi(CVector3 posi)
 	{
 		m_position = posi;

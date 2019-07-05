@@ -13,7 +13,11 @@ public:
 	void Update();
 	void Turn();
 	void GhostObj();
-	CVector3 SetScale(CVector3 scale)
+	void SetRotation(CQuaternion rotation)
+	{
+		m_rot = rotation;
+	}
+	void SetScale(CVector3 scale)
 	{
 		scena = scale;
 	}
@@ -36,6 +40,8 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity;
 	CCharacterController m_EnemyCharaCon;
 	CVector3 scena = CVector3::Zero;
+	bool hakkenFlag = false;
+
 	//ゴーストオブジェクト
 	CPhysicsGhostObject m_ghostobj; 
 	CVector3  ghostPosi = CVector3::Zero;

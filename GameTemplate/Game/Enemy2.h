@@ -24,6 +24,10 @@ public:
 	{
 		scale = Scale;
 	}
+	void SetRotation(CQuaternion rotation)
+	{
+		m_rot = rotation;
+	}
 	CVector3 Getscale()
 	{
 		return scale;

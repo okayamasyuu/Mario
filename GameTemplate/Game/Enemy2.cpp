@@ -22,15 +22,15 @@ bool Enemy2::Start()
 	m_enemy2 = NewGO<prefab::CSkinModelRender>(0);
 	m_enemy2->Init(L"modelData/WorkEnemy.cmo", m_enemy2animClip, enEnemy2AnimClip_Num);
 	
-	CVector3 scale = { 4,4,4 };
+	//CVector3 scale = { 4,4,4 };
 
-	m_position.x = -400;
-	m_position.y = -200;
+	//m_position.x = -400;
+	//m_position.y = -200;
 
 	//キャラコンの初期化
 	m_Enemy2CharaCon.Init(
-		25.0,        //半径
-		47.0,       //高さ
+		10.0,        //半径
+		10.0,       //高さ
 		m_position
 	);
 	
@@ -40,12 +40,13 @@ bool Enemy2::Start()
 		m_ghostobj.CreateBox(
 			ghostPosi = m_position,    //第一引数は座標。
 			CQuaternion::Identity,     //第二引数は回転クォータニオン。
-			{ 30.0, 5.0, 30.0 }     //第三引数はボックスのサイズ。
+			{ 12.0, 5.0, 12.0 }     //第三引数はボックスのサイズ。
 		);
 	}
 	
 	m_enemy2->SetPosition(m_position);
 	m_enemy2->SetScale(scale);
+	m_enemy2->SetRotation(m_rot);
 	//m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
 	return true;
 }
@@ -70,46 +71,46 @@ void Enemy2::Update()
 	float len = toPlayer.Length();
 
 	///////視野角
-	CVector3 enemyForward = CVector3::AxisZ;
-	m_rot.Multiply(enemyForward);
+	//CVector3 enemyForward = CVector3::AxisZ;
+	//m_rot.Multiply(enemyForward);
 
-	//エネミーからプレイヤーに伸びるベクトルを求める。
-	CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
-	//正規化を行う前に、プレイヤーまでの距離を求めておく。
-	float toPlayerLen = toPlayerDir.Length();
-	//正規化！
-	toPlayerDir.Normalize();
-	//enemyForwardとtoPlayerDirとの内積を計算する。
-	float d = enemyForward.Dot(toPlayerDir);
-	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
-	float angle = acos(d);
-	//視野角判定
-	//fabsfは絶対値を求める関数！
-	//角度はマイナスが存在するから、絶対値にする。
-	if (fabsf(angle) < CMath::DegToRad(90.0f)
-		&& toPlayerLen < 500.0f){
+	////エネミーからプレイヤーに伸びるベクトルを求める。
+	//CVector3 toPlayerDir = m_pl->GetPosi() - m_position;
+	////正規化を行う前に、プレイヤーまでの距離を求めておく。
+	//float toPlayerLen = toPlayerDir.Length();
+	////正規化！
+	//toPlayerDir.Normalize();
+	////enemyForwardとtoPlayerDirとの内積を計算する。
+	//float d = enemyForward.Dot(toPlayerDir);
+	////内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+	//float angle = acos(d);
+	////視野角判定
+	////fabsfは絶対値を求める関数！
+	////角度はマイナスが存在するから、絶対値にする。
+	//if (fabsf(angle) < CMath::DegToRad(90.0f)
+	//	&& toPlayerLen < 500.0f){
+	//	toPlayer.Normalize();
+	//	//スピード
+	//	toPlayer.x *= 25;
+	//	toPlayer.z *= 25;
+	//	m_moveSpeed.x += toPlayer.x;
+	//	m_moveSpeed.z += toPlayer.z;
+	//	//if (m_moveSpeed.LengthSq() > 10 * 10) {
+	//		m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
+	//	//}
+	//}
+	//範囲
+	if (len < 400) {
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 10;
-		toPlayer.z *= 10;
+		toPlayer.x *= 15;
+		toPlayer.z *= 15;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		//if (m_moveSpeed.LengthSq() > 10 * 10) {
 			m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
 		//}
 	}
-	//範囲
-	//if (len < 500) {
-	//	toPlayer.Normalize();
-	//	//スピード
-	//	toPlayer.x *= 10;
-	//	toPlayer.z *= 10;
-	//	m_moveSpeed.x += toPlayer.x;
-	//	m_moveSpeed.z += toPlayer.z;
-	//	if (m_moveSpeed.LengthSq() > 10 * 10) {
-	//		m_enemy2->PlayAnimation(enEnemy2AnimClip_walk);
-	//	}
-	//}
 	else {
 		toPlayer.x *= 0;
 		toPlayer.z *= 0;
@@ -131,7 +132,7 @@ void Enemy2::Update()
 
 		//距離小さくなったら
 		//距離0.5前後ぐらい
-		if (diff.Length() < 0.8 && m_goalflaag->GetClearFlag() == false
+		if (diff.Length() < 0.48 && m_goalflaag->GetClearFlag() == false
 			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
 			//HPダメージ
 			pl->HikuHP(1);
@@ -151,7 +152,7 @@ void Enemy2::Update()
 	
 	//ゴーストをエネミーと一緒に移動させる
 	CVector3 pos = m_position;	
-	pos.y += 120;
+	pos.y += 30;
 	m_ghostobj.SetPosition(pos);
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
