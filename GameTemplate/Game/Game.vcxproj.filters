@@ -106,12 +106,11 @@
     <ImageContentTask Include="Assets\sprite\banana.png" />
     <ImageContentTask Include="Assets\sprite\Mario.Titlehaikei.png" />
     <ImageContentTask Include="Assets\sprite\Mario.Titlemozi.png" />
+    <ImageContentTask Include="Assets\sprite\HPusiro.png" />
+    <ImageContentTask Include="Assets\sprite\HPmae.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\sprite\HPusiro.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
-    <Image Include="Assets\sprite\HPmae.png">
+    <Image Include="Assets\sprite\sibou.png">
       <Filter>Assets\sprite</Filter>
     </Image>
   </ItemGroup>
