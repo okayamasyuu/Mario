@@ -109,4 +109,9 @@
     <ImageContentTask Include="Assets\sprite\HPusiro.png" />
     <ImageContentTask Include="Assets\sprite\HPmae.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\sibou.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

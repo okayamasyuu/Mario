@@ -18,6 +18,6 @@ bool GameOver::Start()
 	himei->SetVolume(0.1f);
 	himei->Play(false);
 	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	m_spriteRender->Init(L"sprite/mu.dds", 500, 400);
+	m_spriteRender->Init(L"sprite/sibou.dds", 1280.0f, 720.0f);
 	return true;
 }
