@@ -1,6 +1,7 @@
 #pragma once
 #include <Camera.h>
 class Camera;
+class Block;
 class Player : public IGameObject
 {
 public:
@@ -57,6 +58,17 @@ public:
 	{
 		m_moveSpeed.y = movespeed.y;
 	}
+	/*void Init(Block* p)
+
+	{
+		m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
+		parent = p;
+	}
+	void SetWorldMatrix(CMatrix World)
+	{
+		 worldMatrix = World;
+	}*/
+	CMatrix worldMatrix;			//ワールド行列。
 	CCharacterController m_charaCon; //キャラクターコントローラー
 	CPad& pad = Pad(0);
 	enum EnAnimationClip {
@@ -68,6 +80,7 @@ public:
 	};
 	prefab::CSpriteRender* HPmae = nullptr;
 private:
+	Block* parent = nullptr;//親
 	CVector3 scale;
 	int m_state = 0; //状態の変数
 	int HP = 10;
@@ -77,6 +90,8 @@ private:
 	prefab::CFontRender* font = nullptr; //フォント
 	prefab::CSpriteRender* HPusiro = nullptr;
 	
+	CSkinModelData m_skinModelData;
+	CSkinModel m_model;
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CAnimationClip m_animClips[enAnimationClip_Num];
 	CVector3 m_position = CVector3::Zero;
@@ -86,5 +101,6 @@ private:
 	CVector3 HPusiroPos = { 200.0f, 100.0f , 0.0f };
 	CVector4 color = CVector4::Yellow;
 	Camera* camera = nullptr;
+	Block* m_bl = nullptr;
 };
 

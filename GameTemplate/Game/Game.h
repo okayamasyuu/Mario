@@ -9,6 +9,7 @@ class Player;
 class GoalFlaag;
 class Enemy1;
 class Enemy2;
+class Block;
 class Game : public IGameObject
 {
 public:
@@ -19,8 +20,9 @@ public:
 	CLevel m_level;
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goaflaag = nullptr;
-	Enemy1* en1[3] = { nullptr };
-	Enemy2* en2[3] = { nullptr };
+	Block* m_bl = nullptr;
+	/*Enemy1* en1[3] = { nullptr };
+	Enemy2* en2[3] = { nullptr };*/
 	//クラスの継承
 	//ポイント型にする
 
@@ -49,7 +51,7 @@ public:
 		return m_zikan;
 	}
 private:
-	
+	prefab::CDirectionLight* directionLight = nullptr;
 	int m_timer = 0;
 	prefab::CSoundSource* soundRender = nullptr;
 	float m_zikan = 0.0f;

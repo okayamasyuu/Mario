@@ -24,6 +24,13 @@ bool Coin::Start()
 }
 void Coin::Update()
 {
+	//回転
+	CQuaternion Rot;
+	Rot.SetRotationDeg(
+		{ 0.0f, 1.0, 0.0 },
+		3.0f);
+	m_rotation *= Rot;
+
 	//コインとプレイヤーとの当たり判定
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
@@ -33,4 +40,5 @@ void Coin::Update()
 		}
 		return true;
 	});
+	m_coin->SetRotation(m_rotation);
 }

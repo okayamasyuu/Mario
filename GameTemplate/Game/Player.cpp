@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Block.h"
+#include "Game.h"
 
 Player::Player()
 {
@@ -45,7 +47,8 @@ bool Player::Start()
 	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
 	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
-
+	//m_bl = Game::GetInstance()->m_bl;
+	//Init(m_bl);
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
 	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
@@ -57,6 +60,7 @@ bool Player::Start()
 	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
 	HPusiro->SetPosition(HPusiroPos);
 	m_skinModelRender->SetScale(scale);
+	m_skinModelRender->SetPosition(m_position);
 	return true;
 }
 void Player::Update()
@@ -118,6 +122,13 @@ void Player::Update()
 	m_moveSpeed += cameraForward * LSticky * 300.0f;
 	m_moveSpeed += cameraRight * LStickx * 300.0f;
 
+	////普通にワールド行列を作ると・・・
+	//CMatrix mWorld;
+	//mWorld.MakeTranslation(m_position);
+	////床のワールド行列を乗算して、子供に影響を与えてみる
+	//mWorld.Mul(mWorld, parent->GetWorldMatrix());
+	////行列をモデルに設定する
+	//m_skinModelRender->(mWorld);
 
 	//重力
 	m_moveSpeed.y -= 900.0 * GameTime().GetFrameDeltaTime();
@@ -129,6 +140,8 @@ void Player::Update()
 	Turn();
 
 	HPUI();
+
+	
 
 	//3dMax上で成分の設定されているので回転する
 	CQuaternion qRot;

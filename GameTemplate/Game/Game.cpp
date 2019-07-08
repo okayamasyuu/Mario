@@ -29,17 +29,17 @@ Game::Game()
 
 
 	/*
-	クラス　プレイヤー、ステージ、ゴール、敵１、敵２、ブロックを
+	クラス　プレイヤー、ステージ、ゴール、敵１、敵２、ブロック、コインを
 　　NewGOしているところをコメントアウトする
 	クラスの中で座標や大きさをSetしていたらコメントアウトする
 	ファイルパス Mariotkl
 	Angel
 	WorkEnemy
-	unityChan　座標
-	stge_1   座標
-	hatahata　座標
-	block　　　座標
-	coin 　　　座標、(回転あってもなくても)
+	unityChan　
+	stge_1   
+	hatahata　
+	block　　　
+	coin 　　　
 	*/
 	m_level.Init(L"Mariotkl.tkl", [&](LevelObjectData & objData) {
 		if (objData.EqualObjectName(L"unityChan")) {
@@ -127,7 +127,7 @@ bool Game::Start()
 	en1[0] = NewGO<Enemy1>(0, "敵１");
 	en1[0]->SetPosi({ -350,-250,700 });*/
 
-	NewGO<Enemy2>(0, "敵2");
+	//NewGO<Enemy2>(0, "敵2");
 	//NewGO<Enemy1>(0, "敵１");
 	NewGO<Timer>(0, "時間");
 	//NewGO<Block>(0, "ブロック");
