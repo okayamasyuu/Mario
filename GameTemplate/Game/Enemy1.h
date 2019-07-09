@@ -13,6 +13,10 @@ public:
 	void Update();
 	void Turn();
 	void GhostObj();
+	CVector3 GetPosi()
+	{
+		return m_position;
+	}
 	void SetRotation(CQuaternion rotation)
 	{
 		m_rot = rotation;
@@ -25,11 +29,15 @@ public:
 	{
 		m_position = Plposi;
 	}
+	void SetMoveSpeed(CVector3 movespeed)
+	{
+		m_moveSpeed.y = movespeed.y;
+	}
 	enum EnAnimationClip {
 		enEnemyAnimClip_sky,//飛行アニメーション
 		enEnemyAnimClip_Num
 	};
-	CVector3 m_pos = CVector3::Zero;
+	CCharacterController m_EnemyCharaCon;
 private:
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goalflaag = nullptr;
@@ -38,7 +46,7 @@ private:
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
 	CQuaternion m_rot = CQuaternion::Identity;
-	CCharacterController m_EnemyCharaCon;
+
 	CVector3 scena = CVector3::Zero;
 	bool hakkenFlag = false;
 

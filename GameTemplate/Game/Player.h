@@ -1,7 +1,10 @@
 #pragma once
 #include <Camera.h>
+#include "tkEngine/physics/tkPhysicsGhostObject.h"
 class Camera;
 class Block;
+class GoalFlaag;
+class Enemy1;
 class Player : public IGameObject
 {
 public:
@@ -13,6 +16,8 @@ public:
 	void HPUI();
 	void blink();
 	void Coinget();
+	void EnemyColider();
+	void GhostObj();
 	void SetScale(CVector3 Scale)
 	{
 		scale = Scale;
@@ -102,5 +107,11 @@ private:
 	CVector4 color = CVector4::Yellow;
 	Camera* camera = nullptr;
 	Block* m_bl = nullptr;
+	GoalFlaag* m_goal = nullptr;
+	Enemy1* m_en1 = nullptr;
+
+	//ゴーストオブジェクト
+	CPhysicsGhostObject m_ghostobj;
+	CVector3  ghostPosi = CVector3::Zero;
 };
 

@@ -2,6 +2,9 @@
 #include "Player.h"
 #include "Block.h"
 #include "Game.h"
+#include "Enemy1.h"
+#include "Enemy2.h"
+#include "GoalFlaag.h"
 
 Player::Player()
 {
@@ -28,7 +31,16 @@ bool Player::Start()
 		20.0,       //高さ
 		m_position
 	);
+	
+	//for (int i = 0; i < 1; i++) {
 
+	//	//ボックス形状のゴースト作成する
+	//	m_ghostobj.CreateBox(
+	//		ghostPosi = m_position,    //第一引数は座標。
+	//		CQuaternion::Identity,     //第二引数は回転クォータニオン。
+	//		{ 12.0, 4.0, 12.0 }     //第三引数はボックスのサイズ。
+	//	);
+	//}
 	//HPUI
 	font = NewGO<prefab::CFontRender>(0);
 	font->SetShadowParam(true, 2.0f, CVector4::Black);
@@ -47,8 +59,6 @@ bool Player::Start()
 	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
 	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
-	//m_bl = Game::GetInstance()->m_bl;
-	//Init(m_bl);
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
 	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
@@ -85,7 +95,7 @@ void Player::Update()
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
 			m_state = 1;
-			m_moveSpeed.y = 300.0f;
+			m_moveSpeed.y = 350.0f;
 	}
 	//歩き歩き
 	else if (m_moveSpeed.LengthSq() > 50 * 50) {
@@ -109,8 +119,10 @@ void Player::Update()
 	}
 	
 	
-
+	EnemyColider();
 	
+	//GhostObj();
+
 	cameraForward.y = 0.0;
 	cameraForward.Normalize();
 	cameraRight.y = 0.0;
@@ -119,8 +131,8 @@ void Player::Update()
 	m_moveSpeed.x = 0.0;
 	m_moveSpeed.z = 0.0;
 
-	m_moveSpeed += cameraForward * LSticky * 300.0f;
-	m_moveSpeed += cameraRight * LStickx * 300.0f;
+	m_moveSpeed += cameraForward * LSticky * 200.0f;
+	m_moveSpeed += cameraRight * LStickx * 200.0f;
 
 	////普通にワールド行列を作ると・・・
 	//CMatrix mWorld;
@@ -135,7 +147,12 @@ void Player::Update()
 
 	m_position = m_charaCon.Execute(m_moveSpeed);//キャラコンに移動速度を与える
 
-	//m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
+	//ゴーストをエネミーと一緒に移動させる
+	/*CVector3 pos = m_position;
+	pos.y += 30;
+	m_ghostobj.SetPosition(pos);*/
+
+	m_skinModelRender->SetPosition(m_position);//プレイヤーに移動を教える
 
 	Turn();
 
@@ -207,4 +224,57 @@ void Player::Coinget()
 	DeleteGO(当たったコイン);
 	}
 	*/
+}
+void Player::EnemyColider()
+{
+	QueryGOs<Enemy2>("敵2", [&](Enemy2 * en2)->bool {
+		CVector3 diff2 = m_position - en2->GetPosi();
+		m_goal = Game::GetInstance()->m_goal;
+		//距離25前後ぐらい
+		if (diff2.Length() < 25 && m_goal->GetClearFlag() == false
+			&& HP > 0 && muteki == false) {
+			//HPダメージ
+			HP--;
+			//pl->HPmae.x - Tidimaru.x;
+			//無敵
+			muteki = true;
+		}
+		return true;
+	});
+	//HPダメージ
+	QueryGOs<Enemy1>("敵1", [&](Enemy1 * en1)->bool {
+	
+			m_goal = Game::GetInstance()->m_goal;
+			CVector3 diff1 = m_position - en1->GetPosi();
+			
+			//距離小さくなったら
+			//距離25前後ぐらい
+			if (diff1.Length() < 28 && m_goal->GetClearFlag() == false
+				&& HP > 0 && muteki == false) {
+				//HPダメージ
+				HP--;
+				//pl->HPmae.x - Tidimaru.x;
+				//無敵
+				muteki = true;
+			}
+			
+		return true;
+	});
+}
+void Player::GhostObj()
+{
+	m_en1 = Game::GetInstance()->m_en1;
+	//ゴーストオブジェクトの当たり判定(敵1)
+	PhysicsWorld().ContactTest(m_en1->m_EnemyCharaCon, [&](const btCollisionObject & contactObject) {
+		if (m_ghostobj.IsSelf(contactObject) && muteki == false) {
+			//踏んだら飛ぶ
+			HP--;
+			muteki = true;
+			m_en1->SetMoveSpeed({ 0,200,0 });
+			//DeleteGO(this); //当たったら破棄
+		}
+		else if (m_ghostobj.IsSelf(contactObject) && muteki == true) {
+			m_en1->SetMoveSpeed({ 0,200,0 });
+		}
+	});
 }

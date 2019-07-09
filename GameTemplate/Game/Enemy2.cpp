@@ -100,11 +100,11 @@ void Enemy2::Update()
 	//	//}
 	//}
 	//範囲
-	if (len < 400) {
+	if (len < 230) {
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 15;
-		toPlayer.z *= 15;
+		toPlayer.x *= 12;
+		toPlayer.z *= 12;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		//if (m_moveSpeed.LengthSq() > 10 * 10) {
@@ -119,28 +119,28 @@ void Enemy2::Update()
 	}
 
 	//HPダメージ
-	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
-		CVector3 diff = pl->GetPosi() - m_position;
-		//無敵時間
-		/*if (pl->GetMutekiFlag() == true) {
-			pl->TasuMutekiTime(1);
-			if (pl->GetMutekiTime() == 100) {
-				pl->SetMutekiFlag(false);
-				pl->SetMutekiTime(0);
-			}
-		}*/
+	//QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
+	//	CVector3 diff = pl->GetPosi() - m_position;
+	//	//無敵時間
+	//	/*if (pl->GetMutekiFlag() == true) {
+	//		pl->TasuMutekiTime(1);
+	//		if (pl->GetMutekiTime() == 100) {
+	//			pl->SetMutekiFlag(false);
+	//			pl->SetMutekiTime(0);
+	//		}
+	//	}*/
 
-		//距離小さくなったら
-		//距離0.5前後ぐらい
-		if (diff.Length() < 0.48 && m_goalflaag->GetClearFlag() == false
-			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
-			//HPダメージ
-			pl->HikuHP(1);
-			//無敵
-			pl->SetMutekiFlag(true);
-		}
-		return true;
-	});
+	//	//距離小さくなったら
+	//	//距離0.5前後ぐらい
+	//	if (diff.Length() < 0.49 && m_goalflaag->GetClearFlag() == false
+	//		&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
+	//		//HPダメージ
+	//		pl->HikuHP(1);
+	//		//無敵
+	//		pl->SetMutekiFlag(true);
+	//	}
+	//	return true;
+	//});
 
 	GhostObj();
 

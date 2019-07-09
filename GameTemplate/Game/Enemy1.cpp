@@ -121,12 +121,12 @@ void Enemy1::Update()
 	//toPlayerの距離を計算
 	float len = toPlayer.Length();
 	//範囲
-	if (len < 300) {
+	if (len < 200 ) {
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 12;
-		toPlayer.z *= 12;
-		toPlayer.y *= 12;
+		toPlayer.x *= 10;
+		toPlayer.z *= 10;
+		toPlayer.y *= 8;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		m_moveSpeed.y += toPlayer.y;	
@@ -136,30 +136,31 @@ void Enemy1::Update()
 		m_moveSpeed = toPlayer;
 	}
 	//HPダメージ
-	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
-		CVector3 diff = pl->GetPosi() - m_position;
-		//無敵時間
-		/*if (pl->GetMutekiFlag() == true) {
-			pl->TasuMutekiTime(1);
-			if (pl->GetMutekiTime() == 100) {
-				pl->SetMutekiFlag(false);
-				pl->SetMutekiTime(0);
-			}
-		}*/
-	
-		//距離小さくなったら
-		//距離0.5前後ぐらい
-		if (diff.Length() < 0.48 && m_goalflaag->GetClearFlag() == false
-			&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
-			//HPダメージ
-			pl->HikuHP(1);
-			//pl->HPmae.x - Tidimaru.x;
-			//無敵
-			pl->SetMutekiFlag(true);
-		}
-		return true;
-	});
-
+	//QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
+	//	CVector3 diff = pl->GetPosi() - m_position;
+	//	//無敵時間
+	//	/*if (pl->GetMutekiFlag() == true) {
+	//		pl->TasuMutekiTime(1);
+	//		if (pl->GetMutekiTime() == 100) {
+	//			pl->SetMutekiFlag(false);
+	//			pl->SetMutekiTime(0);
+	//		}
+	//	}*/
+	//
+	//	//距離小さくなったら
+	//	//距離0.5前後ぐらい
+	//	if (diff.Length() < 0.5 && m_goalflaag->GetClearFlag() == false
+	//		&& pl->GetHP() > 0 && pl->GetMutekiFlag() == false) {
+	//		//HPダメージ
+	//		pl->HikuHP(1);
+	//		//pl->HPmae.x - Tidimaru.x;
+	//		//無敵
+	//		pl->SetMutekiFlag(true);
+	//	}
+	//	return true;
+	//});
+	//座標更新
+	//m_enemy->SetPosition(m_position);
 	
 	
 	//キャラコンに移動速度を与える
@@ -172,7 +173,7 @@ void Enemy1::Update()
 
 	//キャラコンで動かした結果をCSkinModelRenderに反映させる。
 	m_enemy->SetPosition(m_EnemyCharaCon.GetPosition());
-
+	
 	Turn();
 
 	m_enemy->SetRotation(m_rot);

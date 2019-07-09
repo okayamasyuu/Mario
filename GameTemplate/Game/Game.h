@@ -19,8 +19,9 @@ public:
 	void Update();
 	CLevel m_level;
 	Player* m_pl = nullptr;
-	GoalFlaag* m_goaflaag = nullptr;
+	GoalFlaag* m_goal = nullptr;
 	Block* m_bl = nullptr;
+	Enemy1* m_en1 = nullptr;
 	/*Enemy1* en1[3] = { nullptr };
 	Enemy2* en2[3] = { nullptr };*/
 	//ÉNÉâÉXÇÃåpè≥

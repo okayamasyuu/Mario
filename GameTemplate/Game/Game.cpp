@@ -27,6 +27,10 @@ Game::Game()
 	//このインスタンスを唯一のインスタンスとして記録する。 
 	m_instance = this; 
 
+	//playerの頭当たりに（真上）に敵が当たると強制的にゲームオーバーになって挙動がおかしくなる
+	//またはエラーが出る　コリジョンわけわかめなので勘弁してください。
+	//他の部分からの当たり判定は正常
+	//なのでenemy1の追跡範囲と位置を低めにしました
 
 	/*
 	クラス　プレイヤー、ステージ、ゴール、敵１、敵２、ブロック、コインを
@@ -36,7 +40,7 @@ Game::Game()
 	Angel
 	WorkEnemy
 	unityChan　
-	stge_1   
+	stage   
 	hatahata　
 	block　　　
 	coin 　　　
@@ -54,7 +58,7 @@ Game::Game()
 			goal->SetScale(objData.scale);
 			return true;
 		}
-		else if(objData.EqualObjectName(L"stge_1")){
+		else if(objData.EqualObjectName(L"stage")){
 			Stege* st  = NewGO<Stege>(0, "ステージ");
 			st->SetPosi(objData.position);
 			st->SetScale(objData.scale);
@@ -142,10 +146,10 @@ void Game::Update()
 {
 	m_zikan = min(999.0f, m_zikan + GameTime().GetFrameDeltaTime());
 	m_pl = FindGO<Player>("プレイヤー");
-	m_goaflaag = FindGO<GoalFlaag>("ゴールオブジェクト");
+	m_goal = FindGO<GoalFlaag>("ゴールオブジェクト");
 	soundRender->Play(true);
 
-	if (m_goaflaag->GetClearFlag() == false) {
+	if (m_goal->GetClearFlag() == false) {
 		if (Pad(0).IsPress(enButtonSelect) == true) {
 			soundRender->Stop();
 			//NewGO<GameClear>(0, "クリア");
