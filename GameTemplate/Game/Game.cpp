@@ -15,7 +15,7 @@
 #include "coin.h"
 #include "Score.h"
 #include "HaikeiWall.h"
-
+#include "Enemy3.h"
 
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
 //静的メンバ変数を定義する
@@ -100,6 +100,13 @@ Game::Game()
 			en2->SetRotation(objData.rotation);
 			return true;
 		}
+		else if (objData.EqualObjectName(L"Angel2")) {
+			Enemy3* en3 = NewGO<Enemy3>(0, "敵3");
+			en3->SetPosi(objData.position);
+			en3->SetScale(objData.scale);
+			en3->SetRotation(objData.rotation);
+			return true;
+		}
 		return false;
 	});
 
@@ -119,6 +126,7 @@ Game::~Game()
 	DeleteGOs("クリア");
 	DeleteGOs("敵1");
 	DeleteGOs("敵2");
+	DeleteGOs("敵3");
 	DeleteGO(soundRender);
 	DeleteGO("時間");
 	DeleteGOs("ブロック");

@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
+#include "Enemy3.h"
 #include "GoalFlaag.h"
 
 Player::Player()
@@ -270,6 +271,20 @@ void Player::Coinget()
 }
 void Player::EnemyColider()
 {
+	QueryGOs<Enemy3>("“G3", [&](Enemy3 * en3)->bool {
+		CVector3 diff3 = m_position - en3->GetPosi();
+		m_goal = Game::GetInstance()->m_goal;
+		//‹——£25‘OŒã‚®‚ç‚¢
+		if (diff3.Length() < 25 && m_goal->GetClearFlag() == false
+			&& HP > 0 && muteki == false) {
+			//HPƒ_ƒ[ƒW
+			HP--;
+			//pl->HPmae.x - Tidimaru.x;
+			//–³“G
+			muteki = true;
+		}
+		return true;
+	});
 	QueryGOs<Enemy2>("“G2", [&](Enemy2 * en2)->bool {
 		CVector3 diff2 = m_position - en2->GetPosi();
 		m_goal = Game::GetInstance()->m_goal;

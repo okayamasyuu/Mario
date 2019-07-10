@@ -33,7 +33,7 @@ bool Enemy3::Start()
 		);
 	}
 
-	m_moveSpeed.y = 10;
+	m_moveSpeed.y = 50;
 	m_enemy3->SetShadowCasterFlag(true);
 
 	m_enemy3->SetPosition(m_position);
@@ -51,7 +51,7 @@ void Enemy3::Update()
 	//ã‰º‚ÉˆÚ“®
 	timer++;
 	
-	if (timer >= 200 && m_moveSpeed.y > 0){
+	if (timer >= 50 ){
 		timer = 0;
 	    m_moveSpeed.y *= -1.0;//«
 	}
