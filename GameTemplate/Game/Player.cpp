@@ -86,22 +86,23 @@ void Player::Update()
 	CVector3 cameraForward = MainCamera().GetForward();
 	CVector3 cameraRight = MainCamera().GetRight();
 
-	
+
 	//ジャンプ
 	if (m_charaCon.IsJump()) {
-		m_skinModelRender->PlayAnimation(enAnimationClip_jump,0.3);
+		m_skinModelRender->PlayAnimation(enAnimationClip_jump, 0.3);
 		//if (m_charaCon.IsOnGround()) {
-			m_state = 0;
-			//m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3);
-		//}
+		m_state = 0;
+		//m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3);
+	//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-			m_state = 1;
-			m_moveSpeed.y = 350.0f;
+		m_state = 1;
+		m_moveSpeed.y = 350.0f;
 	}
 	//歩き歩き
-	else if (m_moveSpeed.LengthSq() > 50 * 50) {
-		m_skinModelRender->PlayAnimation(enAnimationClip_run,0.3);
+	else if (m_moveSpeed.LengthSq() > 30 * 30) {
+		
+		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.3);
 	}
 	/*else if (m_moveSpeed.LengthSq() > 600 * 600 && m_state == 2) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.3);
@@ -119,10 +120,10 @@ void Player::Update()
 		m_state = 5;
 		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
 	}
-	
-	
+
+
 	EnemyColider();
-	
+
 	//GhostObj();
 
 	cameraForward.y = 0.0;
@@ -135,6 +136,46 @@ void Player::Update()
 
 	m_moveSpeed += cameraForward * LSticky * 200.0f;
 	m_moveSpeed += cameraRight * LStickx * 200.0f;
+
+	
+	////加速度の計算
+	//CVector3 accForwardXZ = MainCamera().GetForward();
+	//CVector3 accRightXZ = MainCamera().GetRight();
+	//accForwardXZ.y = 0.0f;
+	//accForwardXZ.Normalize();
+	//accRightXZ.y = 0.0f;
+	//accRightXZ.Normalize();
+
+	////摩擦力。
+	//CVector3 friction = m_moveSpeed;
+	//if (m_charaCon.IsJump()) {
+	//	//ジャンプ中の摩擦力。
+	//	friction *= -1.0f;
+	//}
+	//else {
+	//	friction *= -3.0f;
+	//}
+	//m_moveSpeed.x += friction.x * GameTime().GetFrameDeltaTime();
+	//m_moveSpeed.z += friction.z * GameTime().GetFrameDeltaTime();
+
+	////加速度を加える。
+	//m_moveSpeed += accForwardXZ;
+	//m_moveSpeed += accRightXZ;
+
+	////重力
+	//m_moveSpeed.y -= 900.0 * GameTime().GetFrameDeltaTime();
+	//if (m_charaCon.IsJump()) {
+	//	//移動速度に制限を加える。
+	//	//ジャンプ中にジャンプ前より早くなることはない
+	//	CVector3 moveSpeedXZ = CVector3(m_moveSpeed.x, 0.0f, m_moveSpeed.z);
+
+	//	if (moveSpeedXZ.LengthSq() > m_moveSpeedWhenStartJump * m_moveSpeedWhenStartJump) {
+	//		moveSpeedXZ.Normalize();
+	//		moveSpeedXZ *= m_moveSpeedWhenStartJump;
+	//		m_moveSpeed.x = moveSpeedXZ.x;
+	//		m_moveSpeed.z = moveSpeedXZ.z;
+	//	}
+	//}
 
 	////普通にワールド行列を作ると・・・
 	//CMatrix mWorld;

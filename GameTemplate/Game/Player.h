@@ -95,8 +95,7 @@ private:
 	prefab::CFontRender* font = nullptr; //フォント
 	prefab::CSpriteRender* HPusiro = nullptr;
 	
-	CSkinModelData m_skinModelData;
-	CSkinModel m_model;
+	float m_moveSpeedWhenStartJump;			//ジャンプを開始したときの移動速度。
 	prefab::CSkinModelRender* m_skinModelRender = nullptr;
 	CAnimationClip m_animClips[enAnimationClip_Num];
 	CVector3 m_position = CVector3::Zero;

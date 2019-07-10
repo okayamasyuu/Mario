@@ -179,7 +179,7 @@ void Game::Update()
 		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
-		if (m_timer == 500) {
+		if (m_timer == 250) {
 			
 			DeleteGO(this);
 			NewGO<title>(0);
@@ -191,7 +191,7 @@ void Game::Update()
 		soundRender->Stop();
 		NewGO<GameOver>(0, "ゲームオーバー");
 		m_timer += 5;
-		if (m_timer == 500) {
+		if (m_timer == 250) {
 			DeleteGO(this);
 			NewGO<title>(0);
 			m_timer = 0;
