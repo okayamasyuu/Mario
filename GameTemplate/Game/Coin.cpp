@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Coin.h"
 #include "Player.h"
+//#include "Game.h"
+#include "Score.h"
 
 Coin::Coin()
 {
@@ -18,12 +20,17 @@ bool Coin::Start()
 
 	//scale = { 3,3,3 };
 	//m_position = { 100,-140,0 };
+	m_coin->SetShadowCasterFlag(true);
+
+	m_coin->SetEmissionColor({ 0.8, 0.8, 0 });
+
 	m_coin->SetPosition(m_position);
 	m_coin->SetScale(scale);
 	return true;
 }
 void Coin::Update()
 {
+	
 	//回転
 	CQuaternion Rot;
 	Rot.SetRotationDeg(
@@ -35,7 +42,8 @@ void Coin::Update()
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
 		if (diff.Length() < 20) {
-
+			//m_score = FindGO<Score>("スコア");
+			//m_score->TasuScore(1);
 			DeleteGO(this);
 		}
 		return true;

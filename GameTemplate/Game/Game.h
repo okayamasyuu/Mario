@@ -10,6 +10,7 @@ class GoalFlaag;
 class Enemy1;
 class Enemy2;
 class Block;
+class Score;
 class Game : public IGameObject
 {
 public:
@@ -22,6 +23,7 @@ public:
 	GoalFlaag* m_goal = nullptr;
 	Block* m_bl = nullptr;
 	Enemy1* m_en1 = nullptr;
+	Score* m_score = nullptr;
 	/*Enemy1* en1[3] = { nullptr };
 	Enemy2* en2[3] = { nullptr };*/
 	//ÉNÉâÉXÇÃåpè≥
@@ -52,7 +54,7 @@ public:
 		return m_zikan;
 	}
 private:
-	prefab::CDirectionLight* directionLight = nullptr;
+	prefab::CDirectionLight* dirLight = nullptr;
 	int m_timer = 0;
 	prefab::CSoundSource* soundRender = nullptr;
 	float m_zikan = 0.0f;

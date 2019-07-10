@@ -52,9 +52,9 @@ namespace {
 		
 		//影の設定。
 		initParam.graphicsConfing.shadowRenderConfig.isEnable = true;
-		initParam.graphicsConfing.shadowRenderConfig.shadowMapWidth = 1024;
-		initParam.graphicsConfing.shadowRenderConfig.shadowMapHeight = 1024;
-		initParam.graphicsConfing.shadowRenderConfig.lightHeight = UnitM(20.0f);
+		initParam.graphicsConfing.shadowRenderConfig.shadowMapWidth = 2048;
+		initParam.graphicsConfing.shadowRenderConfig.shadowMapHeight = 2048;
+		initParam.graphicsConfing.shadowRenderConfig.lightHeight = UnitM(2.0f);
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[0] = 0.001f;
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[1] = 0.001f;
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[2] = 0.002f;
@@ -69,11 +69,11 @@ namespace {
 		initParam.graphicsConfing.tonemapConfig.luminance = 0.56f;
 
 		//SSR
-		initParam.graphicsConfing.ssrConfig.isEnable = true;
+		initParam.graphicsConfing.ssrConfig.isEnable = false;
 		//ディザ
 		initParam.graphicsConfing.ditheringConfig.isEnable = false;
 		//dof
-		initParam.graphicsConfing.dofConfig.isEnable = true;
+		initParam.graphicsConfing.dofConfig.isEnable = false;
 	}
 	/*!
 	*@brief	高スペックPC向けにtkEngineのConfigを設定する。
@@ -87,15 +87,15 @@ namespace {
 		initParam.frameBufferHeight = 1080;
 		//指向性シャドウの設定。
 		initParam.graphicsConfing.shadowRenderConfig.isEnable = true;
-		initParam.graphicsConfing.shadowRenderConfig.shadowMapWidth = 2048;
-		initParam.graphicsConfing.shadowRenderConfig.shadowMapHeight = 2048;
-		initParam.graphicsConfing.shadowRenderConfig.lightHeight = UnitM(10.0f);
+		initParam.graphicsConfing.shadowRenderConfig.shadowMapWidth = 4096;
+		initParam.graphicsConfing.shadowRenderConfig.shadowMapHeight = 4096;
+		initParam.graphicsConfing.shadowRenderConfig.lightHeight = UnitM(20.0f);
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[0] = 0.001f;
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[1] = 0.001f;
 		initParam.graphicsConfing.shadowRenderConfig.depthOffset[2] = 0.002f;
 		initParam.graphicsConfing.shadowRenderConfig.softShadowLevel = EnSoftShadowQualityLevel::eSSSS_PCF;
 		//全方位シャドウの設定。
-		initParam.graphicsConfing.ominiShadowRenderConfig.isEnable = true;
+		initParam.graphicsConfing.ominiShadowRenderConfig.isEnable = false;
 
 		//アンチ
 		initParam.graphicsConfing.aaConfig.isEnable = true;
@@ -107,9 +107,9 @@ namespace {
 		//SSR
 		initParam.graphicsConfing.ssrConfig.isEnable = true;
 		//ディザ
-		initParam.graphicsConfing.ditheringConfig.isEnable = true;
+		initParam.graphicsConfing.ditheringConfig.isEnable = false;
 		//dof
-		initParam.graphicsConfing.dofConfig.isEnable = true;
+		initParam.graphicsConfing.dofConfig.isEnable = false;
 	}
 }
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)

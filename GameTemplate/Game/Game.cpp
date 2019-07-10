@@ -10,9 +10,11 @@
 #include "GoalFlaag.h"
 #include "Enemy1.h"
 #include "Timer.h"
-#include"Enemy2.h"
+#include "Enemy2.h"
 #include "Block.h"
 #include "coin.h"
+#include "Score.h"
+
 
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
 //静的メンバ変数を定義する
@@ -58,12 +60,12 @@ Game::Game()
 			goal->SetScale(objData.scale);
 			return true;
 		}
-		else if(objData.EqualObjectName(L"stage")){
+		/*else if(objData.EqualObjectName(L"stage")){
 			Stege* st  = NewGO<Stege>(0, "ステージ");
 			st->SetPosi(objData.position);
 			st->SetScale(objData.scale);
 			return true;
-		}
+		}*/
 		else if(objData.EqualObjectName(L"block")){
 			Block* bl  = NewGO<Block>(0, "ブロック");
 			bl->SetPosi(objData.position);
@@ -90,6 +92,7 @@ Game::Game()
 			en2->SetRotation(objData.rotation);
 			return true;
 		}
+		return false;
 	});
 
 }
@@ -112,6 +115,7 @@ Game::~Game()
 	DeleteGO("時間");
 	DeleteGOs("ブロック");
 	DeleteGOs("コイン");
+	//DeleteGO("スコア");
 }
 bool Game::Start()
 {
@@ -119,6 +123,7 @@ bool Game::Start()
 	MainCamera().SetNear(10.0f);
 	MainCamera().SetFar(10000.0f);
 	
+	//NewGO<Score>(0, "スコア");
 	//NewGO<Player>(0, "プレイヤー");
 	NewGO<Camera>(0, "カメラ");
 	//NewGO<Stege>(0, "ステージ");
@@ -139,6 +144,14 @@ bool Game::Start()
 	soundRender = NewGO<prefab::CSoundSource>(0);
 	soundRender->Init(L"sound/field1.wav");
 	soundRender->SetVolume(10.0f);
+
+	dirLight = NewGO<prefab::CDirectionLight>(0);
+	CVector3 lightDir = { 0,-1,0 };
+	lightDir.Normalize();
+	dirLight->SetColor({ 1.0,1.0,1.0,1.0 });
+	dirLight->SetDirection(lightDir);
+	LightManager().SetAmbientLight({ 0.2, 0.2, 0.2 });
+	GraphicsEngine().GetDirectionShadowMap().SetLightDirection(lightDir);
 	return true;
 }
 

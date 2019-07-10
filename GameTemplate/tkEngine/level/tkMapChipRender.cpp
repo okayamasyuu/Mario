@@ -47,6 +47,6 @@ namespace tkEngine {
 		}
 		//‰e
 		m_modelRender->SetShadowReceiverFlag(true);
-		m_modelRender->SetShadowCasterFlag(true);
+		m_modelRender->SetShadowCasterFlag(false);
 	}
 }

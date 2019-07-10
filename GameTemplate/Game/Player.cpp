@@ -69,6 +69,8 @@ bool Player::Start()
 	HPusiro = NewGO<prefab::CSpriteRender>(0);
 	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
 	HPusiro->SetPosition(HPusiroPos);
+	m_skinModelRender->SetShadowCasterFlag(true);
+
 	m_skinModelRender->SetScale(scale);
 	m_skinModelRender->SetPosition(m_position);
 	return true;

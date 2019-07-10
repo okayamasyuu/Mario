@@ -49,6 +49,7 @@ bool Enemy1::Start()
 			{ 12.0, 5.0, 12.0 }     //第三引数はボックスのサイズ。
 		);
 	}
+	m_enemy->SetShadowCasterFlag(true);
 
 	m_enemy->SetPosition(m_position);
 	m_enemy->SetScale(scena);

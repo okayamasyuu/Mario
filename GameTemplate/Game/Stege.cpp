@@ -19,6 +19,7 @@ bool Stege::Start()
 
 	//scela = { 2,2,2 };
 	/*m_position = { 0,-300,0 };*/
+	m_StegeModelRender->SetShadowReceiverFlag(true);
 
 	m_StegeModelRender->SetPosition(m_position);
 	m_StegeModelRender->SetScale(scela);

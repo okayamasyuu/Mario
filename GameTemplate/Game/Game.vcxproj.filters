@@ -32,6 +32,7 @@
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Score.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -52,6 +53,7 @@
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Coin.h" />
+    <ClInclude Include="Score.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -108,10 +110,6 @@
     <ImageContentTask Include="Assets\sprite\Mario.Titlemozi.png" />
     <ImageContentTask Include="Assets\sprite\HPusiro.png" />
     <ImageContentTask Include="Assets\sprite\HPmae.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\sibou.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\sprite\sibou.png" />
   </ItemGroup>
 </Project>

@@ -250,8 +250,12 @@ namespace tkEngine{
 		rc.RSSetViewport(0.0f, 0.0f, (float)GraphicsEngine().GetFrameBufferWidth(), (float)GraphicsEngine().GetFrameBufferHeight());
 		EndGPUEvent();
 	}
+
 	void CDirectionShadowMap::SendShadowReceiveParamToGPU(CRenderContext& rc)
 	{
+		if (IsEnable() == false) {
+			return;
+		}
 		rc.UpdateSubresource(m_shadowCb, &m_shadowCbEntity);
 		rc.PSSetConstantBuffer(enSkinModelCBReg_Shadow, m_shadowCb);
 		//テクスチャを転送。
