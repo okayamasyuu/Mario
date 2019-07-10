@@ -14,6 +14,7 @@
 #include "Block.h"
 #include "coin.h"
 #include "Score.h"
+#include "HaikeiWall.h"
 
 
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
@@ -43,6 +44,7 @@ Game::Game()
 	WorkEnemy
 	unityChan　
 	stage   
+	Wall
 	hatahata　
 	block　　　
 	coin 　　　
@@ -66,6 +68,12 @@ Game::Game()
 			st->SetScale(objData.scale);
 			return true;
 		}*/
+		else if(objData.EqualObjectName(L"Wall")){
+			HaikeiWall* Wall  = NewGO<HaikeiWall>(0, "背景の壁");
+			Wall->SetPosi(objData.position);
+			Wall->SetScale(objData.scale);
+			return true;
+		}
 		else if(objData.EqualObjectName(L"block")){
 			Block* bl  = NewGO<Block>(0, "ブロック");
 			bl->SetPosi(objData.position);
@@ -115,6 +123,7 @@ Game::~Game()
 	DeleteGO("時間");
 	DeleteGOs("ブロック");
 	DeleteGOs("コイン");
+	DeleteGO("背景の壁");
 	//DeleteGO("スコア");
 }
 bool Game::Start()

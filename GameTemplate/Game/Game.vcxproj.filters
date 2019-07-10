@@ -33,6 +33,8 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Enemy3.cpp" />
+    <ClCompile Include="HaikeiWall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -54,6 +56,8 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="Enemy3.h" />
+    <ClInclude Include="HaikeiWall.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -86,6 +90,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\koin.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\haikeiWall.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

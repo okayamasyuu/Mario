@@ -63,12 +63,12 @@ bool Player::Start()
 	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
 	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
 
-	HPmae = NewGO<prefab::CSpriteRender>(0);
+	/*HPmae = NewGO<prefab::CSpriteRender>(0);
 	HPmae->Init(L"sprite/HPmae.dds", 150.0f, 100.0f);
 	HPmae->SetPosition(HPmaePos);
 	HPusiro = NewGO<prefab::CSpriteRender>(0);
 	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
-	HPusiro->SetPosition(HPusiroPos);
+	HPusiro->SetPosition(HPusiroPos);*/
 	m_skinModelRender->SetShadowCasterFlag(true);
 
 	m_skinModelRender->SetScale(scale);
