@@ -1854,11 +1854,6 @@
     <ImageContentTask Include="Assets\sprite\Mario.Title.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\banana.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Mario.Titlehaikei.png" />
     <ImageContentTask Include="Assets\sprite\Mario.Titlemozi.png" />
   </ItemGroup>
@@ -1870,6 +1865,9 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\sibou.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,9 @@
 #pragma once
 #include "Game.h"
 class Game;
+class Timer;
+class Score;
+
 class GoalFlaag : public IGameObject
 {
 public:
@@ -31,5 +34,7 @@ private:
 	CVector3 scela;
 	bool Clear_flag = false; //クリアフラグ
 	Game* ga = nullptr;
+	Timer* ti = nullptr;
+	Score* sc = nullptr;
 };
 

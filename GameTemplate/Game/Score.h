@@ -14,8 +14,10 @@ public:
 	{
 		return Count;
 	}
+
+	int Count = 0;
 private:
 	prefab::CFontRender* font = nullptr;
-	int Count = 0;
+	
 };
 
