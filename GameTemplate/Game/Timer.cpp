@@ -25,10 +25,9 @@ void Timer::Update()
 {
 	QueryGOs<Game>("game", [&](Game * ga)->bool {
 		float zikan = ga->timer();
-		float hun, byou;
+		//float hun, byou;
 		hun = zikan / 60.0f;
 		byou = fmod(zikan, 60.0f);
-
 		wchar_t text[256];
 		swprintf(text, L"%.f:%02.fŒo‰ß", hun, byou);
 		m_fontRender->SetText(text);
