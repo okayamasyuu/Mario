@@ -14,8 +14,15 @@ Enemy3::~Enemy3()
 }
 bool Enemy3::Start()
 {
+	//m_enemy3animClip[enEnemyAnimClip_sky].Load(L"animData/WorkEnemymotion.tka");
+
+	//m_enemy3animClip[enEnemyAnimClip_sky].SetLoopFlag(true);
+
 	m_enemy3 = NewGO<prefab::CSkinModelRender>(0);
-	m_enemy3->Init(L"modelData/Angel.cmo");//オブジェクトかテクスチャ変える変える
+	//m_enemy3->Init(L"modelData/Angel.cmo", m_enemy3animClip, enEnemyAnimClip_Num);
+
+	m_enemy3->Init(L"modelData/Angel.cmo");
+
 
 	m_EnemyCharaCon.Init(
 		10.0,        //半径
@@ -33,12 +40,13 @@ bool Enemy3::Start()
 		);
 	}
 
-	m_moveSpeed.y = 50;
+	m_moveSpeed.y = 150;
 	m_enemy3->SetShadowCasterFlag(true);
 
 	m_enemy3->SetPosition(m_position);
 	m_enemy3->SetScale(scena);
 	m_enemy3->SetRotation(m_rot);
+	//m_enemy3->PlayAnimation(enEnemyAnimClip_sky);
 	return true;
 }
 void Enemy3::Update()
@@ -51,11 +59,11 @@ void Enemy3::Update()
 	//上下に移動
 	timer++;
 	
-	if (timer >= 50 ){
+	if (timer >= 20 ){
 		timer = 0;
 	    m_moveSpeed.y *= -1.0;//↓
 	}
-	if (timer >= 200 && m_moveSpeed.y < 0) {
+	if (timer >= 20 && m_moveSpeed.y < 0) {
 		m_moveSpeed.y *= 1.0;//↑
 	}
 

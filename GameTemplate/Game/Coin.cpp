@@ -41,7 +41,7 @@ void Coin::Update()
 	//コインとプレイヤーとの当たり判定
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
-		if (diff.Length() < 20) {
+		if (diff.Length() < 25) {
 			//m_score = FindGO<Score>("スコア");
 			//m_score->TasuScore(1);
 			DeleteGO(this);

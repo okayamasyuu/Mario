@@ -41,6 +41,7 @@ Game::Game()
 	クラスの中で座標や大きさをSetしていたらコメントアウトする
 	ファイルパス Mariotkl
 	Angel
+	Angel2
 	WorkEnemy
 	unityChan　
 	stage   

@@ -251,7 +251,7 @@ void Player::blink()
 			m_skinModelRender->SetActiveFlag(true);
 		}
 
-		if (mutekitime >= 100 ) {
+		if (mutekitime >= 90 ) {
 			m_skinModelRender->SetActiveFlag(true);
 			muteki = false;
 			mutekitime = 0;

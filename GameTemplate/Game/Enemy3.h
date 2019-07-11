@@ -33,15 +33,15 @@ public:
 	{
 		m_moveSpeed.y = movespeed.y;
 	}
-	//enum EnAnimationClip {
-	//	enEnemyAnimClip_sky,//飛行アニメーション
-	//	enEnemyAnimClip_Num
-	//};
+	enum EnAnimationClip {
+		enEnemyAnimClip_sky,//飛行アニメーション
+		enEnemyAnimClip_Num
+	};
 	CCharacterController m_EnemyCharaCon;
 private:
 	Player* m_pl = nullptr;
 	GoalFlaag* m_goalflaag = nullptr;
-	//CAnimationClip m_enemyanimClip[enEnemyAnimClip_Num];
+	CAnimationClip m_enemy3animClip[enEnemyAnimClip_Num];
 	prefab::CSkinModelRender* m_enemy3 = nullptr;
 	CVector3 m_position = CVector3::Zero;
 	CVector3 m_moveSpeed = CVector3::Zero;
