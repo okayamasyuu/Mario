@@ -121,7 +121,7 @@ void Player::Update()
 	//‘Ò‹@
 	else {
 		m_state = 5;
-		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //‚½
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3); //‚½
 	}
 
 
