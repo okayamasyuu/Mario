@@ -97,7 +97,11 @@ void Player::Update()
 	//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-		
+		//Œø‰Ê‰¹
+		auto ss = NewGO<prefab::CSoundSource>(0);
+		ss->Init(L"sound/jump.wav");
+		ss->SetVolume(11.0f);
+		ss->Play(false);
 		//
 		m_state = 1;
 		m_moveSpeed.y = 350.0f;
