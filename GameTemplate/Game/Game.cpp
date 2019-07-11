@@ -133,7 +133,7 @@ Game::~Game()
 	DeleteGOs("ブロック");
 	DeleteGOs("コイン");
 	DeleteGO("背景の壁");
-	DeleteGO("スコア");
+	DeleteGOs("スコア");
 }
 bool Game::Start()
 {
