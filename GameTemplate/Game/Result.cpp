@@ -14,7 +14,7 @@ Result::~Result()
 bool Result::Start()
 {
 	m_resultSprite = NewGO<prefab::CSpriteRender>(0);
-	m_resultSprite->Init(L"sprite/banana.dds", 500, 200);//リザルト画面
+	//m_resultSprite->Init(L"sprite/banana.dds", 500, 200);//リザルト画面
 	return true;
 }
 void Result::Update()
