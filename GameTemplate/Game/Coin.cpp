@@ -30,7 +30,8 @@ bool Coin::Start()
 }
 void Coin::Update()
 {
-	
+	m_score = FindGO<Score>("スコア");
+
 	//回転
 	CQuaternion Rot;
 	Rot.SetRotationDeg(
@@ -41,9 +42,16 @@ void Coin::Update()
 	//コインとプレイヤーとの当たり判定
 	QueryGOs<Player>("プレイヤー", [&](Player * pl)->bool {
 		CVector3 diff = pl->GetPosi() - m_position;
-		if (diff.Length() < 20) {
-			//m_score = FindGO<Score>("スコア");
-			//m_score->TasuScore(1);
+		if (diff.Length() < 28) {
+			//効果音
+			auto ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/coinGet.wav");
+			ss->SetVolume(11.0f);
+			ss->Play(false);
+
+			//スコアに加算する
+			m_score->TasuScore(10);
+
 			DeleteGO(this);
 		}
 		return true;

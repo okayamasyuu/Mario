@@ -69,7 +69,7 @@ void Camera::Update()
 		//カメラが上向きすぎ。
 		toCameraPos = toCameraPosOld;//カメラが下に行きすぎないように0.0
 	}
-	else if (toPosDir.y > 0.7f) {
+	else if (toPosDir.y > 0.85f) {
 		//カメラが下向きすぎ。
 		toCameraPos = toCameraPosOld;
 	}

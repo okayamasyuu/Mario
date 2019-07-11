@@ -2,6 +2,7 @@
 #include "Enemy2.h"
 #include "Player.h"
 #include "GoalFlaag.h"
+#include "Score.h"
 
 Enemy2::Enemy2()
 {
@@ -104,8 +105,8 @@ void Enemy2::Update()
 	if (len < 230) {
 		toPlayer.Normalize();
 		//スピード
-		toPlayer.x *= 12;
-		toPlayer.z *= 12;
+		toPlayer.x *= 18;
+		toPlayer.z *= 18;
 		m_moveSpeed.x += toPlayer.x;
 		m_moveSpeed.z += toPlayer.z;
 		//if (m_moveSpeed.LengthSq() > 10 * 10) {

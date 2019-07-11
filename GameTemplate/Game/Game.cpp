@@ -14,7 +14,8 @@
 #include "Block.h"
 #include "coin.h"
 #include "Score.h"
-
+#include "HaikeiWall.h"
+#include "Enemy3.h"
 
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
 //静的メンバ変数を定義する
@@ -40,9 +41,11 @@ Game::Game()
 	クラスの中で座標や大きさをSetしていたらコメントアウトする
 	ファイルパス Mariotkl
 	Angel
+	Angel2
 	WorkEnemy
 	unityChan　
 	stage   
+	Wall
 	hatahata　
 	block　　　
 	coin 　　　
@@ -66,6 +69,12 @@ Game::Game()
 			st->SetScale(objData.scale);
 			return true;
 		}*/
+		else if(objData.EqualObjectName(L"Wall")){
+			HaikeiWall* Wall  = NewGO<HaikeiWall>(0, "背景の壁");
+			Wall->SetPosi(objData.position);
+			Wall->SetScale(objData.scale);
+			return true;
+		}
 		else if(objData.EqualObjectName(L"block")){
 			Block* bl  = NewGO<Block>(0, "ブロック");
 			bl->SetPosi(objData.position);
@@ -92,6 +101,13 @@ Game::Game()
 			en2->SetRotation(objData.rotation);
 			return true;
 		}
+		else if (objData.EqualObjectName(L"Angel2")) {
+			Enemy3* en3 = NewGO<Enemy3>(0, "敵3");
+			en3->SetPosi(objData.position);
+			en3->SetScale(objData.scale);
+			en3->SetRotation(objData.rotation);
+			return true;
+		}
 		return false;
 	});
 
@@ -111,10 +127,12 @@ Game::~Game()
 	DeleteGOs("クリア");
 	DeleteGOs("敵1");
 	DeleteGOs("敵2");
+	DeleteGOs("敵3");
 	DeleteGO(soundRender);
 	DeleteGO("時間");
 	DeleteGOs("ブロック");
 	DeleteGOs("コイン");
+	DeleteGO("背景の壁");
 	//DeleteGO("スコア");
 }
 bool Game::Start()

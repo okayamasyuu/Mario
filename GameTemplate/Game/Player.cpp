@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
+#include "Enemy3.h"
 #include "GoalFlaag.h"
 
 Player::Player()
@@ -56,19 +57,19 @@ bool Player::Start()
 	//ワンショット再生で停止する。
 	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
 	m_animClips[enAnimationClip_run].SetLoopFlag(true);
-	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
+	m_animClips[enAnimationClip_jump].SetLoopFlag(false);
 	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
 	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
 	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
 
-	HPmae = NewGO<prefab::CSpriteRender>(0);
+	/*HPmae = NewGO<prefab::CSpriteRender>(0);
 	HPmae->Init(L"sprite/HPmae.dds", 150.0f, 100.0f);
 	HPmae->SetPosition(HPmaePos);
 	HPusiro = NewGO<prefab::CSpriteRender>(0);
 	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
-	HPusiro->SetPosition(HPusiroPos);
+	HPusiro->SetPosition(HPusiroPos);*/
 	m_skinModelRender->SetShadowCasterFlag(true);
 
 	m_skinModelRender->SetScale(scale);
@@ -96,6 +97,8 @@ void Player::Update()
 	//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		
+		//
 		m_state = 1;
 		m_moveSpeed.y = 350.0f;
 	}
@@ -118,7 +121,7 @@ void Player::Update()
 	//待機
 	else {
 		m_state = 5;
-		m_skinModelRender->PlayAnimation(enAnimationClip_idle); //た
+		m_skinModelRender->PlayAnimation(enAnimationClip_idle,0.3); //た
 	}
 
 
@@ -250,7 +253,7 @@ void Player::blink()
 			m_skinModelRender->SetActiveFlag(true);
 		}
 
-		if (mutekitime >= 100 ) {
+		if (mutekitime >= 90 ) {
 			m_skinModelRender->SetActiveFlag(true);
 			muteki = false;
 			mutekitime = 0;
@@ -270,6 +273,20 @@ void Player::Coinget()
 }
 void Player::EnemyColider()
 {
+	QueryGOs<Enemy3>("敵3", [&](Enemy3 * en3)->bool {
+		CVector3 diff3 = m_position - en3->GetPosi();
+		m_goal = Game::GetInstance()->m_goal;
+		//距離25前後ぐらい
+		if (diff3.Length() < 25 && m_goal->GetClearFlag() == false
+			&& HP > 0 && muteki == false) {
+			//HPダメージ
+			HP--;
+			//pl->HPmae.x - Tidimaru.x;
+			//無敵
+			muteki = true;
+		}
+		return true;
+	});
 	QueryGOs<Enemy2>("敵2", [&](Enemy2 * en2)->bool {
 		CVector3 diff2 = m_position - en2->GetPosi();
 		m_goal = Game::GetInstance()->m_goal;

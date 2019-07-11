@@ -20,7 +20,7 @@ bool Score::Start()
 void Score::Update()
 {
 	wchar_t text[256];
-	swprintf(text, L"%02d", Count);
+	swprintf(text, L"%04d　スコア", Count);
 	font->SetText(text);
-	font->SetPosition({ 320.0f, 200.0f }); //位置
+	font->SetPosition({ 360.0f, 200.0f }); //位置
 }
