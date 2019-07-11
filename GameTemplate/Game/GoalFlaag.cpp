@@ -5,6 +5,8 @@
 #include "title.h"
 #include "Game.h"
 #include "Result.h"
+#include "Timer.h"
+#include "Score.h"
 
 GoalFlaag::GoalFlaag()
 {
@@ -29,6 +31,7 @@ bool GoalFlaag::Start()
 	m_goalflaagModel->SetScale(scela);
 	m_PSOject.CreateMesh(m_position, CQuaternion::Identity, scela, m_goalflaagModel);
 
+	
 	return true;
 }
 void GoalFlaag::Update()
@@ -40,9 +43,14 @@ void GoalFlaag::Update()
 			if (ga->GetTimer() == 300) { //リザルト画面に移るまでのタイム
 				ga->SetTimer(0);
 				Clear_flag = false;
-
+				Result* re = NewGO<Result>(0, "リザルト");
+				ti = FindGO<Timer>("時間");
+				sc = FindGO<Score>("スコア");
+				re->hunRe = ti->hun;
+				re->byouRe = ti->byou;
+				re->count = sc->Count;
 				DeleteGO(ga);
-				NewGO<Result>(0, "リザルト");
+				//NewGO<Result>(0, "リザルト");
 			}
 			return true;
 		});
