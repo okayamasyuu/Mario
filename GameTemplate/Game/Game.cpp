@@ -141,7 +141,7 @@ bool Game::Start()
 	MainCamera().SetNear(10.0f);
 	MainCamera().SetFar(10000.0f);
 	
-	NewGO<Score>(0, "スコア");
+	//NewGO<Score>(0, "スコア");
 	//NewGO<Player>(0, "プレイヤー");
 	NewGO<Camera>(0, "カメラ");
 	//NewGO<Stege>(0, "ステージ");
