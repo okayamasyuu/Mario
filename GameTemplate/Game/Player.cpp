@@ -57,7 +57,7 @@ bool Player::Start()
 	//ワンショット再生で停止する。
 	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
 	m_animClips[enAnimationClip_run].SetLoopFlag(true);
-	m_animClips[enAnimationClip_jump].SetLoopFlag(true);
+	m_animClips[enAnimationClip_jump].SetLoopFlag(false);
 	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
@@ -97,6 +97,8 @@ void Player::Update()
 	//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
+		
+		//
 		m_state = 1;
 		m_moveSpeed.y = 350.0f;
 	}
