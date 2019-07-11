@@ -2,6 +2,7 @@
 #include "Enemy2.h"
 #include "Player.h"
 #include "GoalFlaag.h"
+#include "Score.h"
 
 Enemy2::Enemy2()
 {

@@ -30,7 +30,8 @@ bool Coin::Start()
 }
 void Coin::Update()
 {
-	
+	m_score = FindGO<Score>("スコア");
+
 	//回転
 	CQuaternion Rot;
 	Rot.SetRotationDeg(
@@ -47,6 +48,9 @@ void Coin::Update()
 			ss->Init(L"sound/coinGet.wav");
 			ss->SetVolume(11.0f);
 			ss->Play(false);
+
+			//スコアに加算する
+			m_score->TasuScore(10);
 
 			DeleteGO(this);
 		}
