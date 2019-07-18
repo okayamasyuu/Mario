@@ -29,7 +29,7 @@ void Timer::Update()
 		hun = zikan / 60.0f;
 		byou = fmod(zikan, 60.0f);
 		wchar_t text[256];
-		swprintf(text, L"%.f:%02.fŒo‰ß", hun, byou);
+		//swprintf(text, L"%.f:%02.fŒo‰ß", hun, byou);
 		m_fontRender->SetText(text);
 
 		return true;

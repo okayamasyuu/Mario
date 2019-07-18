@@ -21,7 +21,7 @@ bool Enemy2::Start()
 
 
 	m_enemy2 = NewGO<prefab::CSkinModelRender>(0);
-	m_enemy2->Init(L"modelData/WorkEnemy.cmo", m_enemy2animClip, enEnemy2AnimClip_Num);
+	m_enemy2->Init(L"modelData/WorkEnemy2.cmo", m_enemy2animClip, enEnemy2AnimClip_Num);
 	
 	//CVector3 scale = { 4,4,4 };
 
@@ -184,6 +184,11 @@ void Enemy2::GhostObj()
 		if (m_ghostobj.IsSelf(contactObject)) {
 			//“¥‚ñ‚¾‚ç”ò‚Ô
 			m_pl->SetMoveSpeed({ 0,300,0 });
+			//Œø‰Ê‰¹
+			auto ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/jump.wav");
+			ss->SetVolume(11.0f);
+			ss->Play(false);
 			DeleteGO(this); //“–‚½‚Á‚½‚ç”jŠü
 		}
 	});

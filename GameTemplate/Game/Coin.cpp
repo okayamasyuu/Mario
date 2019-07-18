@@ -22,7 +22,7 @@ bool Coin::Start()
 	//m_position = { 100,-140,0 };
 	m_coin->SetShadowCasterFlag(true);
 
-	m_coin->SetEmissionColor({ 0.8, 0.8, 0 });
+	m_coin->SetEmissionColor({ 0.3, 0.3, 0 });
 
 	m_coin->SetPosition(m_position);
 	m_coin->SetScale(scale);

@@ -21,7 +21,7 @@ bool Enemy1::Start()
 	m_enemyanimClip[enEnemyAnimClip_sky].SetLoopFlag(true);
 
 	m_enemy = NewGO<prefab::CSkinModelRender>(0);
-	m_enemy->Init(L"modelData/Angel.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
+	m_enemy->Init(L"modelData/Angel2.cmo", m_enemyanimClip,enEnemyAnimClip_Num);
 	//m_enemy->Init(L"modelData/Angel.cmo");
 	/* scena = {
 		4,
@@ -202,6 +202,11 @@ void Enemy1::GhostObj()
 		if (m_ghostobj.IsSelf(contactObject)) {
 			//“¥‚ñ‚¾‚ç”ò‚Ô
 			m_pl->SetMoveSpeed({ 0,300,0 });
+			//Œø‰Ê‰¹
+			auto ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/jump.wav");
+			ss->SetVolume(11.0f);
+			ss->Play(false);
 			DeleteGO(this); //“–‚½‚Á‚½‚ç”jŠü
 		}
 	});

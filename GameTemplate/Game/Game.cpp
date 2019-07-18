@@ -50,14 +50,16 @@ Game::Game()
 	block　　　
 	coin 　　　
 	*/
+	//m_pl =NewGO<Player>(0, "プレイヤー");
+	
 	m_level.Init(L"Mariotkl.tkl", [&](LevelObjectData & objData) {
-		if (objData.EqualObjectName(L"unityChan")) {
+		if (objData.EqualObjectName(L"Player")) {
 			Player* pl = NewGO<Player>(0, "プレイヤー");
 			pl->SetPosi(objData.position);
 			pl->SetScale(objData.scale);
 			return true;
 		}
-		else if(objData.EqualObjectName(L"hatahata")){
+		 if(objData.EqualObjectName(L"hatahata")){
 			GoalFlaag* goal = NewGO<GoalFlaag>(0, "ゴールオブジェクト");
 			goal->SetPosi(objData.position);
 			goal->SetScale(objData.scale);
@@ -81,13 +83,13 @@ Game::Game()
 			bl->SetScale(objData.scale);
 			return true;
 		}
-		else if(objData.EqualObjectName(L"koin")){
+		else if(objData.EqualObjectName(L"koin")){//３８（敵１，２，３、コイン消して
 			Coin* co  = NewGO<Coin>(0, "コイン");
 			co->SetPosi(objData.position);
 			co->SetScale(objData.scale);
 			return true;
 		}
-		else if (objData.EqualObjectName(L"Angel")) {
+		else if (objData.EqualObjectName(L"Angel")) {//10～３０
 			Enemy1* en1 = NewGO<Enemy1>(0, "敵1");
 			en1->SetPosi(objData.position);
 			en1->SetScale(objData.scale);
@@ -164,11 +166,12 @@ bool Game::Start()
 	soundRender->SetVolume(10.0f);
 
 	dirLight = NewGO<prefab::CDirectionLight>(0);
-	CVector3 lightDir = { 0,-1,0 };
+	CVector3 lightDir = { 0,0.1,0 };
 	lightDir.Normalize();
-	dirLight->SetColor({ 1.0,1.0,1.0,1.0 });
+	dirLight->SetColor({ 0.3, 0.3, 0.3, 0.3 });
 	dirLight->SetDirection(lightDir);
-	LightManager().SetAmbientLight({ 0.2, 0.2, 0.2 });
+
+	LightManager().SetAmbientLight({ 0.3, 0.3, 0.3 });
 	GraphicsEngine().GetDirectionShadowMap().SetLightDirection(lightDir);
 	return true;
 }

@@ -1828,14 +1828,19 @@
     <MeshContentTask Include="Assets\modelData\Angel.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Angel2.fbx" />
     <MeshContentTask Include="Assets\modelData\block.fbx" />
+    <MeshContentTask Include="Assets\modelData\bouninn.fbx" />
+    <MeshContentTask Include="Assets\modelData\Bouninngen.fbx" />
     <MeshContentTask Include="Assets\modelData\haikeiWall.fbx" />
     <MeshContentTask Include="Assets\modelData\hatahata.fbx" />
     <MeshContentTask Include="Assets\modelData\koin.fbx" />
+    <MeshContentTask Include="Assets\modelData\koinG.fbx" />
     <MeshContentTask Include="Assets\modelData\stage.fbx" />
     <MeshContentTask Include="Assets\modelData\stge_1.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\WorkEnemy.fbx" />
+    <MeshContentTask Include="Assets\modelData\WorkEnemy2.fbx" />
     <MeshContentTask Include="Assets\modelData\yuka.fbx" />
   </ItemGroup>
   <ItemGroup>

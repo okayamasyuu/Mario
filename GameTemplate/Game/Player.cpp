@@ -48,22 +48,25 @@ bool Player::Start()
 
 
 	//アニメーションクリップのロード。
-	m_animClips[enAnimationClip_idle].Load(L"animData/unityChan/idle.tka");
-	m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
-	m_animClips[enAnimationClip_jump].Load(L"animData/unityChan/jump.tka");
-	m_animClips[enAnimationClip_walk].Load(L"animData/unityChan/walk.tka");
-	
-	//ループフラグを設定する。<-走りアニメーションはループフラグを設定していないので
-	//ワンショット再生で停止する。
+	m_animClips[enAnimationClip_idle].Load(L"animData/Player_taiki.tka");
+	//m_animClips[enAnimationClip_run].Load(L"animData/unityChan/run.tka");
+	m_animClips[enAnimationClip_jump].Load(L"animData/Player_jump.tka");
+	m_animClips[enAnimationClip_walk].Load(L"animData/Player_walk.tka");
+	//
+	////ループフラグを設定する。<-走りアニメーションはループフラグを設定していないので
+	////ワンショット再生で停止する。
 	m_animClips[enAnimationClip_idle].SetLoopFlag(true);
-	m_animClips[enAnimationClip_run].SetLoopFlag(true);
+	//m_animClips[enAnimationClip_run].SetLoopFlag(true);
 	m_animClips[enAnimationClip_jump].SetLoopFlag(false);
 	m_animClips[enAnimationClip_walk].SetLoopFlag(true);
 	
 	m_skinModelRender = NewGO<prefab::CSkinModelRender>(0);
-	m_skinModelRender->Init(L"modelData/unityChan.cmo", m_animClips, enAnimationClip_Num);
-	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
+	//m_skinModelRender->Init(L"modelData/unityChan.cmo"/*, m_animClips, enAnimationClip_Num*/);
+	
 
+	m_skinModelRender->Init(L"modelData/bouninn.cmo", m_animClips, enAnimationClip_Num);
+	m_skinModelRender->PlayAnimation(enAnimationClip_idle);
+	//scale = { 5,5,5 };
 	/*HPmae = NewGO<prefab::CSpriteRender>(0);
 	HPmae->Init(L"sprite/HPmae.dds", 150.0f, 100.0f);
 	HPmae->SetPosition(HPmaePos);
@@ -71,6 +74,7 @@ bool Player::Start()
 	HPusiro->Init(L"sprite/HPusiro.dds", 200.0f, 100.0f);
 	HPusiro->SetPosition(HPusiroPos);*/
 	m_skinModelRender->SetShadowCasterFlag(true);
+
 
 	m_skinModelRender->SetScale(scale);
 	m_skinModelRender->SetPosition(m_position);
@@ -97,19 +101,14 @@ void Player::Update()
 	//}
 	}
 	else if (m_charaCon.IsOnGround() && Pad(0).IsTrigger(enButtonA)) {
-		//効果音
-		auto ss = NewGO<prefab::CSoundSource>(0);
-		ss->Init(L"sound/jump.wav");
-		ss->SetVolume(11.0f);
-		ss->Play(false);
+		
 		//
 		m_state = 1;
 		m_moveSpeed.y = 350.0f;
 	}
 	//歩き歩き
 	else if (m_moveSpeed.LengthSq() > 30 * 30) {
-		
-		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.3);
+		m_skinModelRender->PlayAnimation(enAnimationClip_walk, 0.3);
 	}
 	/*else if (m_moveSpeed.LengthSq() > 600 * 600 && m_state == 2) {
 		m_skinModelRender->PlayAnimation(enAnimationClip_run, 0.3);
@@ -211,11 +210,14 @@ void Player::Update()
 	
 
 	//3dMax上で成分の設定されているので回転する
-	CQuaternion qRot;
+	/*CQuaternion qRot;
 	qRot.SetRotationDeg(CVector3::AxisX, 90.0f);
 	qRot.Multiply(m_rotation, qRot);
 	m_skinModelRender->SetPosition(m_position);
-	m_skinModelRender->SetRotation(qRot);
+	m_skinModelRender->SetRotation(qRot);*/
+
+	m_skinModelRender->SetRotation(m_rotation);
+	
 }
 void Player::Turn()
 {
@@ -228,13 +230,14 @@ void Player::Turn()
 	float angle = atan2(m_moveSpeed.x, m_moveSpeed.z);
 
 	//Z軸回転
-	m_rotation.SetRotation(CVector3::AxisZ, -angle);
+	m_rotation.SetRotation(CVector3::AxisY, angle);
+	m_skinModelRender->SetRotation(m_rotation);
 }
 void Player::HPUI()
 {
 	//HP
 	wchar_t text[256];
-	swprintf(text, L"%02d / 10", HP);
+	swprintf(text, L"HP%02d / 10", HP);
 
 	font->SetText(text);
 	font->SetPosition({ 400, 250 });
@@ -281,10 +284,11 @@ void Player::EnemyColider()
 		CVector3 diff3 = m_position - en3->GetPosi();
 		m_goal = Game::GetInstance()->m_goal;
 		//距離25前後ぐらい
-		if (diff3.Length() < 25 && m_goal->GetClearFlag() == false
+		if (diff3.Length() < 23 && m_goal->GetClearFlag() == false
 			&& HP > 0 && muteki == false) {
 			//HPダメージ
 			HP--;
+
 			//pl->HPmae.x - Tidimaru.x;
 			//無敵
 			muteki = true;
@@ -313,7 +317,7 @@ void Player::EnemyColider()
 			
 			//距離小さくなったら
 			//距離25前後ぐらい
-			if (diff1.Length() < 28 && m_goal->GetClearFlag() == false
+			if (diff1.Length() < 26 && m_goal->GetClearFlag() == false
 				&& HP > 0 && muteki == false) {
 				//HPダメージ
 				HP--;

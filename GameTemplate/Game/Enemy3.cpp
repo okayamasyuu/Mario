@@ -15,14 +15,14 @@ Enemy3::~Enemy3()
 }
 bool Enemy3::Start()
 {
-	//m_enemy3animClip[enEnemyAnimClip_sky].Load(L"animData/WorkEnemymotion.tka");
+	/*m_enemy3animClip[enEnemyAnimClip_sky].Load(L"animData/WorkEnemymotion.tka");
 
-	//m_enemy3animClip[enEnemyAnimClip_sky].SetLoopFlag(true);
+	m_enemy3animClip[enEnemyAnimClip_sky].SetLoopFlag(true);*/
 
 	m_enemy3 = NewGO<prefab::CSkinModelRender>(0);
-	//m_enemy3->Init(L"modelData/Angel.cmo", m_enemy3animClip, enEnemyAnimClip_Num);
+	//m_enemy3->Init(L"modelData/Angel2.cmo", m_enemy3animClip, enEnemyAnimClip_Num);
 
-	m_enemy3->Init(L"modelData/Angel.cmo");
+	m_enemy3->Init(L"modelData/Angel2.cmo");
 
 
 	m_EnemyCharaCon.Init(
@@ -89,6 +89,11 @@ void Enemy3::GhostObj()
 		if (m_ghostobj.IsSelf(contactObject)) {
 			//“¥‚ñ‚¾‚ç”ò‚Ô
 			m_pl->SetMoveSpeed({ 0,300,0 });
+			//Œø‰Ê‰¹
+			auto ss = NewGO<prefab::CSoundSource>(0);
+			ss->Init(L"sound/jump.wav");
+			ss->SetVolume(11.0f);
+			ss->Play(false);
 			DeleteGO(this); //“–‚½‚Á‚½‚ç”jŠü
 		}
 	});
