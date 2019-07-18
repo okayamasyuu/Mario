@@ -15,5 +15,6 @@ private:
 	float time = 0.0f;
 	float x = 0;
 	float y = 0;
+	
 };
 

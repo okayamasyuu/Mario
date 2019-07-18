@@ -135,5 +135,8 @@
     <ImageContentTask Include="Assets\sprite\result.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Mario.Titlehaikei2.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

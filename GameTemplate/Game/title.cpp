@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "title.h"
 #include "Game.h"
+#include "tkEngine/light/tkDirectionLight.h"
 
 title::title()
 {
@@ -16,7 +17,7 @@ title::~title()
 bool title::Start()
 {
 	m_spriteRender = NewGO<prefab::CSpriteRender>(0);
-	m_spriteRender->Init(L"sprite/Mario.Titlehaikei.dds", 1280.0f, 720.0f);
+	m_spriteRender->Init(L"sprite/Mario.Titlehaikei2.dds", 1280.0f, 720.0f);
 	kabemozi = NewGO<prefab::CSpriteRender>(0);
 	kabemozi->Init(L"sprite/Mario.Titlemozi.dds", 1000.0f, 800.0f);
 	kabemozi->SetPosition(position);
@@ -25,6 +26,7 @@ bool title::Start()
 	APress = NewGO<prefab::CSoundSource>(0);
 	APress->Init(L"sound/nanndeyanen.wav");
 	APress->SetVolume(30.0f);
+	
 	return true;
 }
 void title::Update()
@@ -38,11 +40,12 @@ void title::Update()
 		x = 0;
 		y += 0.5;
 		position.x -= y;
+		if (position.x <= -100.0f) {
+			float z = -150.0f;
+			position.x = z;
+		}
 	}
-	if (time >= 7.0) {
-		y = 0;
-		time = 0;
-	}
+	
 	soundRender->Play(true);
 	if (Pad(0).IsTrigger(enButtonA)) {
 		soundRender->Stop();
