@@ -166,12 +166,12 @@ bool Game::Start()
 	soundRender->SetVolume(10.0f);
 
 	dirLight = NewGO<prefab::CDirectionLight>(0);
-	CVector3 lightDir = { 0,0.1,0 };
+	CVector3 lightDir = { 0, -1,0 };
 	lightDir.Normalize();
-	dirLight->SetColor({ 0.3, 0.3, 0.3, 0.3 });
+	dirLight->SetColor({ 0.3, 0.3, 0.3, 0 });
 	dirLight->SetDirection(lightDir);
 
-	LightManager().SetAmbientLight({ 0.3, 0.3, 0.3 });
+	LightManager().SetAmbientLight({ 0.2, 0.2, 0.2 });
 	GraphicsEngine().GetDirectionShadowMap().SetLightDirection(lightDir);
 	return true;
 }
