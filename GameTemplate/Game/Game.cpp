@@ -17,6 +17,13 @@
 #include "HaikeiWall.h"
 #include "Enemy3.h"
 
+
+//Visual Studo2017
+//Windows SDK バージョン　10.0.17763.0
+//プラットフォームツールセット　　Visual Studio 2017 (v141)、ビルドと動作確認が取れました
+//移動WASDキー、Jキー　ジャンプ、speceキー　タイトルに戻る　↑←↓→キー　カメラ移動
+//ゲームパッドでの操作も可能です。
+
 //唯一のインスタンスのアドレスを記録するポインタ変数。 
 //静的メンバ変数を定義する
 Game* Game::m_instance = nullptr;
